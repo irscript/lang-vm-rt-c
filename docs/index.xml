@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>airlang on air 编程语言</title>
+    <link>https://lang-vm-rt-c.irscript.github.io/index.html</link>
+    <description>Recent content in airlang on air 编程语言</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language><atom:link href="https://lang-vm-rt-c.irscript.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>编程语言</title>
+      <link>https://lang-vm-rt-c.irscript.github.io/1_lang/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lang-vm-rt-c.irscript.github.io/1_lang/index.html</guid>
+      <description>目录 </description>
+    </item>
+    <item>
+      <title>编译器</title>
+      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/index.html</guid>
+      <description>目录 引言 编译原理是将文本字符流，通过一系列的分析、转换，最后生成确定的指令文件的数据分析转换技术。编译器是利用编译原理，将一种程序（源程序）翻译成另一种程序（目标程序）的计算机程序。业界也将编译器分为三个部分：前端、中端、后端。
+编译器所做的工作流程如下图所示。</description>
+    </item>
+    <item>
+      <title>反汇编器</title>
+      <link>https://lang-vm-rt-c.irscript.github.io/3_disassembler/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lang-vm-rt-c.irscript.github.io/3_disassembler/index.html</guid>
+      <description>目录 引言 </description>
+    </item>
+    <item>
+      <title>字节码文件</title>
+      <link>https://lang-vm-rt-c.irscript.github.io/4_bytecode/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lang-vm-rt-c.irscript.github.io/4_bytecode/index.html</guid>
+      <description>待续 </description>
+    </item>
+    <item>
+      <title>虚拟机</title>
+      <link>https://lang-vm-rt-c.irscript.github.io/5_vmrt/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lang-vm-rt-c.irscript.github.io/5_vmrt/index.html</guid>
+      <description>待续 </description>
+    </item>
+  </channel>
+</rss>
