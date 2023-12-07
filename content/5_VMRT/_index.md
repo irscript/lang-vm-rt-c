@@ -1,4 +1,5 @@
 +++
+archetype = "chapter"
 title = "虚拟机"
 weight = 5
 +++
