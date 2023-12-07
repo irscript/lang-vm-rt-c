@@ -1,11 +1,16 @@
 [
 {
   "directory": "e:\\Airlang\\Dev",
-  "arguments": ["D:\\Mingw\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-std=c++17", "-I.", "-o", "build\\.objs\\airc\\mingw\\x86_64\\debug\\airc\\src\\main.cpp.obj", "airc\\src\\main.cpp"],
-  "file": "airc\\src\\main.cpp"
+  "arguments": ["D:\\Mingw\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-std=c++17", "-Idev", "-o", "build\\.objs\\airc\\mingw\\x86_64\\debug\\dev\\airc\\main.cpp.obj", "dev\\airc\\main.cpp"],
+  "file": "dev\\airc\\main.cpp"
 },
 {
   "directory": "e:\\Airlang\\Dev",
-  "arguments": ["D:\\Mingw\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-std=c++17", "-I.", "-o", "build\\.objs\\VMRT\\mingw\\x86_64\\debug\\VMRT\\src\\main.cpp.obj", "VMRT\\src\\main.cpp"],
-  "file": "VMRT\\src\\main.cpp"
+  "arguments": ["D:\\Mingw\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-std=c++17", "-Idev", "-o", "build\\.objs\\Disa\\mingw\\x86_64\\debug\\dev\\disas\\src\\main.cpp.obj", "dev\\disas\\src\\main.cpp"],
+  "file": "dev\\disas\\src\\main.cpp"
+},
+{
+  "directory": "e:\\Airlang\\Dev",
+  "arguments": ["D:\\Mingw\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-std=c++17", "-Idev", "-o", "build\\.objs\\VMRT\\mingw\\x86_64\\debug\\dev\\VMRT\\src\\main.cpp.obj", "dev\\VMRT\\src\\main.cpp"],
+  "file": "dev\\VMRT\\src\\main.cpp"
 }]
