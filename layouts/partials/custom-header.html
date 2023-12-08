@@ -40,11 +40,20 @@
       content: counter(h2) "." counter(h3) "." counter(h4) " "
    }
 
-   div .toc-wrapper   ul {
+   div .toc-wrapper ul {
       counter-reset: item
    }
 
    div .toc-wrapper div[autonumbering] li a:before {
+      content: counters(item, ".") " ";
+      counter-increment: item
+   }
+
+   article ul {
+      counter-reset: item
+   }
+
+   article li a:before {
       content: counters(item, ".") " ";
       counter-increment: item
    }
