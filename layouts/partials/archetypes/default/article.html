@@ -1,0 +1,22 @@
+{{- $page := .page }}
+{{- $content := .content }}
+{{- with $page }}
+<article class="default">
+  <header class="headline">
+    {{- partial "content-header.html" . }}
+  </header>
+  {{ partial "heading-pre.html" . }}
+  <h1 id="{{ .Title | anchorize }}"> {{ if .Parent
+    }}{{if (ne .Parent.Weight 0)}}{{ if .Parent.Parent
+    }}{{if (ne .Parent.Parent.Weight 0)}}{{ .Parent.Parent.Weight }}.{{ end }}{{ end }}{{ .Parent.Weight }}.{{ end
+    }}{{
+    end }}{{
+    .Params.weight }}    {{ .Title }}</h1>
+  <hr />{{ partial "heading-post.html" . }}
+
+  {{ $content | safeHTML }}
+  <footer class="footline">
+    {{- partial "content-footer.html" . }}
+  </footer>
+</article>
+{{- end }}
