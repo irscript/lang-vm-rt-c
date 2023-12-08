@@ -1,7 +1,8 @@
 #ifndef __TKENUM__H__
 #define __TKENUM__H__
 #include <cstdint>
-
+namespace air
+{
 // 词元类别
 enum class TkKind : uint16_t
 {
@@ -160,9 +161,8 @@ enum class TkKeyWord : uint16_t
     Public,    // 公开的
     Static,    // 静态的
     Const,     // 常量（不可修改）的
-    Readonly,  // 只读的
+    final,     // 只读的
     Inline,    // 内联的
-    Override,  // 重写的
     Virtual,   // 虚函数
 
     // 扩展类型
@@ -208,4 +208,5 @@ enum class TkAnnotate : uint16_t
     Operator, //@operator
 
 };
+}
 #endif //!__TKENUM__H__

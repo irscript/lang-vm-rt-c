@@ -1,16 +1,21 @@
 [
 {
-  "directory": "e:\\Airlang\\Dev",
-  "arguments": ["D:\\Mingw\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-std=c++17", "-Idev", "-o", "build\\.objs\\airc\\mingw\\x86_64\\debug\\dev\\airc\\main.cpp.obj", "dev\\airc\\main.cpp"],
+  "directory": "e:\\airlang\\Dev",
+  "arguments": ["F:\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-std=c++17", "-Idev", "-o", "build\\.objs\\Utils\\mingw\\x86_64\\debug\\dev\\utils\\print.cpp.obj", "dev\\utils\\print.cpp"],
+  "file": "dev\\utils\\print.cpp"
+},
+{
+  "directory": "e:\\airlang\\Dev",
+  "arguments": ["F:\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-std=c++17", "-Idev", "-o", "build\\.objs\\Disa\\mingw\\x86_64\\debug\\dev\\disas\\main.cpp.obj", "dev\\disas\\main.cpp"],
+  "file": "dev\\disas\\main.cpp"
+},
+{
+  "directory": "e:\\airlang\\Dev",
+  "arguments": ["F:\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-std=c++17", "-Idev", "-o", "build\\.objs\\airc\\mingw\\x86_64\\debug\\dev\\airc\\main.cpp.obj", "dev\\airc\\main.cpp"],
   "file": "dev\\airc\\main.cpp"
 },
 {
-  "directory": "e:\\Airlang\\Dev",
-  "arguments": ["D:\\Mingw\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-std=c++17", "-Idev", "-o", "build\\.objs\\Disa\\mingw\\x86_64\\debug\\dev\\disas\\src\\main.cpp.obj", "dev\\disas\\src\\main.cpp"],
-  "file": "dev\\disas\\src\\main.cpp"
-},
-{
-  "directory": "e:\\Airlang\\Dev",
-  "arguments": ["D:\\Mingw\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-std=c++17", "-Idev", "-o", "build\\.objs\\VMRT\\mingw\\x86_64\\debug\\dev\\VMRT\\src\\main.cpp.obj", "dev\\VMRT\\src\\main.cpp"],
-  "file": "dev\\VMRT\\src\\main.cpp"
+  "directory": "e:\\airlang\\Dev",
+  "arguments": ["F:\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe", "-c", "-m64", "-g", "-O0", "-std=c++17", "-Idev", "-o", "build\\.objs\\VMRT\\mingw\\x86_64\\debug\\dev\\VMRT\\main.cpp.obj", "dev\\VMRT\\main.cpp"],
+  "file": "dev\\VMRT\\main.cpp"
 }]

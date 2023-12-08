@@ -15,6 +15,7 @@ target("Utils")
 --编译器
 target("airc")
     set_kind("binary")
+    add_deps(("Utils"))
     add_files("dev/airc/**.cpp")
 --虚拟机运行时
 target("VMRT")
