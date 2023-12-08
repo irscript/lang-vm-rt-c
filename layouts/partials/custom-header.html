@@ -1,0 +1,51 @@
+<!-- Partial intended to be overwritten to add custom headers, like CSS or any other info
+<style>
+   /* Custom css */
+</style>
+-->
+
+<style>
+   body {
+      counter-reset: h2
+   }
+
+   h2 {
+      counter-reset: h3
+   }
+
+   h3 {
+      counter-reset: h4
+   }
+
+   h4 {
+      counter-reset: h5
+   }
+
+   article {
+      counter-reset: h2
+   }
+
+   article h2:before {
+      counter-increment: h2;
+      content: counter(h2) ". "
+   }
+
+   article h3:before {
+      counter-increment: h3;
+      content: counter(h2) "." counter(h3) " "
+   }
+
+   article h4:before {
+      counter-increment: h4;
+      content: counter(h2) "." counter(h3) "." counter(h4) " "
+   }
+
+   div .toc-wrapper ul {
+      counter-reset: item
+   }
+
+   div .toc-wrapper li a:before {
+      content: counters(item, ".") " ";
+      counter-increment: item
+   }
+</style>
