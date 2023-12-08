@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>airlang 语法 on air 编程语言</title>
+    <link>https://lang-vm-rt-c.irscript.github.io/1_lang/2_langdef/index.html</link>
+    <description>Recent content in airlang 语法 on air 编程语言</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language><atom:link href="https://lang-vm-rt-c.irscript.github.io/1_lang/2_langdef/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>标识符</title>
+      <link>https://lang-vm-rt-c.irscript.github.io/1_lang/2_langdef/1_bnf/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lang-vm-rt-c.irscript.github.io/1_lang/2_langdef/1_bnf/index.html</guid>
+      <description>标识符 组成：由 任意个 字母、数字、下划线_ 组成。 规则：必须以字母 或 下划线开头。 提示 和C语言的标识符规则一致
+关键字 void bool int8 int16 int32 int64 uint8 uint16 uint32 uint64 uint sint uintptr flt32 flt64 char cstring string if elsif else switch case default for do while break continue goto return struct enum class interface entrust destructor constructor const static final public private protected注解符 组成：由 @ 符号开始，后接 任意个 字母、数字、_ 组成。 用途：用于标注一些信息 注解字 符号 含义 @file @func @line @override </description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.121.0">
+    <meta name="generator" content="Relearn 5.20.0">
+    <meta name="description" content="站在巨人的肩膀上">
+    <meta name="author" content="月明之都">
+    <title>词法分析 :: air 编程语言</title>
+    <link href="../../2_compiler/1_lexer/index.xml" rel="alternate" type="application/rss+xml" title="词法分析 :: air 编程语言">
+    <link href="../../2_compiler/1_lexer/index.print.html" rel="alternate" type="text/html" title="词法分析 :: air 编程语言"><link rel="icon" href="../../images/favicon.png" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="../../css/fontawesome-all.min.css?1702012346" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/fontawesome-all.min.css?1702012346" rel="stylesheet"></noscript>
+    <link href="../../css/nucleus.css?1702012346" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1702012346" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/auto-complete.css?1702012346" rel="stylesheet"></noscript>
+    <link href="../../css/perfect-scrollbar.min.css?1702012346" rel="stylesheet">
+    <link href="../../css/fonts.css?1702012346" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/fonts.css?1702012346" rel="stylesheet"></noscript>
+    <link href="../../css/theme.css?1702012346" rel="stylesheet">
+    <link href="../../css/theme-auto.css?1702012346" rel="stylesheet" id="variant-style">
+    <link href="../../css/variant.css?1702012346" rel="stylesheet">
+    <link href="../../css/print.css?1702012346" rel="stylesheet" media="print">
+    <link href="../../css/ie.css?1702012346" rel="stylesheet">
+    <script src="../../js/url.js?1702012346"></script>
+    <script src="../../js/variant.js?1702012346"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="../../index.search.js";
+      var root_url="../../";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = '复制到剪贴板';
+      window.T_Copied_to_clipboard = '复制到剪贴板！';
+      window.T_Copy_link_to_clipboard = '将链接复制到剪贴板';
+      window.T_Link_copied_to_clipboard = '链接复制到剪贴板！';
+      window.T_No_results_found = '找不到\u0022{0}\u0022的结果';
+      window.T_N_results_found = '为\u0022{0}\u0022找到 {1} 个结果';
+      // some further base stuff
+      var baseUriFull='https:\/\/lang-vm-rt-c.irscript.github.io/';
+      window.variants && variants.init( [ 'auto', 'relearn-bright', 'relearn-light', 'relearn-dark', 'zen-light', 'zen-dark', 'neon', 'learn', 'blue', 'green', 'red' ] );
+    </script>
+
+<style>
+   body {
+      counter-reset: h2
+   }
+
+   h2 {
+      counter-reset: h3
+   }
+
+   h3 {
+      counter-reset: h4
+   }
+
+   h4 {
+      counter-reset: h5
+   }
+
+   article {
+      counter-reset: h2
+   }
+
+   article h2:before {
+      counter-increment: h2;
+      content: counter(h2) ". "
+   }
+
+   article h3:before {
+      counter-increment: h3;
+      content: counter(h2) "." counter(h3) " "
+   }
+
+   article h4:before {
+      counter-increment: h4;
+      content: counter(h2) "." counter(h3) "." counter(h4) " "
+   }
+
+   div .toc-wrapper ul {
+      counter-reset: item
+   }
+
+   div .toc-wrapper li a:before {
+      content: counters(item, ".") " ";
+      counter-increment: item
+   }
+</style>
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="../../2_compiler/1_lexer/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div class="navigation">
+            <a class="nav nav-next topbar-link" href="../../2_compiler/1_lexer/1_char/index.html" title="字符抽象 (&#129106;)"><i class="fas fa-chevron-right fa-fw"></i></a>
+          </div>
+          <div class="navigation">
+            <a class="nav nav-prev topbar-link" href="../../2_compiler/index.html" title="编译器 (&#129104;)"><i class="fas fa-chevron-left fa-fw"></i></a>
+          </div>
+          <div id="top-print-link">
+            <a class="print-link topbar-link" title='打印整章 (CTRL+ALT+p)' href="../../2_compiler/1_lexer/index.print.html">
+              <i class="fas fa-print fa-fw"></i>
+            </a>
+          </div>
+          <div id="top-github-link">
+            <a class="github-link topbar-link" title='编辑 (CTRL+ALT+w)' href="https://github.com/irscript/lang-vm-rt-c/tree/doc/content/2_Compiler/1_Lexer/_index.md" target="_blank">
+              <i class="fas fa-pen fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='导航 (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='目录 (CTRL+ALT+t)'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="../../index.html"><span itemprop="name">airlang</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="../../2_compiler/index.html"><span itemprop="name">编译器</span></a><meta itemprop="position" content="2"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">词法分析</span><meta itemprop="position" content="3"></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="toc-wrapper"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#引言">引言</a></li>
+    <li><a href="#目录">目录</a></li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+  
+  <h1 id="词法分析"> 2.1    词法分析</h1>
+  <hr />
+
+  <h2 id="引言">引言</h2>
+<hr>
+词法分析，也称为扫描或词法分析器，是编译过程中的第一步。它负责将源代码（即程序员编写的程序）分解成一系列有意义的符号，这些符号被称为标记（tokens），可以叫做词元。
+每个标记代表源代码中的一部分，如关键字、标识符、常量、运算符和分隔符。
+<p>在词法分析过程中，输入的源代码被逐字符地读取，并根据预定的规则（通常称为词法规则或正则表达式）进行匹配。当找到一个匹配时，就生成一个相应的标记，并将其发送到下一个编译阶段（通常是语法分析）。这个过程会一直持续到整个源代码文件都被处理完为止。</p>
+<p>词法分析的主要目的是识别出源代码中的词汇结构，为后续的编译步骤提供基础。通过这种方式，编译器可以理解程序的基本元素，从而能够正确地解析和执行代码。</p>
+<h2 id="目录">目录</h2>
+<hr>
+
+<ul class="children children-li children-sort-weight">
+	
+<li><a href="../../2_compiler/1_lexer/1_char/index.html">字符抽象</a></li>
+<li><a href="../../2_compiler/1_lexer/2_stream/index.html">字符流抽象</a></li>
+<li><a href="../../2_compiler/1_lexer/3_lexer/index.html">词法分析器</a></li>
+<li><a href="../../2_compiler/1_lexer/4_test/index.html">案列测试</a></li>
+</ul>
+
+  <footer class="footline">
+
+  </footer>
+</article>        </div>
+      </main>
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-topbar" class="default-animation"></div>
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+<a id="logo" href="../../"><img src="../../images/logo.png"></a>
+        </div>
+        <form action="../../search.html" method="get"><div class="searchbox default-animation">
+          <button class="search-detail" type="submit" title="搜索 (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+          <label class="a11y-only" for="search-by">搜索</label>
+          <input data-search-input id="search-by" name="search-by" class="search-by" type="search" placeholder="搜索...">
+          <button class="search-clear" type="button" data-search-clear="" title="清除搜索"><i class="fas fa-times" title="清除搜索"></i></button>
+        </div></form>
+        <script>
+          var contentLangs=['zh'];
+        </script>
+        <script src="../../js/auto-complete.js?1702012346" defer></script>
+        <script src="../../js/lunr/lunr.min.js?1702012346" defer></script>
+        <script src="../../js/lunr/lunr.stemmer.support.min.js?1702012346" defer></script>
+        <script src="../../js/lunr/lunr.multi.min.js?1702012346" defer></script>
+        <script src="../../js/lunr/lunr.zh.min.js?1702012346" defer></script>
+        <script src="../../js/search.js?1702012346" defer></script>
+      </div>
+      <div id="homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <div id="topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/1_lang/index.html" class=""><input type="checkbox" id="section-949c605e729da9ab1480fcd3901be9b4" aria-controls="subsections-949c605e729da9ab1480fcd3901be9b4"><label for="section-949c605e729da9ab1480fcd3901be9b4"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">子菜单编程语言</span></label><a class="padding" href="../../1_lang/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">1. </b>编程语言<i class="fas fa-check read-icon"></i></a><ul id="subsections-949c605e729da9ab1480fcd3901be9b4" class="morespace collapsible-menu">
+          <li data-nav-id="/1_lang/1_meta/index.html" class=""><input type="checkbox" id="section-a3c467e6f08590d8162a11b77eaf23e4" aria-controls="subsections-a3c467e6f08590d8162a11b77eaf23e4"><label for="section-a3c467e6f08590d8162a11b77eaf23e4"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">子菜单语言描述语法</span></label><a class="padding" href="../../1_lang/1_meta/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">1.1. </b>语言描述语法<i class="fas fa-check read-icon"></i></a><ul id="subsections-a3c467e6f08590d8162a11b77eaf23e4" class="morespace collapsible-menu">
+          <li data-nav-id="/1_lang/1_meta/1_bnf/index.html" class=""><a class="padding" href="../../1_lang/1_meta/1_bnf/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">1.1.1. </b>巴科斯范式：BNF<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/1_lang/1_meta/2_ebnf/index.html" class=""><a class="padding" href="../../1_lang/1_meta/2_ebnf/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">1.1.2. </b>扩展巴科斯范式：EBNF<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/1_lang/1_meta/3_abnf/index.html" class=""><a class="padding" href="../../1_lang/1_meta/3_abnf/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">1.1.3. </b>增强巴科斯范式：ABNF<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/1_lang/2_langdef/index.html" class=""><input type="checkbox" id="section-ed23dafaab7f84161a9143eac1f0d047" aria-controls="subsections-ed23dafaab7f84161a9143eac1f0d047"><label for="section-ed23dafaab7f84161a9143eac1f0d047"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">子菜单airlang 语法</span></label><a class="padding" href="../../1_lang/2_langdef/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">1.2. </b>airlang 语法<i class="fas fa-check read-icon"></i></a><ul id="subsections-ed23dafaab7f84161a9143eac1f0d047" class="morespace collapsible-menu">
+          <li data-nav-id="/1_lang/2_langdef/1_bnf/index.html" class=""><a class="padding" href="../../1_lang/2_langdef/1_bnf/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">1.2.1. </b>标识符<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          <li data-nav-id="/2_compiler/index.html" class="parent "><input type="checkbox" id="section-4977c6ce66d3b7fbb9bc909e1f982d41" aria-controls="subsections-4977c6ce66d3b7fbb9bc909e1f982d41" checked><label for="section-4977c6ce66d3b7fbb9bc909e1f982d41"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">子菜单编译器</span></label><a class="padding" href="../../2_compiler/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">2. </b>编译器<i class="fas fa-check read-icon"></i></a><ul id="subsections-4977c6ce66d3b7fbb9bc909e1f982d41" class="morespace collapsible-menu">
+          <li data-nav-id="/2_compiler/1_lexer/index.html" class="active parent "><input type="checkbox" id="section-d2bdea80258b3e2ce0da351ad2a8b857" aria-controls="subsections-d2bdea80258b3e2ce0da351ad2a8b857" checked><label for="section-d2bdea80258b3e2ce0da351ad2a8b857"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">子菜单词法分析</span></label><a class="padding" href="../../2_compiler/1_lexer/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">2.1. </b>词法分析<i class="fas fa-check read-icon"></i></a><ul id="subsections-d2bdea80258b3e2ce0da351ad2a8b857" class="morespace collapsible-menu">
+          <li data-nav-id="/2_compiler/1_lexer/1_char/index.html" class=""><a class="padding" href="../../2_compiler/1_lexer/1_char/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">2.1.1. </b>字符抽象<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/2_compiler/1_lexer/2_stream/index.html" class=""><a class="padding" href="../../2_compiler/1_lexer/2_stream/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">2.1.2. </b>字符流抽象<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/2_compiler/1_lexer/3_lexer/index.html" class=""><a class="padding" href="../../2_compiler/1_lexer/3_lexer/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">2.1.3. </b>词法分析器<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/2_compiler/1_lexer/4_test/index.html" class=""><a class="padding" href="../../2_compiler/1_lexer/4_test/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">2.1.4. </b>案列测试<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          <li data-nav-id="/3_disassembler/index.html" class=""><a class="padding" href="../../3_disassembler/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">3. </b>反汇编器<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/4_bytecode/index.html" class=""><a class="padding" href="../../4_bytecode/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">4. </b>字节码文件<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/5_vmrt/index.html" class=""><a class="padding" href="../../5_vmrt/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">5. </b>虚拟机<i class="fas fa-check read-icon"></i></a></li>
+          </ul>
+        </div>
+        <div id="shortcuts">
+          <div class="nav-title padding">更多</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/irscript/irscript.github.io"><i class='fab fa-fw fa-github'></i> GitHub 仓库</a></li>
+            <li><a class="padding" href="https://gohugo.io/"><i class='fas fa-fw fa-bookmark'></i> Hugo 文档</a></li>
+            <li><a class="padding" href="../../tags/index.html"><i class='fas fa-fw fa-tags'></i> 标签</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"></div>
+        <div id="menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter">
+          <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch showVisitedLinks">
+            <ul>
+              <li id="select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-language fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="select-language">语言</label>
+                    <select id="select-language" onchange="location = baseUri + this.value;">
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="select-variant">主题</label>
+                    <select id="select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="auto" value="auto" selected>Auto</option>
+                      <option id="relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="relearn-dark" value="relearn-dark">Relearn Dark</option>
+                      <option id="zen-light" value="zen-light">Zen Light</option>
+                      <option id="zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="neon" value="neon">Neon</option>
+                      <option id="learn" value="learn">Learn</option>
+                      <option id="blue" value="blue">Blue</option>
+                      <option id="green" value="green">Green</option>
+                      <option id="red" value="red">Red</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fas fa-history fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">清理历史记录</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="footer" class="footerFooter showFooter"><hr/>
+<p style="text-align: center;margin: 0;">© 2023 - 2023</p>
+<p style="text-align: center;margin: 0;"><i class="fab fa-creative-commons-sa"></i> CC BY-SA 3.0</p>
+<p style="text-align: center;margin: 0;">Built with ❤️ by <a href="https://github.com/irscript/">IrScript</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="../../js/clipboard.min.js?1702012346" defer></script>
+    <script src="../../js/perfect-scrollbar.min.js?1702012346" defer></script>
+    <script src="../../js/theme.js?1702012346" defer></script>
+  </body>
+</html>

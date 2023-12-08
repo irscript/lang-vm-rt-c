@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>词法分析 on air 编程语言</title>
+    <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/index.html</link>
+    <description>Recent content in 词法分析 on air 编程语言</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language><atom:link href="https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>字符抽象</title>
+      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/1_char/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/1_char/index.html</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>字符流抽象</title>
+      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/2_stream/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/2_stream/index.html</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>词法分析器</title>
+      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/3_lexer/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/3_lexer/index.html</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>案列测试</title>
+      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/4_test/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/4_test/index.html</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

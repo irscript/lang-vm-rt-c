@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.121.0">
+    <meta name="generator" content="Relearn 5.20.0">
+    <meta name="description" content="站在巨人的肩膀上">
+    <meta name="author" content="月明之都">
+    <title>巴科斯范式：BNF :: air 编程语言</title>
+    <link href="../../../1_lang/1_meta/1_bnf/index.xml" rel="alternate" type="application/rss+xml" title="巴科斯范式：BNF :: air 编程语言">
+    <link href="../../../1_lang/1_meta/1_bnf/index.print.html" rel="alternate" type="text/html" title="巴科斯范式：BNF :: air 编程语言"><link rel="icon" href="../../../images/favicon.png" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="../../../css/fontawesome-all.min.css?1702012346" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/fontawesome-all.min.css?1702012346" rel="stylesheet"></noscript>
+    <link href="../../../css/nucleus.css?1702012346" rel="stylesheet">
+    <link href="../../../css/auto-complete.css?1702012346" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/auto-complete.css?1702012346" rel="stylesheet"></noscript>
+    <link href="../../../css/perfect-scrollbar.min.css?1702012346" rel="stylesheet">
+    <link href="../../../css/fonts.css?1702012346" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/fonts.css?1702012346" rel="stylesheet"></noscript>
+    <link href="../../../css/theme.css?1702012346" rel="stylesheet">
+    <link href="../../../css/theme-auto.css?1702012346" rel="stylesheet" id="variant-style">
+    <link href="../../../css/variant.css?1702012346" rel="stylesheet">
+    <link href="../../../css/print.css?1702012346" rel="stylesheet" media="print">
+    <link href="../../../css/ie.css?1702012346" rel="stylesheet">
+    <script src="../../../js/url.js?1702012346"></script>
+    <script src="../../../js/variant.js?1702012346"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="../../../index.search.js";
+      var root_url="../../../";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = '复制到剪贴板';
+      window.T_Copied_to_clipboard = '复制到剪贴板！';
+      window.T_Copy_link_to_clipboard = '将链接复制到剪贴板';
+      window.T_Link_copied_to_clipboard = '链接复制到剪贴板！';
+      window.T_No_results_found = '找不到\u0022{0}\u0022的结果';
+      window.T_N_results_found = '为\u0022{0}\u0022找到 {1} 个结果';
+      // some further base stuff
+      var baseUriFull='https:\/\/lang-vm-rt-c.irscript.github.io/';
+      window.variants && variants.init( [ 'auto', 'relearn-bright', 'relearn-light', 'relearn-dark', 'zen-light', 'zen-dark', 'neon', 'learn', 'blue', 'green', 'red' ] );
+    </script>
+
+<style>
+   body {
+      counter-reset: h2
+   }
+
+   h2 {
+      counter-reset: h3
+   }
+
+   h3 {
+      counter-reset: h4
+   }
+
+   h4 {
+      counter-reset: h5
+   }
+
+   article {
+      counter-reset: h2
+   }
+
+   article h2:before {
+      counter-increment: h2;
+      content: counter(h2) ". "
+   }
+
+   article h3:before {
+      counter-increment: h3;
+      content: counter(h2) "." counter(h3) " "
+   }
+
+   article h4:before {
+      counter-increment: h4;
+      content: counter(h2) "." counter(h3) "." counter(h4) " "
+   }
+
+   div .toc-wrapper ul {
+      counter-reset: item
+   }
+
+   div .toc-wrapper li a:before {
+      content: counters(item, ".") " ";
+      counter-increment: item
+   }
+</style>
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="../../../1_lang/1_meta/1_bnf/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div class="navigation">
+            <a class="nav nav-next topbar-link" href="../../../1_lang/1_meta/2_ebnf/index.html" title="扩展巴科斯范式：EBNF (&#129106;)"><i class="fas fa-chevron-right fa-fw"></i></a>
+          </div>
+          <div class="navigation">
+            <a class="nav nav-prev topbar-link" href="../../../1_lang/1_meta/index.html" title="语言描述语法 (&#129104;)"><i class="fas fa-chevron-left fa-fw"></i></a>
+          </div>
+          <div id="top-print-link">
+            <a class="print-link topbar-link" title='打印整章 (CTRL+ALT+p)' href="../../../1_lang/1_meta/1_bnf/index.print.html">
+              <i class="fas fa-print fa-fw"></i>
+            </a>
+          </div>
+          <div id="top-github-link">
+            <a class="github-link topbar-link" title='编辑 (CTRL+ALT+w)' href="https://github.com/irscript/lang-vm-rt-c/tree/doc/content/1_Lang/1_meta/1_BNF.md" target="_blank">
+              <i class="fas fa-pen fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='导航 (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='目录 (CTRL+ALT+t)'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="../../../index.html"><span itemprop="name">airlang</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="../../../1_lang/index.html"><span itemprop="name">编程语言</span></a><meta itemprop="position" content="2"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="../../../1_lang/1_meta/index.html"><span itemprop="name">语言描述语法</span></a><meta itemprop="position" content="3"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">巴科斯范式：BNF</span><meta itemprop="position" content="4"></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="toc-wrapper"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#巴科斯范式bnf">巴科斯范式：BNF</a>
+      <ul>
+        <li><a href="#bnf-详细规则">BNF 详细规则</a></li>
+        <li><a href="#c-语言的-bnf-定义">C 语言的 BNF 定义</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+  
+  <h1 id="巴科斯范式bnf"> 1.1.1    巴科斯范式：BNF</h1>
+  <hr />
+
+  <h2 id="巴科斯范式bnf">巴科斯范式：BNF</h2>
+<p>巴科斯范式 以美国人巴科斯(Backus)和丹麦人诺尔(Naur)的名字命名的一种形式化的语法表示方法，用来描述语法的一种形式体系，是一种典型的元语言。又称巴科斯-诺尔形式(Backus-Naur form)。它不仅能严格地表示语法规则，而且所描述的语法是与上下文无关的。</p>
+<p>它具有语法简单，表示明确，便于语法分析和编译的特点。</p>
+<p>BNF表示语法规则的方式为：</p>
+<ul>
+<li>非终结符用尖括号括起。</li>
+<li>每条规则的左部是一个非终结符，右部是由非终结符和终结符组成的一个符号串，中间一般以“::=”分开。</li>
+<li>具有相同左部的规则可以共用一个左部，各右部之间以直竖“|”隔开。</li>
+</ul>
+<h3 id="bnf-详细规则">BNF 详细规则</h3>
+<ul>
+<li>在双引号中的字(&ldquo;word&rdquo;)代表着这些字符本身。而double_quote用来代表双引号。</li>
+<li>在双引号外的字（有可能有下划线）代表着语法部分。</li>
+<li>尖括号( &lt; &gt; )内包含的为必选项。</li>
+<li>方括号( [ ] )内包含的为可选项。</li>
+<li>大括号( { } )内包含的为可重复0至无数次的项。</li>
+<li>竖线( | )表示在其左右两边任选一项，相当于&quot;OR&quot;的意思。</li>
+<li>::= 是“被定义为”的意思。</li>
+</ul>
+<h3 id="c-语言的-bnf-定义">C 语言的 BNF 定义</h3>
+<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-ebnf" data-lang="ebnf"><span class="line"><span class="cl"><span class="err">%</span><span class="k">token int_const char_const float_const id string enumeration_const</span>
+</span></span><span class="line"><span class="cl"><span class="err">%%</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">translation_unit</span>	<span class="err">:</span> <span class="k">external_decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">translation_unit external_decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">external_decl</span>		<span class="err">:</span> <span class="k">function_definition</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">function_definition</span>	<span class="err">:</span> <span class="k">decl_specs declarator decl_list compound_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>		<span class="k">declarator decl_list compound_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl_specs declarator</span>		<span class="k">compound_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>		<span class="k">declarator </span>	<span class="k">compound_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">decl</span>			<span class="err">:</span> <span class="k">decl_specs init_declarator_list </span><span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl_specs</span>			<span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">decl_list</span>		<span class="err">:</span> <span class="k">decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl_list decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">decl_specs</span>		<span class="err">:</span> <span class="k">storage_class_spec decl_specs</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">storage_class_spec</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_spec decl_specs</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_spec</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_qualifier decl_specs</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_qualifier</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">storage_class_spec</span>	<span class="err">:</span> <span class="err">&#39;</span><span class="k">auto</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">register</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">static</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">extern</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">typedef</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">type_spec</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">void</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">char</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">short</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">int</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">long</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">float</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">double</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">signed</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">unsigned</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">struct_or_union_spec</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">enum_spec</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">typedef_name</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">type_qualifier</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">const</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">volatile</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct_or_union_spec</span>	<span class="err">:</span> <span class="k">struct_or_union id </span><span class="err">&#39;{&#39;</span> <span class="k">struct_decl_list </span><span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">struct_or_union</span>	<span class="err">&#39;{&#39;</span> <span class="k">struct_decl_list </span><span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">struct_or_union id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct_or_union</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">struct</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">union</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct_decl_list</span>	<span class="err">:</span> <span class="k">struct_decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">struct_decl_list struct_decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">init_declarator_list</span>	<span class="err">:</span> <span class="k">init_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">init_declarator_list </span><span class="err">&#39;,&#39;</span> <span class="k">init_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">init_declarator</span>		<span class="err">:</span> <span class="k">declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">declarator </span><span class="err">&#39;</span><span class="o">=</span><span class="s1">&#39; initializer
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">struct_decl		: spec_qualifier_list struct_declarator_list &#39;</span><span class="p">;</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">spec_qualifier_list</span>	<span class="err">:</span> <span class="k">type_spec spec_qualifier_list</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_spec</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_qualifier spec_qualifier_list</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_qualifier</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct_declarator_list</span>	<span class="err">:</span> <span class="k">struct_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">struct_declarator_list </span><span class="err">&#39;,&#39;</span> <span class="k">struct_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct_declarator</span>	<span class="err">:</span> <span class="k">declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">declarator </span><span class="err">&#39;:&#39;</span> <span class="k">const_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>		<span class="err">&#39;:&#39;</span> <span class="k">const_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">enum_spec</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">enum</span><span class="err">&#39;</span> <span class="k">id </span><span class="err">&#39;{&#39;</span> <span class="k">enumerator_list </span><span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">enum</span><span class="err">&#39;</span>	<span class="err">&#39;{&#39;</span> <span class="k">enumerator_list </span><span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">enum</span><span class="err">&#39;</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">enumerator_list</span>		<span class="err">:</span> <span class="k">enumerator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">enumerator_list </span><span class="err">&#39;,&#39;</span> <span class="k">enumerator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">enumerator</span>		<span class="err">:</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">id </span><span class="err">&#39;</span><span class="o">=</span><span class="s1">&#39; const_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">declarator		: pointer direct_declarator
+</span></span></span><span class="line"><span class="cl"><span class="s1">			|	direct_declarator
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">direct_declarator	: id
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="p">(</span><span class="s1">&#39; declarator &#39;</span><span class="p">)</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| direct_declarator &#39;</span><span class="p">[</span><span class="s1">&#39; const_exp &#39;</span><span class="p">]</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| direct_declarator &#39;</span><span class="p">[</span><span class="s1">&#39;		&#39;</span><span class="p">]</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| direct_declarator &#39;</span><span class="p">(</span><span class="s1">&#39; param_type_list &#39;</span><span class="p">)</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| direct_declarator &#39;</span><span class="p">(</span><span class="s1">&#39; id_list &#39;</span><span class="p">)</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| direct_declarator &#39;</span><span class="p">(</span><span class="s1">&#39;		&#39;</span><span class="p">)</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">pointer			: &#39;</span><span class="err">*</span><span class="s1">&#39; type_qualifier_list
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="err">*</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="err">*</span><span class="s1">&#39; type_qualifier_list pointer
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="err">*</span><span class="s1">&#39;			pointer
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">type_qualifier_list	: type_qualifier
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| type_qualifier_list type_qualifier
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">param_type_list		: param_list
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| param_list &#39;</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">.</span><span class="err">..&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">param_list</span>		<span class="err">:</span> <span class="k">param_decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">param_list </span><span class="err">&#39;,&#39;</span> <span class="k">param_decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">param_decl</span>		<span class="err">:</span> <span class="k">decl_specs declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl_specs abstract_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl_specs</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">id_list</span>			<span class="err">:</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">id_list </span><span class="err">&#39;,&#39;</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">initializer</span>		<span class="err">:</span> <span class="k">assignment_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;{&#39;</span> <span class="k">initializer_list </span><span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;{&#39;</span> <span class="k">initializer_list </span><span class="err">&#39;,&#39;</span> <span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">initializer_list</span>	<span class="err">:</span> <span class="k">initializer</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">initializer_list </span><span class="err">&#39;,&#39;</span> <span class="k">initializer</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">type_name</span>		<span class="err">:</span> <span class="k">spec_qualifier_list abstract_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">spec_qualifier_list</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">abstract_declarator</span>	<span class="err">:</span> <span class="k">pointer</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">pointer direct_abstract_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>	<span class="k">direct_abstract_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">direct_abstract_declarator</span><span class="err">:</span> <span class="err">&#39;(&#39;</span> <span class="k">abstract_declarator </span><span class="err">&#39;)&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">direct_abstract_declarator </span><span class="err">&#39;[&#39;</span> <span class="k">const_exp </span><span class="err">&#39;]&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>				<span class="err">&#39;[&#39;</span> <span class="k">const_exp </span><span class="err">&#39;]&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">direct_abstract_declarator </span><span class="err">&#39;[&#39;</span>	<span class="err">&#39;]&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>				<span class="err">&#39;[&#39;</span>	<span class="err">&#39;]&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">direct_abstract_declarator </span><span class="err">&#39;(&#39;</span> <span class="k">param_type_list </span><span class="err">&#39;)&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>				<span class="err">&#39;(&#39;</span> <span class="k">param_type_list </span><span class="err">&#39;)&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">direct_abstract_declarator </span><span class="err">&#39;(&#39;</span>		<span class="err">&#39;)&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>				<span class="err">&#39;(&#39;</span>		<span class="err">&#39;)&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef_name</span>		<span class="err">:</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">stat</span>			<span class="err">:</span> <span class="k">labeled_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">exp_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">compound_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">selection_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">iteration_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">jump_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">labeled_stat</span>		<span class="err">:</span> <span class="k">id </span><span class="err">&#39;:&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">case</span><span class="err">&#39;</span> <span class="k">const_exp </span><span class="err">&#39;:&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">default</span><span class="err">&#39;</span> <span class="err">&#39;:&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">exp_stat</span>		<span class="err">:</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>	<span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">compound_stat</span>		<span class="err">:</span> <span class="err">&#39;{&#39;</span> <span class="k">decl_list stat_list </span><span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;{&#39;</span>		<span class="k">stat_list </span><span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;{&#39;</span> <span class="k">decl_list</span>		<span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;{&#39;</span>			<span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">stat_list</span>		<span class="err">:</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">stat_list stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">selection_stat</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">if</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">if</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat </span><span class="err">&#39;</span><span class="k">else</span><span class="err">&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">switch</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">iteration_stat</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">while</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">do</span><span class="err">&#39;</span> <span class="k">stat </span><span class="err">&#39;</span><span class="k">while</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>	<span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>	<span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>	<span class="err">&#39;;&#39;</span>	<span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span>	<span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span>	<span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>	<span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span>	<span class="err">&#39;;&#39;</span>	<span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span>	<span class="err">&#39;;&#39;</span>	<span class="err">&#39;;&#39;</span>	<span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">jump_stat</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">goto</span><span class="err">&#39;</span> <span class="k">id </span><span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">continue</span><span class="err">&#39;</span> <span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">break</span><span class="err">&#39;</span> <span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">return</span><span class="err">&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">return</span><span class="err">&#39;</span>	<span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">exp</span>			<span class="err">:</span> <span class="k">assignment_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">exp </span><span class="err">&#39;,&#39;</span> <span class="k">assignment_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">assignment_exp</span>		<span class="err">:</span> <span class="k">conditional_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">unary_exp assignment_operator assignment_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">assignment_operator</span>	<span class="err">:</span> <span class="err">&#39;</span><span class="o">=</span><span class="s1">&#39; | &#39;</span><span class="err">*=</span><span class="s1">&#39; | &#39;</span><span class="err">/=</span><span class="s1">&#39; | &#39;</span><span class="err">%=</span><span class="s1">&#39; | &#39;</span><span class="err">+=</span><span class="s1">&#39; | &#39;</span><span class="o">-</span><span class="err">=</span><span class="s1">&#39; | &#39;</span><span class="err">&lt;&lt;=</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="err">&gt;&gt;=</span><span class="s1">&#39; | &#39;</span><span class="err">&amp;=</span><span class="s1">&#39; | &#39;</span><span class="err">^=</span><span class="s1">&#39; | &#39;</span><span class="p">|</span><span class="err">=</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">conditional_exp		: logical_or_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| logical_or_exp &#39;</span><span class="err">?</span><span class="s1">&#39; exp &#39;</span><span class="err">:</span><span class="s1">&#39; conditional_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">const_exp		: conditional_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">logical_or_exp		: logical_and_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| logical_or_exp &#39;</span><span class="p">||</span><span class="s1">&#39; logical_and_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">logical_and_exp		: inclusive_or_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| logical_and_exp &#39;</span><span class="err">&amp;&amp;</span><span class="s1">&#39; inclusive_or_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">inclusive_or_exp	: exclusive_or_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| inclusive_or_exp &#39;</span><span class="p">|</span><span class="s1">&#39; exclusive_or_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">exclusive_or_exp	: and_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| exclusive_or_exp &#39;</span><span class="err">^</span><span class="s1">&#39; and_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">and_exp			: equality_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| and_exp &#39;</span><span class="err">&amp;</span><span class="s1">&#39; equality_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">equality_exp		: relational_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| equality_exp &#39;</span><span class="err">==</span><span class="s1">&#39; relational_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| equality_exp &#39;</span><span class="err">!=</span><span class="s1">&#39; relational_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">relational_exp		: shift_expression
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| relational_exp &#39;</span><span class="err">&lt;</span><span class="s1">&#39; shift_expression
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| relational_exp &#39;</span><span class="err">&gt;</span><span class="s1">&#39; shift_expression
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| relational_exp &#39;</span><span class="err">&lt;=</span><span class="s1">&#39; shift_expression
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| relational_exp &#39;</span><span class="err">&gt;=</span><span class="s1">&#39; shift_expression
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">shift_expression	: additive_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| shift_expression &#39;</span><span class="err">&lt;&lt;</span><span class="s1">&#39; additive_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| shift_expression &#39;</span><span class="err">&gt;&gt;</span><span class="s1">&#39; additive_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">additive_exp		: mult_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| additive_exp &#39;</span><span class="err">+</span><span class="s1">&#39; mult_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| additive_exp &#39;</span><span class="o">-</span><span class="s1">&#39; mult_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">mult_exp		: cast_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| mult_exp &#39;</span><span class="err">*</span><span class="s1">&#39; cast_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| mult_exp &#39;</span><span class="err">/</span><span class="s1">&#39; cast_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| mult_exp &#39;</span><span class="err">%</span><span class="s1">&#39; cast_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">cast_exp		: unary_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="p">(</span><span class="s1">&#39; type_name &#39;</span><span class="p">)</span><span class="s1">&#39; cast_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">unary_exp		: postfix_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="err">++</span><span class="s1">&#39; unary_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="o">--</span><span class="s1">&#39; unary_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| unary_operator cast_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="k">sizeof</span><span class="s1">&#39; unary_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="k">sizeof</span><span class="s1">&#39; &#39;</span><span class="p">(</span><span class="s1">&#39; type_name &#39;</span><span class="p">)</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">unary_operator		: &#39;</span><span class="err">&amp;</span><span class="s1">&#39; | &#39;</span><span class="err">*</span><span class="s1">&#39; | &#39;</span><span class="err">+</span><span class="s1">&#39; | &#39;</span><span class="o">-</span><span class="s1">&#39; | &#39;</span><span class="err">~</span><span class="s1">&#39; | &#39;</span><span class="err">!</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">postfix_exp		: primary_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| postfix_exp &#39;</span><span class="p">[</span><span class="s1">&#39; exp &#39;</span><span class="p">]</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| postfix_exp &#39;</span><span class="p">(</span><span class="s1">&#39; argument_exp_list &#39;</span><span class="p">)</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| postfix_exp &#39;</span><span class="p">(</span><span class="s1">&#39;			&#39;</span><span class="p">)</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| postfix_exp &#39;</span><span class="p">.</span><span class="err">&#39;</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">postfix_exp </span><span class="err">&#39;-&gt;&#39;</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">postfix_exp </span><span class="err">&#39;++&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">postfix_exp </span><span class="err">&#39;--&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">primary_exp</span>		<span class="err">:</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">const</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">string</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">argument_exp_list</span>	<span class="err">:</span> <span class="k">assignment_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">argument_exp_list </span><span class="err">&#39;,&#39;</span> <span class="k">assignment_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span>			<span class="err">:</span> <span class="k">int_const</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">char_const</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">float_const</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">enumeration_const</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span></span></span></code></pre></div>
+  <footer class="footline">
+
+  </footer>
+</article>        </div>
+      </main>
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-topbar" class="default-animation"></div>
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+<a id="logo" href="../../../"><img src="../../../images/logo.png"></a>
+        </div>
+        <form action="../../../search.html" method="get"><div class="searchbox default-animation">
+          <button class="search-detail" type="submit" title="搜索 (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+          <label class="a11y-only" for="search-by">搜索</label>
+          <input data-search-input id="search-by" name="search-by" class="search-by" type="search" placeholder="搜索...">
+          <button class="search-clear" type="button" data-search-clear="" title="清除搜索"><i class="fas fa-times" title="清除搜索"></i></button>
+        </div></form>
+        <script>
+          var contentLangs=['zh'];
+        </script>
+        <script src="../../../js/auto-complete.js?1702012346" defer></script>
+        <script src="../../../js/lunr/lunr.min.js?1702012346" defer></script>
+        <script src="../../../js/lunr/lunr.stemmer.support.min.js?1702012346" defer></script>
+        <script src="../../../js/lunr/lunr.multi.min.js?1702012346" defer></script>
+        <script src="../../../js/lunr/lunr.zh.min.js?1702012346" defer></script>
+        <script src="../../../js/search.js?1702012346" defer></script>
+      </div>
+      <div id="homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <div id="topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/1_lang/index.html" class="parent "><input type="checkbox" id="section-949c605e729da9ab1480fcd3901be9b4" aria-controls="subsections-949c605e729da9ab1480fcd3901be9b4" checked><label for="section-949c605e729da9ab1480fcd3901be9b4"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">子菜单编程语言</span></label><a class="padding" href="../../../1_lang/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">1. </b>编程语言<i class="fas fa-check read-icon"></i></a><ul id="subsections-949c605e729da9ab1480fcd3901be9b4" class="morespace collapsible-menu">
+          <li data-nav-id="/1_lang/1_meta/index.html" class="parent "><input type="checkbox" id="section-a3c467e6f08590d8162a11b77eaf23e4" aria-controls="subsections-a3c467e6f08590d8162a11b77eaf23e4" checked><label for="section-a3c467e6f08590d8162a11b77eaf23e4"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">子菜单语言描述语法</span></label><a class="padding" href="../../../1_lang/1_meta/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">1.1. </b>语言描述语法<i class="fas fa-check read-icon"></i></a><ul id="subsections-a3c467e6f08590d8162a11b77eaf23e4" class="morespace collapsible-menu">
+          <li data-nav-id="/1_lang/1_meta/1_bnf/index.html" class="active"><a class="padding" href="../../../1_lang/1_meta/1_bnf/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">1.1.1. </b>巴科斯范式：BNF<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/1_lang/1_meta/2_ebnf/index.html" class=""><a class="padding" href="../../../1_lang/1_meta/2_ebnf/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">1.1.2. </b>扩展巴科斯范式：EBNF<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/1_lang/1_meta/3_abnf/index.html" class=""><a class="padding" href="../../../1_lang/1_meta/3_abnf/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">1.1.3. </b>增强巴科斯范式：ABNF<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/1_lang/2_langdef/index.html" class=""><input type="checkbox" id="section-ed23dafaab7f84161a9143eac1f0d047" aria-controls="subsections-ed23dafaab7f84161a9143eac1f0d047"><label for="section-ed23dafaab7f84161a9143eac1f0d047"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">子菜单airlang 语法</span></label><a class="padding" href="../../../1_lang/2_langdef/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">1.2. </b>airlang 语法<i class="fas fa-check read-icon"></i></a><ul id="subsections-ed23dafaab7f84161a9143eac1f0d047" class="morespace collapsible-menu">
+          <li data-nav-id="/1_lang/2_langdef/1_bnf/index.html" class=""><a class="padding" href="../../../1_lang/2_langdef/1_bnf/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">1.2.1. </b>标识符<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          <li data-nav-id="/2_compiler/index.html" class=""><input type="checkbox" id="section-4977c6ce66d3b7fbb9bc909e1f982d41" aria-controls="subsections-4977c6ce66d3b7fbb9bc909e1f982d41"><label for="section-4977c6ce66d3b7fbb9bc909e1f982d41"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">子菜单编译器</span></label><a class="padding" href="../../../2_compiler/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">2. </b>编译器<i class="fas fa-check read-icon"></i></a><ul id="subsections-4977c6ce66d3b7fbb9bc909e1f982d41" class="morespace collapsible-menu">
+          <li data-nav-id="/2_compiler/1_lexer/index.html" class=""><input type="checkbox" id="section-d2bdea80258b3e2ce0da351ad2a8b857" aria-controls="subsections-d2bdea80258b3e2ce0da351ad2a8b857"><label for="section-d2bdea80258b3e2ce0da351ad2a8b857"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">子菜单词法分析</span></label><a class="padding" href="../../../2_compiler/1_lexer/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">2.1. </b>词法分析<i class="fas fa-check read-icon"></i></a><ul id="subsections-d2bdea80258b3e2ce0da351ad2a8b857" class="morespace collapsible-menu">
+          <li data-nav-id="/2_compiler/1_lexer/1_char/index.html" class=""><a class="padding" href="../../../2_compiler/1_lexer/1_char/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">2.1.1. </b>字符抽象<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/2_compiler/1_lexer/2_stream/index.html" class=""><a class="padding" href="../../../2_compiler/1_lexer/2_stream/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">2.1.2. </b>字符流抽象<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/2_compiler/1_lexer/3_lexer/index.html" class=""><a class="padding" href="../../../2_compiler/1_lexer/3_lexer/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">2.1.3. </b>词法分析器<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/2_compiler/1_lexer/4_test/index.html" class=""><a class="padding" href="../../../2_compiler/1_lexer/4_test/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">2.1.4. </b>案列测试<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          <li data-nav-id="/3_disassembler/index.html" class=""><a class="padding" href="../../../3_disassembler/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">3. </b>反汇编器<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/4_bytecode/index.html" class=""><a class="padding" href="../../../4_bytecode/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">4. </b>字节码文件<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/5_vmrt/index.html" class=""><a class="padding" href="../../../5_vmrt/index.html"><b style="display: inline-block; font-weight: 200; padding-right: .5rem; text-align: left; ;">5. </b>虚拟机<i class="fas fa-check read-icon"></i></a></li>
+          </ul>
+        </div>
+        <div id="shortcuts">
+          <div class="nav-title padding">更多</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/irscript/irscript.github.io"><i class='fab fa-fw fa-github'></i> GitHub 仓库</a></li>
+            <li><a class="padding" href="https://gohugo.io/"><i class='fas fa-fw fa-bookmark'></i> Hugo 文档</a></li>
+            <li><a class="padding" href="../../../tags/index.html"><i class='fas fa-fw fa-tags'></i> 标签</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter"></div>
+        <div id="menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showVisitedLinks showFooter">
+          <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch showVisitedLinks">
+            <ul>
+              <li id="select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-language fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="select-language">语言</label>
+                    <select id="select-language" onchange="location = baseUri + this.value;">
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="select-variant">主题</label>
+                    <select id="select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="auto" value="auto" selected>Auto</option>
+                      <option id="relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="relearn-dark" value="relearn-dark">Relearn Dark</option>
+                      <option id="zen-light" value="zen-light">Zen Light</option>
+                      <option id="zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="neon" value="neon">Neon</option>
+                      <option id="learn" value="learn">Learn</option>
+                      <option id="blue" value="blue">Blue</option>
+                      <option id="green" value="green">Green</option>
+                      <option id="red" value="red">Red</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fas fa-history fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">清理历史记录</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="footer" class="footerFooter showFooter"><hr/>
+<p style="text-align: center;margin: 0;">© 2023 - 2023</p>
+<p style="text-align: center;margin: 0;"><i class="fab fa-creative-commons-sa"></i> CC BY-SA 3.0</p>
+<p style="text-align: center;margin: 0;">Built with ❤️ by <a href="https://github.com/irscript/">IrScript</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="../../../js/clipboard.min.js?1702012346" defer></script>
+    <script src="../../../js/perfect-scrollbar.min.js?1702012346" defer></script>
+    <script src="../../../js/theme.js?1702012346" defer></script>
+  </body>
+</html>

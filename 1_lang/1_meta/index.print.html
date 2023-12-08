@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.121.0">
+    <meta name="generator" content="Relearn 5.20.0">
+    <meta name="description" content="站在巨人的肩膀上">
+    <meta name="author" content="月明之都">
+    <title>语言描述语法 :: air 编程语言</title>
+    <link href="https://lang-vm-rt-c.irscript.github.io/1_lang/1_meta/index.html" rel="canonical" type="text/html" title="语言描述语法 :: air 编程语言">
+    <link href="../../1_lang/1_meta/index.xml" rel="alternate" type="application/rss+xml" title="语言描述语法 :: air 编程语言"><link rel="icon" href="../../images/favicon.png" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="../../css/fontawesome-all.min.css?1702012346" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/fontawesome-all.min.css?1702012346" rel="stylesheet"></noscript>
+    <link href="../../css/nucleus.css?1702012346" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1702012346" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/auto-complete.css?1702012346" rel="stylesheet"></noscript>
+    <link href="../../css/perfect-scrollbar.min.css?1702012346" rel="stylesheet">
+    <link href="../../css/fonts.css?1702012346" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/fonts.css?1702012346" rel="stylesheet"></noscript>
+    <link href="../../css/theme.css?1702012346" rel="stylesheet">
+    <link href="../../css/theme-auto.css?1702012346" rel="stylesheet" id="variant-style">
+    <link href="../../css/variant.css?1702012346" rel="stylesheet">
+    <link href="../../css/print.css?1702012346" rel="stylesheet" media="print">
+    <link href="../../css/format-print.css?1702012346" rel="stylesheet">
+    <link href="../../css/ie.css?1702012346" rel="stylesheet">
+    <script src="../../js/url.js?1702012346"></script>
+    <script src="../../js/variant.js?1702012346"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="../../index.search.js";
+      var root_url="../../";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = '复制到剪贴板';
+      window.T_Copied_to_clipboard = '复制到剪贴板！';
+      window.T_Copy_link_to_clipboard = '将链接复制到剪贴板';
+      window.T_Link_copied_to_clipboard = '链接复制到剪贴板！';
+      window.T_No_results_found = '找不到\u0022{0}\u0022的结果';
+      window.T_N_results_found = '为\u0022{0}\u0022找到 {1} 个结果';
+      // some further base stuff
+      var baseUriFull='https:\/\/lang-vm-rt-c.irscript.github.io/';
+      window.variants && variants.init( [ 'auto', 'relearn-bright', 'relearn-light', 'relearn-dark', 'zen-light', 'zen-dark', 'neon', 'learn', 'blue', 'green', 'red' ] );
+    </script>
+
+<style>
+   body {
+      counter-reset: h2
+   }
+
+   h2 {
+      counter-reset: h3
+   }
+
+   h3 {
+      counter-reset: h4
+   }
+
+   h4 {
+      counter-reset: h5
+   }
+
+   article {
+      counter-reset: h2
+   }
+
+   article h2:before {
+      counter-increment: h2;
+      content: counter(h2) ". "
+   }
+
+   article h3:before {
+      counter-increment: h3;
+      content: counter(h2) "." counter(h3) " "
+   }
+
+   article h4:before {
+      counter-increment: h4;
+      content: counter(h2) "." counter(h3) "." counter(h4) " "
+   }
+
+   div .toc-wrapper ul {
+      counter-reset: item
+   }
+
+   div .toc-wrapper li a:before {
+      content: counters(item, ".") " ";
+      counter-increment: item
+   }
+</style>
+  </head>
+  <body class="mobile-support print disableInlineCopyToClipboard" data-url="../../1_lang/1_meta/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='导航 (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="../../index.html"><span itemprop="name">airlang</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="../../1_lang/index.html"><span itemprop="name">编程语言</span></a><meta itemprop="position" content="2"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">语言描述语法</span><meta itemprop="position" content="3"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+  
+  <h1 id="语言描述语法"> 1.1    语言描述语法</h1>
+  <hr />
+
+  <h2 id="目录">目录</h2>
+
+<ul class="children children-li children-sort-weight">
+	
+<li><a href="../../1_lang/1_meta/1_bnf/index.html">巴科斯范式：BNF</a><ul>
+	</ul></li>
+<li><a href="../../1_lang/1_meta/2_ebnf/index.html">扩展巴科斯范式：EBNF</a><ul>
+	</ul></li>
+<li><a href="../../1_lang/1_meta/3_abnf/index.html">增强巴科斯范式：ABNF</a><ul>
+	</ul></li>
+</ul>
+
+  <footer class="footline">
+
+  </footer>
+</article>
+          <section>
+            <h1 class="a11y-only">语言描述语法 的子部分</h1>
+<article class="default">
+  <header class="headline">
+  </header>
+  
+  <h1 id="巴科斯范式bnf"> 1.1.1    巴科斯范式：BNF</h1>
+  <hr />
+
+  <h2 id="巴科斯范式bnf">巴科斯范式：BNF</h2>
+<p>巴科斯范式 以美国人巴科斯(Backus)和丹麦人诺尔(Naur)的名字命名的一种形式化的语法表示方法，用来描述语法的一种形式体系，是一种典型的元语言。又称巴科斯-诺尔形式(Backus-Naur form)。它不仅能严格地表示语法规则，而且所描述的语法是与上下文无关的。</p>
+<p>它具有语法简单，表示明确，便于语法分析和编译的特点。</p>
+<p>BNF表示语法规则的方式为：</p>
+<ul>
+<li>非终结符用尖括号括起。</li>
+<li>每条规则的左部是一个非终结符，右部是由非终结符和终结符组成的一个符号串，中间一般以“::=”分开。</li>
+<li>具有相同左部的规则可以共用一个左部，各右部之间以直竖“|”隔开。</li>
+</ul>
+<h3 id="bnf-详细规则">BNF 详细规则</h3>
+<ul>
+<li>在双引号中的字(&ldquo;word&rdquo;)代表着这些字符本身。而double_quote用来代表双引号。</li>
+<li>在双引号外的字（有可能有下划线）代表着语法部分。</li>
+<li>尖括号( &lt; &gt; )内包含的为必选项。</li>
+<li>方括号( [ ] )内包含的为可选项。</li>
+<li>大括号( { } )内包含的为可重复0至无数次的项。</li>
+<li>竖线( | )表示在其左右两边任选一项，相当于&quot;OR&quot;的意思。</li>
+<li>::= 是“被定义为”的意思。</li>
+</ul>
+<h3 id="c-语言的-bnf-定义">C 语言的 BNF 定义</h3>
+<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-ebnf" data-lang="ebnf"><span class="line"><span class="cl"><span class="err">%</span><span class="k">token int_const char_const float_const id string enumeration_const</span>
+</span></span><span class="line"><span class="cl"><span class="err">%%</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">translation_unit</span>	<span class="err">:</span> <span class="k">external_decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">translation_unit external_decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">external_decl</span>		<span class="err">:</span> <span class="k">function_definition</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">function_definition</span>	<span class="err">:</span> <span class="k">decl_specs declarator decl_list compound_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>		<span class="k">declarator decl_list compound_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl_specs declarator</span>		<span class="k">compound_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>		<span class="k">declarator </span>	<span class="k">compound_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">decl</span>			<span class="err">:</span> <span class="k">decl_specs init_declarator_list </span><span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl_specs</span>			<span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">decl_list</span>		<span class="err">:</span> <span class="k">decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl_list decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">decl_specs</span>		<span class="err">:</span> <span class="k">storage_class_spec decl_specs</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">storage_class_spec</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_spec decl_specs</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_spec</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_qualifier decl_specs</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_qualifier</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">storage_class_spec</span>	<span class="err">:</span> <span class="err">&#39;</span><span class="k">auto</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">register</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">static</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">extern</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">typedef</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">type_spec</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">void</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">char</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">short</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">int</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">long</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">float</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">double</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">signed</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">unsigned</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">struct_or_union_spec</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">enum_spec</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">typedef_name</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">type_qualifier</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">const</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">volatile</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct_or_union_spec</span>	<span class="err">:</span> <span class="k">struct_or_union id </span><span class="err">&#39;{&#39;</span> <span class="k">struct_decl_list </span><span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">struct_or_union</span>	<span class="err">&#39;{&#39;</span> <span class="k">struct_decl_list </span><span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">struct_or_union id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct_or_union</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">struct</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">union</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct_decl_list</span>	<span class="err">:</span> <span class="k">struct_decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">struct_decl_list struct_decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">init_declarator_list</span>	<span class="err">:</span> <span class="k">init_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">init_declarator_list </span><span class="err">&#39;,&#39;</span> <span class="k">init_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">init_declarator</span>		<span class="err">:</span> <span class="k">declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">declarator </span><span class="err">&#39;</span><span class="o">=</span><span class="s1">&#39; initializer
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">struct_decl		: spec_qualifier_list struct_declarator_list &#39;</span><span class="p">;</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">spec_qualifier_list</span>	<span class="err">:</span> <span class="k">type_spec spec_qualifier_list</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_spec</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_qualifier spec_qualifier_list</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_qualifier</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct_declarator_list</span>	<span class="err">:</span> <span class="k">struct_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">struct_declarator_list </span><span class="err">&#39;,&#39;</span> <span class="k">struct_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct_declarator</span>	<span class="err">:</span> <span class="k">declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">declarator </span><span class="err">&#39;:&#39;</span> <span class="k">const_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>		<span class="err">&#39;:&#39;</span> <span class="k">const_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">enum_spec</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">enum</span><span class="err">&#39;</span> <span class="k">id </span><span class="err">&#39;{&#39;</span> <span class="k">enumerator_list </span><span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">enum</span><span class="err">&#39;</span>	<span class="err">&#39;{&#39;</span> <span class="k">enumerator_list </span><span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">enum</span><span class="err">&#39;</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">enumerator_list</span>		<span class="err">:</span> <span class="k">enumerator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">enumerator_list </span><span class="err">&#39;,&#39;</span> <span class="k">enumerator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">enumerator</span>		<span class="err">:</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">id </span><span class="err">&#39;</span><span class="o">=</span><span class="s1">&#39; const_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">declarator		: pointer direct_declarator
+</span></span></span><span class="line"><span class="cl"><span class="s1">			|	direct_declarator
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">direct_declarator	: id
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="p">(</span><span class="s1">&#39; declarator &#39;</span><span class="p">)</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| direct_declarator &#39;</span><span class="p">[</span><span class="s1">&#39; const_exp &#39;</span><span class="p">]</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| direct_declarator &#39;</span><span class="p">[</span><span class="s1">&#39;		&#39;</span><span class="p">]</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| direct_declarator &#39;</span><span class="p">(</span><span class="s1">&#39; param_type_list &#39;</span><span class="p">)</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| direct_declarator &#39;</span><span class="p">(</span><span class="s1">&#39; id_list &#39;</span><span class="p">)</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| direct_declarator &#39;</span><span class="p">(</span><span class="s1">&#39;		&#39;</span><span class="p">)</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">pointer			: &#39;</span><span class="err">*</span><span class="s1">&#39; type_qualifier_list
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="err">*</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="err">*</span><span class="s1">&#39; type_qualifier_list pointer
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="err">*</span><span class="s1">&#39;			pointer
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">type_qualifier_list	: type_qualifier
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| type_qualifier_list type_qualifier
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">param_type_list		: param_list
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| param_list &#39;</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">.</span><span class="err">..&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">param_list</span>		<span class="err">:</span> <span class="k">param_decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">param_list </span><span class="err">&#39;,&#39;</span> <span class="k">param_decl</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">param_decl</span>		<span class="err">:</span> <span class="k">decl_specs declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl_specs abstract_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl_specs</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">id_list</span>			<span class="err">:</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">id_list </span><span class="err">&#39;,&#39;</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">initializer</span>		<span class="err">:</span> <span class="k">assignment_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;{&#39;</span> <span class="k">initializer_list </span><span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;{&#39;</span> <span class="k">initializer_list </span><span class="err">&#39;,&#39;</span> <span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">initializer_list</span>	<span class="err">:</span> <span class="k">initializer</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">initializer_list </span><span class="err">&#39;,&#39;</span> <span class="k">initializer</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">type_name</span>		<span class="err">:</span> <span class="k">spec_qualifier_list abstract_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">spec_qualifier_list</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">abstract_declarator</span>	<span class="err">:</span> <span class="k">pointer</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">pointer direct_abstract_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>	<span class="k">direct_abstract_declarator</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">direct_abstract_declarator</span><span class="err">:</span> <span class="err">&#39;(&#39;</span> <span class="k">abstract_declarator </span><span class="err">&#39;)&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">direct_abstract_declarator </span><span class="err">&#39;[&#39;</span> <span class="k">const_exp </span><span class="err">&#39;]&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>				<span class="err">&#39;[&#39;</span> <span class="k">const_exp </span><span class="err">&#39;]&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">direct_abstract_declarator </span><span class="err">&#39;[&#39;</span>	<span class="err">&#39;]&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>				<span class="err">&#39;[&#39;</span>	<span class="err">&#39;]&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">direct_abstract_declarator </span><span class="err">&#39;(&#39;</span> <span class="k">param_type_list </span><span class="err">&#39;)&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>				<span class="err">&#39;(&#39;</span> <span class="k">param_type_list </span><span class="err">&#39;)&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">direct_abstract_declarator </span><span class="err">&#39;(&#39;</span>		<span class="err">&#39;)&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>				<span class="err">&#39;(&#39;</span>		<span class="err">&#39;)&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef_name</span>		<span class="err">:</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">stat</span>			<span class="err">:</span> <span class="k">labeled_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">exp_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">compound_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">selection_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">iteration_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">jump_stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">labeled_stat</span>		<span class="err">:</span> <span class="k">id </span><span class="err">&#39;:&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">case</span><span class="err">&#39;</span> <span class="k">const_exp </span><span class="err">&#39;:&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">default</span><span class="err">&#39;</span> <span class="err">&#39;:&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">exp_stat</span>		<span class="err">:</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span>	<span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">compound_stat</span>		<span class="err">:</span> <span class="err">&#39;{&#39;</span> <span class="k">decl_list stat_list </span><span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;{&#39;</span>		<span class="k">stat_list </span><span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;{&#39;</span> <span class="k">decl_list</span>		<span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;{&#39;</span>			<span class="err">&#39;}&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">stat_list</span>		<span class="err">:</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">stat_list stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">selection_stat</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">if</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">if</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat </span><span class="err">&#39;</span><span class="k">else</span><span class="err">&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">switch</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">iteration_stat</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">while</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">do</span><span class="err">&#39;</span> <span class="k">stat </span><span class="err">&#39;</span><span class="k">while</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>	<span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>	<span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>	<span class="err">&#39;;&#39;</span>	<span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span>	<span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span>	<span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>	<span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span>	<span class="err">&#39;;&#39;</span>	<span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span>	<span class="err">&#39;;&#39;</span>	<span class="err">&#39;;&#39;</span>	<span class="err">&#39;)&#39;</span> <span class="k">stat</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">jump_stat</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">goto</span><span class="err">&#39;</span> <span class="k">id </span><span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">continue</span><span class="err">&#39;</span> <span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">break</span><span class="err">&#39;</span> <span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">return</span><span class="err">&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">return</span><span class="err">&#39;</span>	<span class="err">&#39;;&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">exp</span>			<span class="err">:</span> <span class="k">assignment_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">exp </span><span class="err">&#39;,&#39;</span> <span class="k">assignment_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">assignment_exp</span>		<span class="err">:</span> <span class="k">conditional_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">unary_exp assignment_operator assignment_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">assignment_operator</span>	<span class="err">:</span> <span class="err">&#39;</span><span class="o">=</span><span class="s1">&#39; | &#39;</span><span class="err">*=</span><span class="s1">&#39; | &#39;</span><span class="err">/=</span><span class="s1">&#39; | &#39;</span><span class="err">%=</span><span class="s1">&#39; | &#39;</span><span class="err">+=</span><span class="s1">&#39; | &#39;</span><span class="o">-</span><span class="err">=</span><span class="s1">&#39; | &#39;</span><span class="err">&lt;&lt;=</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="err">&gt;&gt;=</span><span class="s1">&#39; | &#39;</span><span class="err">&amp;=</span><span class="s1">&#39; | &#39;</span><span class="err">^=</span><span class="s1">&#39; | &#39;</span><span class="p">|</span><span class="err">=</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">conditional_exp		: logical_or_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| logical_or_exp &#39;</span><span class="err">?</span><span class="s1">&#39; exp &#39;</span><span class="err">:</span><span class="s1">&#39; conditional_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">const_exp		: conditional_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">logical_or_exp		: logical_and_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| logical_or_exp &#39;</span><span class="p">||</span><span class="s1">&#39; logical_and_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">logical_and_exp		: inclusive_or_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| logical_and_exp &#39;</span><span class="err">&amp;&amp;</span><span class="s1">&#39; inclusive_or_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">inclusive_or_exp	: exclusive_or_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| inclusive_or_exp &#39;</span><span class="p">|</span><span class="s1">&#39; exclusive_or_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">exclusive_or_exp	: and_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| exclusive_or_exp &#39;</span><span class="err">^</span><span class="s1">&#39; and_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">and_exp			: equality_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| and_exp &#39;</span><span class="err">&amp;</span><span class="s1">&#39; equality_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">equality_exp		: relational_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| equality_exp &#39;</span><span class="err">==</span><span class="s1">&#39; relational_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| equality_exp &#39;</span><span class="err">!=</span><span class="s1">&#39; relational_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">relational_exp		: shift_expression
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| relational_exp &#39;</span><span class="err">&lt;</span><span class="s1">&#39; shift_expression
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| relational_exp &#39;</span><span class="err">&gt;</span><span class="s1">&#39; shift_expression
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| relational_exp &#39;</span><span class="err">&lt;=</span><span class="s1">&#39; shift_expression
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| relational_exp &#39;</span><span class="err">&gt;=</span><span class="s1">&#39; shift_expression
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">shift_expression	: additive_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| shift_expression &#39;</span><span class="err">&lt;&lt;</span><span class="s1">&#39; additive_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| shift_expression &#39;</span><span class="err">&gt;&gt;</span><span class="s1">&#39; additive_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">additive_exp		: mult_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| additive_exp &#39;</span><span class="err">+</span><span class="s1">&#39; mult_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| additive_exp &#39;</span><span class="o">-</span><span class="s1">&#39; mult_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">mult_exp		: cast_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| mult_exp &#39;</span><span class="err">*</span><span class="s1">&#39; cast_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| mult_exp &#39;</span><span class="err">/</span><span class="s1">&#39; cast_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| mult_exp &#39;</span><span class="err">%</span><span class="s1">&#39; cast_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">cast_exp		: unary_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="p">(</span><span class="s1">&#39; type_name &#39;</span><span class="p">)</span><span class="s1">&#39; cast_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">unary_exp		: postfix_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="err">++</span><span class="s1">&#39; unary_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="o">--</span><span class="s1">&#39; unary_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| unary_operator cast_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="k">sizeof</span><span class="s1">&#39; unary_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="k">sizeof</span><span class="s1">&#39; &#39;</span><span class="p">(</span><span class="s1">&#39; type_name &#39;</span><span class="p">)</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">unary_operator		: &#39;</span><span class="err">&amp;</span><span class="s1">&#39; | &#39;</span><span class="err">*</span><span class="s1">&#39; | &#39;</span><span class="err">+</span><span class="s1">&#39; | &#39;</span><span class="o">-</span><span class="s1">&#39; | &#39;</span><span class="err">~</span><span class="s1">&#39; | &#39;</span><span class="err">!</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			;
+</span></span></span><span class="line"><span class="cl"><span class="s1">postfix_exp		: primary_exp
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| postfix_exp &#39;</span><span class="p">[</span><span class="s1">&#39; exp &#39;</span><span class="p">]</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| postfix_exp &#39;</span><span class="p">(</span><span class="s1">&#39; argument_exp_list &#39;</span><span class="p">)</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| postfix_exp &#39;</span><span class="p">(</span><span class="s1">&#39;			&#39;</span><span class="p">)</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">			| postfix_exp &#39;</span><span class="p">.</span><span class="err">&#39;</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">postfix_exp </span><span class="err">&#39;-&gt;&#39;</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">postfix_exp </span><span class="err">&#39;++&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">postfix_exp </span><span class="err">&#39;--&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">primary_exp</span>		<span class="err">:</span> <span class="k">id</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">const</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">string</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">argument_exp_list</span>	<span class="err">:</span> <span class="k">assignment_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">argument_exp_list </span><span class="err">&#39;,&#39;</span> <span class="k">assignment_exp</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span>			<span class="err">:</span> <span class="k">int_const</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">char_const</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">float_const</span>
+</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">enumeration_const</span>
+</span></span><span class="line"><span class="cl">			<span class="err">;</span></span></span></code></pre></div>
+  <footer class="footline">
+
+  </footer>
+</article>
+<article class="default">
+  <header class="headline">
+  </header>
+  
+  <h1 id="扩展巴科斯范式ebnf"> 1.1.2    扩展巴科斯范式：EBNF</h1>
+  <hr />
+
+  <h2 id="扩展巴科斯范式ebnf">扩展巴科斯范式：EBNF</h2>
+<p><strong>扩展巴科斯-瑙尔范式(EBNF, Extended Backus–Naur Form)</strong> 是表达作为描述计算机编程语言形式语言(是用精确的数学或机器可处理的公式定义的语言) 的正规方式的上下文无关文法 的元语法(metalanguage)符号表示法。</p>
+<p>它是 <strong>巴科斯范式(BNF)</strong> 元语法符号表示法的一种扩展。</p>
+<p>简单的理解就是用来描述 <strong>语言词法</strong> 和 <strong>语法规则</strong> 的语言。</p>
+<h3 id="ebnf-基本形式">EBNF 基本形式</h3>
+<p>LEFT=RIGHT 意思为LEFT可由RIGHT推导而来，LEFT为非终结符，RIGHT可以为非终结符也可以为终结符； 非终结符 简单的理解就是可以继续推导的符号 <strong>终结符</strong> 不可被推导的符号。</p>
+<h3 id="ebnf-符号">EBNF 符号</h3>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=</td>
+<td>定义</td>
+<td>CharA=&ldquo;a&rdquo; ; 代表CharA由字母a推导而来</td>
+</tr>
+<tr>
+<td>,</td>
+<td>连接符</td>
+<td>a,b,c 代表abc是挨着的</td>
+</tr>
+<tr>
+<td>;</td>
+<td>结束符</td>
+<td>CharA=&ldquo;a&rdquo;; 代表 CharA这条语句定义结束</td>
+</tr>
+<tr>
+<td>|</td>
+<td>或者</td>
+<td>digit = &ldquo;0&rdquo; | &ldquo;1&rdquo; | &ldquo;2&rdquo; | &ldquo;3&rdquo; | &ldquo;4&rdquo; | &ldquo;5&rdquo; | &ldquo;6&rdquo; | &ldquo;7&rdquo; | &ldquo;8&rdquo; | &ldquo;9&rdquo;;</td>
+</tr>
+<tr>
+<td>[&hellip;]</td>
+<td>可选，出现0次或1次</td>
+<td>number = [&quot;-&quot; | &ldquo;+&rdquo;],digit  可匹配 1 -1 +1 &hellip;</td>
+</tr>
+<tr>
+<td>{&hellip;}</td>
+<td>重复，出现&gt;=0次</td>
+<td>number = [&quot;-&quot; | &ldquo;+&rdquo;],digit,{digit}  可匹配 1 -1 +1 11  &hellip;</td>
+</tr>
+<tr>
+<td>(&hellip;)</td>
+<td>分组</td>
+<td>number = （&quot;-&quot; | &ldquo;+&quot;）,digit  符号必须添加，可匹配 -1 +1 &hellip;</td>
+</tr>
+<tr>
+<td>&ldquo;&hellip;&ldquo;或者&rsquo;&hellip;'</td>
+<td>终结符,单引号主要是一些特殊情况，比如双引号</td>
+<td>&ldquo;a&quot;或者&rsquo;a&rsquo; 由单或双引号引起来的部分是终结符，就是代表字母a，不可继续推导</td>
+</tr>
+<tr>
+<td>(* &hellip; *)</td>
+<td>注释</td>
+<td>(<em>我是注释</em>) 注释不参与定义</td>
+</tr>
+<tr>
+<td>?&hellip;?</td>
+<td>表示其中的内容具有特殊含义，对该含义的定义不在 EBNF 标准之内，有使用者来决定</td>
+<td>space = ? US-ASCII character 32 ?;</td>
+</tr>
+<tr>
+<td>-</td>
+<td>排除(将右边的内容从左边进行排除)</td>
+<td>string= allVistableChar - &lsquo;&rdquo;&rsquo; 表示在allVistableChar里排除&quot;字符</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ebnf-示例">EBNF 示例</h3>
+<p>以下提供一些示例以直观的理解EBNF。</p>
+<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-ebnf" data-lang="ebnf"><span class="line"><span class="cl"><span class="k">digit excluding zero </span><span class="o">=</span> <span class="s2">&#34;1&#34;</span> <span class="p">|</span> <span class="s2">&#34;2&#34;</span> <span class="p">|</span> <span class="s2">&#34;3&#34;</span> <span class="p">|</span> <span class="s2">&#34;4&#34;</span> <span class="p">|</span> <span class="s2">&#34;5&#34;</span> <span class="p">|</span> <span class="s2">&#34;6&#34;</span> <span class="p">|</span> <span class="s2">&#34;7&#34;</span> <span class="p">|</span> <span class="s2">&#34;8&#34;</span> <span class="p">|</span> <span class="s2">&#34;9&#34;</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">digit                </span><span class="o">=</span> <span class="s2">&#34;0&#34;</span> <span class="p">|</span> <span class="k">digit excluding zero </span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">natural number </span><span class="o">=</span> <span class="k">digit excluding zero</span><span class="p">,</span> <span class="p">{</span> <span class="k">digit </span><span class="p">}</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">integer </span><span class="o">=</span> <span class="s2">&#34;0&#34;</span> <span class="p">|</span> <span class="p">[</span> <span class="s2">&#34;-&#34;</span> <span class="p">],</span> <span class="k">natural number </span><span class="p">;</span></span></span></code></pre></div><ul>
+<li>digit excluding zero 可以是 1到9任意一个字符，digit则扩展为0到9任意一个字符。</li>
+<li>natural number可以是1、2、…、10、…、12345、…，因为{}代表重复任意次，包括0次。</li>
+<li>integer则可以是0或者可能带个负号的自然数。</li>
+</ul>
+<p>这是用EBNF描述的EBNF自身语法：</p>
+<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-ebnf" data-lang="ebnf"><span class="line"><span class="cl"><span class="k">Production     </span><span class="o">=</span> <span class="k">NonTerminal </span><span class="s2">&#34;=&#34;</span> <span class="k">Expression </span><span class="s2">&#34;.&#34;</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="k">Expression     </span><span class="o">=</span> <span class="k">Term </span><span class="p">{</span><span class="s2">&#34;|&#34;</span> <span class="k">Term</span><span class="p">}.</span>
+</span></span><span class="line"><span class="cl"><span class="k">Term           </span><span class="o">=</span> <span class="k">Factor </span><span class="p">{</span><span class="k">Factor</span><span class="p">}.</span>
+</span></span><span class="line"><span class="cl"><span class="k">Factor         </span><span class="o">=</span> <span class="k">NonTerminal</span>
+</span></span><span class="line"><span class="cl">                 <span class="p">|</span> <span class="k">Terminal</span>
+</span></span><span class="line"><span class="cl">                 <span class="p">|</span> <span class="s2">&#34;(&#34;</span> <span class="k">Expression </span><span class="s2">&#34;)&#34;</span>
+</span></span><span class="line"><span class="cl">                 <span class="p">|</span> <span class="s2">&#34;[&#34;</span> <span class="k">Expression </span><span class="s2">&#34;]&#34;</span>
+</span></span><span class="line"><span class="cl">                 <span class="p">|</span> <span class="s2">&#34;{&#34;</span> <span class="k">Expression </span><span class="s2">&#34;}&#34;</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="k">Terminal       </span><span class="o">=</span> <span class="k">Identifier </span><span class="p">|</span> <span class="err">“</span><span class="s2">&#34;“ &lt;any char&gt; “&#34;</span><span class="err">“</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="k">NonTerminal    </span><span class="o">=</span> <span class="k">Identifier</span><span class="p">.</span></span></span></code></pre></div><h2 id="增强巴科斯范式abnf">增强巴科斯范式：ABNF</h2>
+<p>RFC2234 定义了扩展的巴科斯范式(ABNF)。近年来在Internet的定义中 ABNF 被广泛使用。ABNF 做了更多的改进。扩充巴科斯-瑙尔范式(ABNF)基于了巴科斯-瑙尔范式(BNF)，但由它自己的语法和推导规则构成。这种元语言的发起原则是描述作为通信协议(双向规范)的语言的形式系统。它建档于 RFC 4234 中通常充当 IETF 通信协议的定义语言。</p>
+<h3 id="abnf-规则">ABNF 规则</h3>
+<p>一个ABNF规范是一些推导规则的集合，书写为：规则 = 定义;注释CR LF
+其中：</p>
+<ul>
+<li>“规则”是不区分大小写的非最终符号</li>
+<li>“定义”由定义该规则的一系列符号组成</li>
+<li>“注释”用于记录</li>
+<li>“CR LF”（回车、换行）用来结束</li>
+</ul>
+<p>规则名字是不区分大小写的:<rulename>,<Rulename>,<RULENAME>和<rUlENamE>都提及同一个规则。</p>
+<p>规则名字由一个字母以及后续的多个字母、数字和连字符（减号）组成。</p>
+<p>用尖括号（“&lt;”，“&gt;”）包围规则名并不是必需的（如同它们在BNF里那样），但是它们可以用来在描述中界定规则名，以方便识别出规则名。</p>
+<p>ABNF 使用标准 ASCII 编码。</p>
+<p>终结符由一个或多个数值字符指定。数值字符可以指定为跟随着基数(b = 二进制, d = 十进制, x = 十六进制)的一个百分号“%”，随后是这个数值，或数值的串联(用“.” 来指示)。例如回车可以指定为十进制的 %d13 或十六进制的 %x0D。回车换行可以指定为 %d13.10。</p>
+<p>文字正文通过使用包围在引号(&quot;)中字符串来指定。这些字符串是大小写不敏感的，使用的字符集是 US-ASCII。所以字符串“abc”将匹配“abc”, “Abc”, “aBc”, “abC”, “ABc”, “AbC”, “aBC” 和 “ABC”。对于大小写敏感匹配，必须定义明确的字符: 要匹配 “aBc” 定义将是 %d97 %d66 %d99。</p>
+<h3 id="abnf-操作符">ABNF 操作符</h3>
+<p>空白被用来分隔定义的各个元素: 要使空格被识别为分割符则必须明确的包含它。</p>
+<h4 id="串联">串联</h4>
+<pre><code>规则1 规则2   
+</code></pre>
+<p>规则可以通过列出一序列的规则名字来定义。</p>
+<p>例如要匹配字符串“aba”可以使用下列规则:</p>
+<pre><code>fu = %x61; a
+bar = %x62; b
+mumble = fu bar fu
+</code></pre>
+<h4 id="选择">选择</h4>
+<pre><code>规则1 / 规则2   
+</code></pre>
+<p>规则可以通过用反斜杠(“/”)分隔的多选一规则来定义。</p>
+<p>例如要接受规则 &lt;fu&gt; 或规则 &lt;bar&gt; 可构造如下规则：</p>
+<pre><code>fu = %x61; a
+bar = %x62; b
+fubar = fu / bar 
+</code></pre>
+<h4 id="递增选择">递增选择</h4>
+<pre><code>规则1 =/ 规则2   
+</code></pre>
+<p>可以通过使用在规则名字和定义之间的“=/”来向一个规则增加补充选择。</p>
+<p>例如规则：</p>
+<pre><code>ruleset = alt1 / alt2 / alt3 / alt4 / alt5
+</code></pre>
+<p>等价于</p>
+<pre><code>ruleset = alt1 / alt2
+ruleset =/ alt3
+ruleset =/ alt4 / alt5
+</code></pre>
+<h4 id="值范围">值范围</h4>
+<pre><code>%c##-##     
+</code></pre>
+<p>数值范围可以通过使用连字符(“-”)来指定。</p>
+<p>例如规则：</p>
+<pre><code>OCTAL = &quot;0&quot; / &quot;1&quot; / &quot;2&quot; / &quot;3&quot; / &quot;4&quot; / &quot;5&quot; / &quot;6&quot; / &quot;7&quot;
+</code></pre>
+<p>等价于</p>
+<pre><code>OCTAL = %x30-37
+</code></pre>
+<h4 id="序列分组">序列分组</h4>
+<pre><code>(规则1 规则2)  
+</code></pre>
+<p>元素可以放置在圆括号中来组合定义中的规则。</p>
+<p>要匹配“elem fubar snafu”或“elem tarfu snafu”可以构造下列规则：</p>
+<pre><code>group = elem (fubar / tarfu) snafu
+</code></pre>
+<p>要匹配“elem fubar”或“tarfu snafu”可以构造下列规则：</p>
+<pre><code>group = elem fubar / tarfu snafu
+group = (elem fubar) / (tarfu snafu)
+</code></pre>
+<h4 id="可变重复">可变重复</h4>
+<pre><code>n*n规则   
+
+要指示一个元素的重复可以使用形式 &lt;a&gt; * &lt;b&gt; 元素。
+可选的 &lt;a&gt; 给出要包括的元素的最小数目，缺省为 0。
+可选的 &lt;b&gt; 给出要包括的元素的最大数目，缺省为无穷。
+对零或多个元素使用 *元素，对一或多个元素使用 1*元素，对二或三个元素使用 2*3元素。
+</code></pre>
+<h4 id="特定重复">特定重复　　</h4>
+<p>n规则</p>
+<pre><code>要指示明确数目的元素可使用形式 &lt;a&gt; 元素，它等价于 &lt;a&gt;*&lt;a&gt;元素。
+使用 2DIGIT 得到两个数字，使用 3DIGIT 得到三个数字。(DIGIT 在下面的核心规则中定义)。
+</code></pre>
+<h4 id="可选序列">可选序列</h4>
+<pre><code>[规则]  
+</code></pre>
+<p>要指示可选元素下列构造是等价的：</p>
+<pre><code>[fubar snafu]
+*1(fubar snafu)
+0*1(fubar snafu)
+</code></pre>
+<h4 id="注释">注释</h4>
+<pre><code>; 注释      
+</code></pre>
+<p>分号(“;”)开始一个注释并持续到此行的结束。</p>
+<h3 id="操作符优先级">操作符优先级</h3>
+<p>上述操作符有从最紧绑定(binding)到最松绑定的给定优先级:</p>
+<ul>
+<li>字符串，名字形成(formation)</li>
+<li>注释</li>
+<li>值范围</li>
+<li>重复</li>
+<li>分组，可选</li>
+<li>串联</li>
+<li>选择</li>
+</ul>
+<p>与串联一起使用选择操作符可以造成混淆，建议使用分组来做明确串联分组。</p>
+<h3 id="核心规则">核心规则</h3>
+<p>核心规则定义于 ABNF 标准中。</p>
+<table>
+<thead>
+<tr>
+<th>规则</th>
+<th>形式定义</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALPHA</td>
+<td>%x41-5A / %x61-7A</td>
+<td>大写和小写 ASCII 字母 (A-Z a-z)</td>
+</tr>
+<tr>
+<td>DIGIT</td>
+<td>%x30-39</td>
+<td>数字 (0-9)</td>
+</tr>
+<tr>
+<td>HEXDIG</td>
+<td>DIGIT / &ldquo;A&rdquo; / &ldquo;B&rdquo; / &ldquo;C&rdquo; / &ldquo;D&rdquo; / &ldquo;E&rdquo; / &ldquo;F&rdquo;</td>
+<td>十六进制数字 (0-9 A-F a-f)</td>
+</tr>
+<tr>
+<td>DQUOTE</td>
+<td>%x22</td>
+<td>双引号</td>
+</tr>
+<tr>
+<td>SP</td>
+<td>%x20</td>
+<td>空格</td>
+</tr>
+<tr>
+<td>HTAB</td>
+<td>%x09</td>
+<td>水平tab</td>
+</tr>
+<tr>
+<td>WSP</td>
+<td>SP / HTAB</td>
+<td>空格和水平tab</td>
+</tr>
+<tr>
+<td>LWSP</td>
+<td>*(WSP / CRLF WSP)</td>
+<td>线性空白(晚于换行)</td>
+</tr>
+<tr>
+<td>VCHAR</td>
+<td>%x21-7E</td>
+<td>可见(打印)字符</td>
+</tr>
+<tr>
+<td>CHAR</td>
+<td>%x01-7F</td>
+<td>任何 7-位 US-ASCII 字符，不包括 NUL</td>
+</tr>
+<tr>
+<td>OCTET</td>
+<td>%x00-FF	8</td>
+<td>位数据</td>
+</tr>
+<tr>
+<td>CTL</td>
+<td>%x00-1F / %x7F</td>
+<td>控制字符</td>
+</tr>
+<tr>
+<td>CR</td>
+<td>%x0D</td>
+<td>回车</td>
+</tr>
+<tr>
+<td>LF</td>
+<td>%x0A</td>
+<td>换行</td>
+</tr>
+<tr>
+<td>CRLF</td>
+<td>CR LF</td>
+<td>互联网标准换行</td>
+</tr>
+<tr>
+<td>BIT</td>
+<td>&ldquo;0&rdquo; / &ldquo;1&rdquo;</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+  <footer class="footline">
+
+  </footer>
+</article>
+<article class="default">
+  <header class="headline">
+  </header>
+  
+  <h1 id="增强巴科斯范式abnf"> 1.1.3    增强巴科斯范式：ABNF</h1>
+  <hr />
+
+  <h2 id="增强巴科斯范式abnf">增强巴科斯范式：ABNF</h2>
+<p>RFC2234 定义了扩展的巴科斯范式(ABNF)。近年来在Internet的定义中 ABNF 被广泛使用。ABNF 做了更多的改进。扩充巴科斯-瑙尔范式(ABNF)基于了巴科斯-瑙尔范式(BNF)，但由它自己的语法和推导规则构成。这种元语言的发起原则是描述作为通信协议(双向规范)的语言的形式系统。它建档于 RFC 4234 中通常充当 IETF 通信协议的定义语言。</p>
+<h3 id="abnf-规则">ABNF 规则</h3>
+<p>一个ABNF规范是一些推导规则的集合，书写为：规则 = 定义;注释CR LF
+其中：</p>
+<ul>
+<li>“规则”是不区分大小写的非最终符号</li>
+<li>“定义”由定义该规则的一系列符号组成</li>
+<li>“注释”用于记录</li>
+<li>“CR LF”（回车、换行）用来结束</li>
+</ul>
+<p>规则名字是不区分大小写的:<rulename>,<Rulename>,<RULENAME>和<rUlENamE>都提及同一个规则。</p>
+<p>规则名字由一个字母以及后续的多个字母、数字和连字符（减号）组成。</p>
+<p>用尖括号（“&lt;”，“&gt;”）包围规则名并不是必需的（如同它们在BNF里那样），但是它们可以用来在描述中界定规则名，以方便识别出规则名。</p>
+<p>ABNF 使用标准 ASCII 编码。</p>
+<p>终结符由一个或多个数值字符指定。数值字符可以指定为跟随着基数(b = 二进制, d = 十进制, x = 十六进制)的一个百分号“%”，随后是这个数值，或数值的串联(用“.” 来指示)。例如回车可以指定为十进制的 %d13 或十六进制的 %x0D。回车换行可以指定为 %d13.10。</p>
+<p>文字正文通过使用包围在引号(&quot;)中字符串来指定。这些字符串是大小写不敏感的，使用的字符集是 US-ASCII。所以字符串“abc”将匹配“abc”, “Abc”, “aBc”, “abC”, “ABc”, “AbC”, “aBC” 和 “ABC”。对于大小写敏感匹配，必须定义明确的字符: 要匹配 “aBc” 定义将是 %d97 %d66 %d99。</p>
+<h3 id="abnf-操作符">ABNF 操作符</h3>
+<p>空白被用来分隔定义的各个元素: 要使空格被识别为分割符则必须明确的包含它。</p>
+<h4 id="串联">串联</h4>
+<pre><code>规则1 规则2   
+</code></pre>
+<p>规则可以通过列出一序列的规则名字来定义。</p>
+<p>例如要匹配字符串“aba”可以使用下列规则:</p>
+<pre><code>fu = %x61; a
+bar = %x62; b
+mumble = fu bar fu
+</code></pre>
+<h4 id="选择">选择</h4>
+<pre><code>规则1 / 规则2   
+</code></pre>
+<p>规则可以通过用反斜杠(“/”)分隔的多选一规则来定义。</p>
+<p>例如要接受规则 &lt;fu&gt; 或规则 &lt;bar&gt; 可构造如下规则：</p>
+<pre><code>fu = %x61; a
+bar = %x62; b
+fubar = fu / bar 
+</code></pre>
+<h4 id="递增选择">递增选择</h4>
+<pre><code>规则1 =/ 规则2   
+</code></pre>
+<p>可以通过使用在规则名字和定义之间的“=/”来向一个规则增加补充选择。</p>
+<p>例如规则：</p>
+<pre><code>ruleset = alt1 / alt2 / alt3 / alt4 / alt5
+</code></pre>
+<p>等价于</p>
+<pre><code>ruleset = alt1 / alt2
+ruleset =/ alt3
+ruleset =/ alt4 / alt5
+</code></pre>
+<h4 id="值范围">值范围</h4>
+<pre><code>%c##-##     
+</code></pre>
+<p>数值范围可以通过使用连字符(“-”)来指定。</p>
+<p>例如规则：</p>
+<pre><code>OCTAL = &quot;0&quot; / &quot;1&quot; / &quot;2&quot; / &quot;3&quot; / &quot;4&quot; / &quot;5&quot; / &quot;6&quot; / &quot;7&quot;
+</code></pre>
+<p>等价于</p>
+<pre><code>OCTAL = %x30-37
+</code></pre>
+<h4 id="序列分组">序列分组</h4>
+<pre><code>(规则1 规则2)  
+</code></pre>
+<p>元素可以放置在圆括号中来组合定义中的规则。</p>
+<p>要匹配“elem fubar snafu”或“elem tarfu snafu”可以构造下列规则：</p>
+<pre><code>group = elem (fubar / tarfu) snafu
+</code></pre>
+<p>要匹配“elem fubar”或“tarfu snafu”可以构造下列规则：</p>
+<pre><code>group = elem fubar / tarfu snafu
+group = (elem fubar) / (tarfu snafu)
+</code></pre>
+<h4 id="可变重复">可变重复</h4>
+<pre><code>n*n规则   
+
+要指示一个元素的重复可以使用形式 &lt;a&gt; * &lt;b&gt; 元素。
+可选的 &lt;a&gt; 给出要包括的元素的最小数目，缺省为 0。
+可选的 &lt;b&gt; 给出要包括的元素的最大数目，缺省为无穷。
+对零或多个元素使用 *元素，对一或多个元素使用 1*元素，对二或三个元素使用 2*3元素。
+</code></pre>
+<h4 id="特定重复">特定重复　　</h4>
+<p>n规则</p>
+<pre><code>要指示明确数目的元素可使用形式 &lt;a&gt; 元素，它等价于 &lt;a&gt;*&lt;a&gt;元素。
+使用 2DIGIT 得到两个数字，使用 3DIGIT 得到三个数字。(DIGIT 在下面的核心规则中定义)。
+</code></pre>
+<h4 id="可选序列">可选序列</h4>
+<pre><code>[规则]  
+</code></pre>
+<p>要指示可选元素下列构造是等价的：</p>
+<pre><code>[fubar snafu]
+*1(fubar snafu)
+0*1(fubar snafu)
+</code></pre>
+<h4 id="注释">注释</h4>
+<pre><code>; 注释      
+</code></pre>
+<p>分号(“;”)开始一个注释并持续到此行的结束。</p>
+<h3 id="操作符优先级">操作符优先级</h3>
+<p>上述操作符有从最紧绑定(binding)到最松绑定的给定优先级:</p>
+<ul>
+<li>字符串，名字形成(formation)</li>
+<li>注释</li>
+<li>值范围</li>
+<li>重复</li>
+<li>分组，可选</li>
+<li>串联</li>
+<li>选择</li>
+</ul>
+<p>与串联一起使用选择操作符可以造成混淆，建议使用分组来做明确串联分组。</p>
+<h3 id="核心规则">核心规则</h3>
+<p>核心规则定义于 ABNF 标准中。</p>
+<table>
+<thead>
+<tr>
+<th>规则</th>
+<th>形式定义</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALPHA</td>
+<td>%x41-5A / %x61-7A</td>
+<td>大写和小写 ASCII 字母 (A-Z a-z)</td>
+</tr>
+<tr>
+<td>DIGIT</td>
+<td>%x30-39</td>
+<td>数字 (0-9)</td>
+</tr>
+<tr>
+<td>HEXDIG</td>
+<td>DIGIT / &ldquo;A&rdquo; / &ldquo;B&rdquo; / &ldquo;C&rdquo; / &ldquo;D&rdquo; / &ldquo;E&rdquo; / &ldquo;F&rdquo;</td>
+<td>十六进制数字 (0-9 A-F a-f)</td>
+</tr>
+<tr>
+<td>DQUOTE</td>
+<td>%x22</td>
+<td>双引号</td>
+</tr>
+<tr>
+<td>SP</td>
+<td>%x20</td>
+<td>空格</td>
+</tr>
+<tr>
+<td>HTAB</td>
+<td>%x09</td>
+<td>水平tab</td>
+</tr>
+<tr>
+<td>WSP</td>
+<td>SP / HTAB</td>
+<td>空格和水平tab</td>
+</tr>
+<tr>
+<td>LWSP</td>
+<td>*(WSP / CRLF WSP)</td>
+<td>线性空白(晚于换行)</td>
+</tr>
+<tr>
+<td>VCHAR</td>
+<td>%x21-7E</td>
+<td>可见(打印)字符</td>
+</tr>
+<tr>
+<td>CHAR</td>
+<td>%x01-7F</td>
+<td>任何 7-位 US-ASCII 字符，不包括 NUL</td>
+</tr>
+<tr>
+<td>OCTET</td>
+<td>%x00-FF	8</td>
+<td>位数据</td>
+</tr>
+<tr>
+<td>CTL</td>
+<td>%x00-1F / %x7F</td>
+<td>控制字符</td>
+</tr>
+<tr>
+<td>CR</td>
+<td>%x0D</td>
+<td>回车</td>
+</tr>
+<tr>
+<td>LF</td>
+<td>%x0A</td>
+<td>换行</td>
+</tr>
+<tr>
+<td>CRLF</td>
+<td>CR LF</td>
+<td>互联网标准换行</td>
+</tr>
+<tr>
+<td>BIT</td>
+<td>&ldquo;0&rdquo; / &ldquo;1&rdquo;</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+  <footer class="footline">
+
+  </footer>
+</article>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script src="../../js/clipboard.min.js?1702012346" defer></script>
+    <script src="../../js/perfect-scrollbar.min.js?1702012346" defer></script>
+    <script src="../../js/theme.js?1702012346" defer></script>
+  </body>
+</html>

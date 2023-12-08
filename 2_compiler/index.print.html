@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.121.0">
+    <meta name="generator" content="Relearn 5.20.0">
+    <meta name="description" content="站在巨人的肩膀上">
+    <meta name="author" content="月明之都">
+    <title>编译器 :: air 编程语言</title>
+    <link href="https://lang-vm-rt-c.irscript.github.io/2_compiler/index.html" rel="canonical" type="text/html" title="编译器 :: air 编程语言">
+    <link href="../2_compiler/index.xml" rel="alternate" type="application/rss+xml" title="编译器 :: air 编程语言"><link rel="icon" href="../images/favicon.png" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="../css/fontawesome-all.min.css?1702012346" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/fontawesome-all.min.css?1702012346" rel="stylesheet"></noscript>
+    <link href="../css/nucleus.css?1702012346" rel="stylesheet">
+    <link href="../css/auto-complete.css?1702012346" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/auto-complete.css?1702012346" rel="stylesheet"></noscript>
+    <link href="../css/perfect-scrollbar.min.css?1702012346" rel="stylesheet">
+    <link href="../css/fonts.css?1702012346" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/fonts.css?1702012346" rel="stylesheet"></noscript>
+    <link href="../css/theme.css?1702012346" rel="stylesheet">
+    <link href="../css/theme-auto.css?1702012346" rel="stylesheet" id="variant-style">
+    <link href="../css/variant.css?1702012346" rel="stylesheet">
+    <link href="../css/print.css?1702012346" rel="stylesheet" media="print">
+    <link href="../css/format-print.css?1702012346" rel="stylesheet">
+    <link href="../css/ie.css?1702012346" rel="stylesheet">
+    <script src="../js/url.js?1702012346"></script>
+    <script src="../js/variant.js?1702012346"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="../index.search.js";
+      var root_url="../";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = '复制到剪贴板';
+      window.T_Copied_to_clipboard = '复制到剪贴板！';
+      window.T_Copy_link_to_clipboard = '将链接复制到剪贴板';
+      window.T_Link_copied_to_clipboard = '链接复制到剪贴板！';
+      window.T_No_results_found = '找不到\u0022{0}\u0022的结果';
+      window.T_N_results_found = '为\u0022{0}\u0022找到 {1} 个结果';
+      // some further base stuff
+      var baseUriFull='https:\/\/lang-vm-rt-c.irscript.github.io/';
+      window.variants && variants.init( [ 'auto', 'relearn-bright', 'relearn-light', 'relearn-dark', 'zen-light', 'zen-dark', 'neon', 'learn', 'blue', 'green', 'red' ] );
+    </script>
+
+<style>
+   body {
+      counter-reset: h2
+   }
+
+   h2 {
+      counter-reset: h3
+   }
+
+   h3 {
+      counter-reset: h4
+   }
+
+   h4 {
+      counter-reset: h5
+   }
+
+   article {
+      counter-reset: h2
+   }
+
+   article h2:before {
+      counter-increment: h2;
+      content: counter(h2) ". "
+   }
+
+   article h3:before {
+      counter-increment: h3;
+      content: counter(h2) "." counter(h3) " "
+   }
+
+   article h4:before {
+      counter-increment: h4;
+      content: counter(h2) "." counter(h3) "." counter(h4) " "
+   }
+
+   div .toc-wrapper ul {
+      counter-reset: item
+   }
+
+   div .toc-wrapper li a:before {
+      content: counters(item, ".") " ";
+      counter-increment: item
+   }
+</style>
+  </head>
+  <body class="mobile-support print disableInlineCopyToClipboard" data-url="../2_compiler/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='导航 (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="../index.html"><span itemprop="name">airlang</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">编译器</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable chapter narrow" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="chapter">
+            <header class="headline">
+            </header>
+<div class="article-subheading">第2章</div>
+<h1 id="编译器">编译器</h1>
+
+<h2 id="目录">目录</h2>
+<hr>
+
+<ul class="children children-li children-sort-weight">
+	
+<li><a href="../2_compiler/1_lexer/index.html">词法分析</a></li>
+</ul>
+<h2 id="引言">引言</h2>
+<hr>
+编译原理是将文本字符流，通过一系列的分析、转换，最后生成确定的指令文件的数据分析转换技术。
+<p>编译器是利用编译原理，将一种程序（源程序）翻译成另一种程序（目标程序）的计算机程序。业界也将编译器分为三个部分：前端、中端、后端。</p>
+<p>编译器所做的工作流程如下图所示。</p>
+<p><a href="#image-ef4d294ddb63ca1096834b945d476879" class="lightbox-link"><img src="../2_compiler/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86.svg" alt="编译总流程" class="figure-image bg-white border lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="image-ef4d294ddb63ca1096834b945d476879"><img src="../2_compiler/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86.svg" alt="编译总流程" class="lightbox-image" loading="lazy"></a></p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+          <section>
+            <h1 class="a11y-only">编译器 的子部分</h1>
+<article class="default">
+  <header class="headline">
+  </header>
+  
+  <h1 id="词法分析"> 2.1    词法分析</h1>
+  <hr />
+
+  <h2 id="引言">引言</h2>
+<hr>
+词法分析，也称为扫描或词法分析器，是编译过程中的第一步。它负责将源代码（即程序员编写的程序）分解成一系列有意义的符号，这些符号被称为标记（tokens），可以叫做词元。
+每个标记代表源代码中的一部分，如关键字、标识符、常量、运算符和分隔符。
+<p>在词法分析过程中，输入的源代码被逐字符地读取，并根据预定的规则（通常称为词法规则或正则表达式）进行匹配。当找到一个匹配时，就生成一个相应的标记，并将其发送到下一个编译阶段（通常是语法分析）。这个过程会一直持续到整个源代码文件都被处理完为止。</p>
+<p>词法分析的主要目的是识别出源代码中的词汇结构，为后续的编译步骤提供基础。通过这种方式，编译器可以理解程序的基本元素，从而能够正确地解析和执行代码。</p>
+<h2 id="目录">目录</h2>
+<hr>
+
+<ul class="children children-li children-sort-weight">
+	
+<li><a href="../2_compiler/1_lexer/1_char/index.html">字符抽象</a></li>
+<li><a href="../2_compiler/1_lexer/2_stream/index.html">字符流抽象</a></li>
+<li><a href="../2_compiler/1_lexer/3_lexer/index.html">词法分析器</a></li>
+<li><a href="../2_compiler/1_lexer/4_test/index.html">案列测试</a></li>
+</ul>
+
+  <footer class="footline">
+
+  </footer>
+</article>
+          <section>
+            <h1 class="a11y-only">词法分析 的子部分</h1>
+<article class="default">
+  <header class="headline">
+  </header>
+  
+  <h1 id="字符抽象"> 2.1.1    字符抽象</h1>
+  <hr />
+
+  
+  <footer class="footline">
+
+  </footer>
+</article>
+<article class="default">
+  <header class="headline">
+  </header>
+  
+  <h1 id="字符流抽象"> 2.1.2    字符流抽象</h1>
+  <hr />
+
+  
+  <footer class="footline">
+
+  </footer>
+</article>
+<article class="default">
+  <header class="headline">
+  </header>
+  
+  <h1 id="词法分析器"> 2.1.3    词法分析器</h1>
+  <hr />
+
+  
+  <footer class="footline">
+
+  </footer>
+</article>
+<article class="default">
+  <header class="headline">
+  </header>
+  
+  <h1 id="案列测试"> 2.1.4    案列测试</h1>
+  <hr />
+
+  
+  <footer class="footline">
+
+  </footer>
+</article>
+          </section>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script src="../js/clipboard.min.js?1702012346" defer></script>
+    <script src="../js/perfect-scrollbar.min.js?1702012346" defer></script>
+    <script src="../js/theme.js?1702012346" defer></script>
+  </body>
+</html>
