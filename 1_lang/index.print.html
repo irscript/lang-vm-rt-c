@@ -11,19 +11,19 @@
     <link href="https://lang-vm-rt-c.irscript.github.io/1_lang/index.html" rel="canonical" type="text/html" title="编程语言 :: air 编程语言">
     <link href="../1_lang/index.xml" rel="alternate" type="application/rss+xml" title="编程语言 :: air 编程语言"><link rel="icon" href="../images/favicon.png" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="../css/fontawesome-all.min.css?1702013657" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/fontawesome-all.min.css?1702013657" rel="stylesheet"></noscript>
-    <link href="../css/nucleus.css?1702013657" rel="stylesheet">
-    <link href="../css/auto-complete.css?1702013657" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/auto-complete.css?1702013657" rel="stylesheet"></noscript>
-    <link href="../css/perfect-scrollbar.min.css?1702013657" rel="stylesheet">
-    <link href="../css/fonts.css?1702013657" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/fonts.css?1702013657" rel="stylesheet"></noscript>
-    <link href="../css/theme.css?1702013657" rel="stylesheet">
-    <link href="../css/theme-auto.css?1702013657" rel="stylesheet" id="variant-style">
-    <link href="../css/variant.css?1702013657" rel="stylesheet">
-    <link href="../css/print.css?1702013657" rel="stylesheet" media="print">
-    <link href="../css/format-print.css?1702013657" rel="stylesheet">
-    <link href="../css/ie.css?1702013657" rel="stylesheet">
-    <script src="../js/url.js?1702013657"></script>
-    <script src="../js/variant.js?1702013657"></script>
+    <link href="../css/fontawesome-all.min.css?1702015670" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/fontawesome-all.min.css?1702015670" rel="stylesheet"></noscript>
+    <link href="../css/nucleus.css?1702015670" rel="stylesheet">
+    <link href="../css/auto-complete.css?1702015670" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/auto-complete.css?1702015670" rel="stylesheet"></noscript>
+    <link href="../css/perfect-scrollbar.min.css?1702015670" rel="stylesheet">
+    <link href="../css/fonts.css?1702015670" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/fonts.css?1702015670" rel="stylesheet"></noscript>
+    <link href="../css/theme.css?1702015670" rel="stylesheet">
+    <link href="../css/theme-auto.css?1702015670" rel="stylesheet" id="variant-style">
+    <link href="../css/variant.css?1702015670" rel="stylesheet">
+    <link href="../css/print.css?1702015670" rel="stylesheet" media="print">
+    <link href="../css/format-print.css?1702015670" rel="stylesheet">
+    <link href="../css/ie.css?1702015670" rel="stylesheet">
+    <script src="../js/url.js?1702015670"></script>
+    <script src="../js/variant.js?1702015670"></script>
     <script>
       // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
       // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
@@ -63,26 +63,26 @@
       counter-reset: h2
    }
 
-   article h2:before {
+   article[autonumbering] h2:before {
       counter-increment: h2;
       content: counter(h2) ". "
    }
 
-   article h3:before {
+   article[autonumbering] h3:before {
       counter-increment: h3;
       content: counter(h2) "." counter(h3) " "
    }
 
-   article h4:before {
+   article[autonumbering] h4:before {
       counter-increment: h4;
       content: counter(h2) "." counter(h3) "." counter(h4) " "
    }
 
-   div .toc-wrapper ul {
+   div .toc-wrapper   ul {
       counter-reset: item
    }
 
-   div .toc-wrapper li a:before {
+   div .toc-wrapper div[autonumbering] li a:before {
       content: counters(item, ".") " ";
       counter-increment: item
    }
@@ -142,7 +142,7 @@
   <header class="headline">
   </header>
   
-  <h1 id="语言描述语法"> 1.1    语言描述语法</h1>
+  <h1 id="语言描述语法"> 1.1 语言描述语法</h1>
   <hr />
 
   <h2 id="目录">目录</h2>
@@ -163,11 +163,11 @@
 </article>
           <section>
             <h1 class="a11y-only">语言描述语法 的子部分</h1>
-<article class="default">
+<article class="default" autonumbering>
   <header class="headline">
   </header>
   
-  <h1 id="巴科斯范式bnf"> 1.1.1    巴科斯范式：BNF</h1>
+  <h1 id="巴科斯范式bnf"> 1.1.1 巴科斯范式：BNF</h1>
   <hr />
 
   <h2 id="巴科斯范式bnf">巴科斯范式：BNF</h2>
@@ -457,11 +457,11 @@
 
   </footer>
 </article>
-<article class="default">
+<article class="default" autonumbering>
   <header class="headline">
   </header>
   
-  <h1 id="扩展巴科斯范式ebnf"> 1.1.2    扩展巴科斯范式：EBNF</h1>
+  <h1 id="扩展巴科斯范式ebnf"> 1.1.2 扩展巴科斯范式：EBNF</h1>
   <hr />
 
   <h2 id="扩展巴科斯范式ebnf">扩展巴科斯范式：EBNF</h2>
@@ -762,11 +762,11 @@ group = (elem fubar) / (tarfu snafu)
 
   </footer>
 </article>
-<article class="default">
+<article class="default" autonumbering>
   <header class="headline">
   </header>
   
-  <h1 id="增强巴科斯范式abnf"> 1.1.3    增强巴科斯范式：ABNF</h1>
+  <h1 id="增强巴科斯范式abnf"> 1.1.3 增强巴科斯范式：ABNF</h1>
   <hr />
 
   <h2 id="增强巴科斯范式abnf">增强巴科斯范式：ABNF</h2>
@@ -979,7 +979,7 @@ group = (elem fubar) / (tarfu snafu)
   <header class="headline">
   </header>
   
-  <h1 id="airlang-语法"> 1.2    airlang 语法</h1>
+  <h1 id="airlang-语法"> 1.2 airlang 语法</h1>
   <hr />
 
   <h2 id="词法定义">词法定义</h2>
@@ -1009,11 +1009,11 @@ group = (elem fubar) / (tarfu snafu)
 </article>
           <section>
             <h1 class="a11y-only">airlang 语法 的子部分</h1>
-<article class="default">
+<article class="default" autonumbering>
   <header class="headline">
   </header>
   
-  <h1 id="标识符"> 1.2.1    标识符</h1>
+  <h1 id="标识符"> 1.2.1 标识符</h1>
   <hr />
 
   <h2 id="标识符">标识符</h2>
@@ -1092,8 +1092,8 @@ group = (elem fubar) / (tarfu snafu)
         </div>
       </main>
     </div>
-    <script src="../js/clipboard.min.js?1702013657" defer></script>
-    <script src="../js/perfect-scrollbar.min.js?1702013657" defer></script>
-    <script src="../js/theme.js?1702013657" defer></script>
+    <script src="../js/clipboard.min.js?1702015670" defer></script>
+    <script src="../js/perfect-scrollbar.min.js?1702015670" defer></script>
+    <script src="../js/theme.js?1702015670" defer></script>
   </body>
 </html>
