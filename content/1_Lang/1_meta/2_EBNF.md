@@ -1,6 +1,7 @@
 +++
 title = '扩展巴科斯范式：EBNF'
 weight = 2
+autonumbering = true
 +++
 
 

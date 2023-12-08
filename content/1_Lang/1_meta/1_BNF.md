@@ -1,6 +1,7 @@
 +++
 title = '巴科斯范式：BNF'
 weight = 1
+autonumbering = true
 +++
 
 ## 巴科斯范式：BNF

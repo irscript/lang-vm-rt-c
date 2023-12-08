@@ -1,6 +1,7 @@
 +++
 title = '增强巴科斯范式：ABNF'
 weight = 3
+autonumbering = true
 +++
 
 ## 增强巴科斯范式：ABNF

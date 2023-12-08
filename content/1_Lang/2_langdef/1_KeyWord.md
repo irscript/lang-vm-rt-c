@@ -1,6 +1,7 @@
 +++
 title = '标识符'
 weight = 1
+autonumbering = true
 +++
 
 ## 标识符
