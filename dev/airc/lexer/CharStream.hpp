@@ -6,6 +6,8 @@
 #include <string>
 
 #include <cstdio>
+
+#include "utils/fileHelper.hpp"
 namespace air
 {
     // 字符封装
@@ -60,6 +62,34 @@ namespace air
 
         // 字符判断
         inline bool isChar(uint32_t ch) const { return val == ch; }
+        // 转义字符
+        uint32_t escape() const
+        {
+            switch (val)
+            {
+            case '\\':
+                return '\\';
+            case '"':
+                return '"';
+            case '0':
+                return '\0';
+            case 'a':
+                return '\a';
+            case 'b':
+                return '\b';
+            case 'f':
+                return '\f';
+            case 'n':
+                return '\n';
+            case 'r':
+                return '\r';
+            case 't':
+                return '\t';
+            case 'v':
+                return '\v';
+            }
+            return -1;
+        }
     };
 
     // 字符串流
@@ -68,9 +98,9 @@ namespace air
         CharStream() {}
 
         // 打开文件
-        bool open(const char *path)
+        bool open(const std::string &path)
         {
-            Fil
+            return ReadFile(path, data);
         }
 
         // 设置字符串数据
@@ -86,6 +116,8 @@ namespace air
             assert(start < end);
             return data.substr(start, end - start);
         }
+
+        uint32_t getpos() const { return index; }
 
         // 获取下一字符
         Char next()
