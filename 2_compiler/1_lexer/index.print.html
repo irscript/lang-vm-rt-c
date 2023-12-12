@@ -11,19 +11,19 @@
     <link href="https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/index.html" rel="canonical" type="text/html" title="词法分析 :: air 编程语言">
     <link href="../../2_compiler/1_lexer/index.xml" rel="alternate" type="application/rss+xml" title="词法分析 :: air 编程语言"><link rel="icon" href="../../images/favicon.png" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="../../css/fontawesome-all.min.css?1702345994" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/fontawesome-all.min.css?1702345994" rel="stylesheet"></noscript>
-    <link href="../../css/nucleus.css?1702345994" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1702345994" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/auto-complete.css?1702345994" rel="stylesheet"></noscript>
-    <link href="../../css/perfect-scrollbar.min.css?1702345994" rel="stylesheet">
-    <link href="../../css/fonts.css?1702345994" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/fonts.css?1702345994" rel="stylesheet"></noscript>
-    <link href="../../css/theme.css?1702345994" rel="stylesheet">
-    <link href="../../css/theme-auto.css?1702345994" rel="stylesheet" id="variant-style">
-    <link href="../../css/variant.css?1702345994" rel="stylesheet">
-    <link href="../../css/print.css?1702345994" rel="stylesheet" media="print">
-    <link href="../../css/format-print.css?1702345994" rel="stylesheet">
-    <link href="../../css/ie.css?1702345994" rel="stylesheet">
-    <script src="../../js/url.js?1702345994"></script>
-    <script src="../../js/variant.js?1702345994"></script>
+    <link href="../../css/fontawesome-all.min.css?1702348711" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/fontawesome-all.min.css?1702348711" rel="stylesheet"></noscript>
+    <link href="../../css/nucleus.css?1702348711" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1702348711" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/auto-complete.css?1702348711" rel="stylesheet"></noscript>
+    <link href="../../css/perfect-scrollbar.min.css?1702348711" rel="stylesheet">
+    <link href="../../css/fonts.css?1702348711" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/fonts.css?1702348711" rel="stylesheet"></noscript>
+    <link href="../../css/theme.css?1702348711" rel="stylesheet">
+    <link href="../../css/theme-auto.css?1702348711" rel="stylesheet" id="variant-style">
+    <link href="../../css/variant.css?1702348711" rel="stylesheet">
+    <link href="../../css/print.css?1702348711" rel="stylesheet" media="print">
+    <link href="../../css/format-print.css?1702348711" rel="stylesheet">
+    <link href="../../css/ie.css?1702348711" rel="stylesheet">
+    <script src="../../js/url.js?1702348711"></script>
+    <script src="../../js/variant.js?1702348711"></script>
     <script>
       // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
       // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
@@ -40,9 +40,7 @@
       // some further base stuff
       var baseUriFull='https:\/\/lang-vm-rt-c.irscript.github.io/';
       window.variants && variants.init( [ 'auto', 'relearn-bright', 'relearn-light', 'relearn-dark', 'zen-light', 'zen-dark', 'neon', 'learn', 'blue', 'green', 'red' ] );
-    </script>
-
-<style>
+    </script><style>
    body {
       counter-reset: h2
    }
@@ -94,6 +92,22 @@
    article li a:before {
       content: counters(item, ".") " ";
       counter-increment: item
+   }
+
+   article p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      text-indent: 2rem;
+   }
+
+   article blockquote p {
+      text-indent: 0rem;
+   }
+
+   article ul,
+   ol,
+   dl {
+      margin-left: 1rem;
    }
 </style>
   </head>
@@ -147,7 +161,7 @@
 </article>
           <section>
             <h1 class="a11y-only">词法分析 的子部分</h1>
-<article class="default">
+<article class="default" autonumbering>
   <header class="headline">
   </header>
   
@@ -161,131 +175,72 @@
 <h2 id="好处">好处</h2>
 <p>在词法分析中，对字符抽象的好处主要体现在以下几个方面：</p>
 <ol>
-    <li> 简化处理逻辑：通过将输入的字符序列转换为一个更高级别的表示（如单词或符号），编译器可以忽略掉字符编码的细节，简化处理过程。例如，无论源代码使用的是ASCII还是Unicode编码，编译器都可以将其统一视为一个整数值流。</li>
-    <li> 提高识别效率：通过对字符进行分类和归类，可以更快地识别出有意义的单词和符号。比如，在识别关键字时，只需要检查某个字符串是否与预定义的关键字列表匹配即可，而不需要关心每个字符的具体值。</li>
-    <li> 便于错误检测：词法分析阶段通常会首先执行错误检测，如检查拼写错误、未闭合的括号等。使用字符抽象可以帮助编译器更容易地定位这些问题，并提供有用的错误信息。</li>
-    <li> 减少后续阶段的工作量：对字符进行抽象后生成的词法单元是语法分析阶段的主要输入。如果在词法分析阶段就能够正确地区分不同类型的词素（如标识符、数字、运算符等），那么语法分析阶段就可以直接使用这些词素，而不需要重新处理原始的字符数据。</li>
-    <li> 支持跨平台编译：对于不同的操作系统和硬件平台，可能使用的字符编码不同。通过在词法分析阶段进行字符抽象，编译器可以在一定程度上独立于具体的字符编码，从而提高代码的可移植性。</li>
+    <li> <b>简化处理逻辑</b>：通过将输入的字符序列转换为一个更高级别的表示（如单词或符号），编译器可以忽略掉字符编码的细节，简化处理过程。例如，无论源代码使用的是ASCII还是Unicode编码，编译器都可以将其统一视为一个整数值流。</li>
+    <li> <b>提高识别效率</b>：通过对字符进行分类和归类，可以更快地识别出有意义的单词和符号。比如，在识别关键字时，只需要检查某个字符串是否与预定义的关键字列表匹配即可，而不需要关心每个字符的具体值。</li>
+    <li> <b>便于错误检测</b>：词法分析阶段通常会首先执行错误检测，如检查拼写错误、未闭合的括号等。使用字符抽象可以帮助编译器更容易地定位这些问题，并提供有用的错误信息。</li>
+    <li> <b>减少后续阶段的工作量</b>：对字符进行抽象后生成的词法单元是语法分析阶段的主要输入。如果在词法分析阶段就能够正确地区分不同类型的词素（如标识符、数字、运算符等），那么语法分析阶段就可以直接使用这些词素，而不需要重新处理原始的字符数据。</li>
+    <li> <b>支持跨平台编译</b>：对于不同的操作系统和硬件平台，可能使用的字符编码不同。通过在词法分析阶段进行字符抽象，编译器可以在一定程度上独立于具体的字符编码，从而提高代码的可移植性。</li>
 </ol>
 通过字符抽象，词法分析器能够以一种更加高效且平台无关的方式处理源代码，使得整个编译过程更加可靠和健壮。
 <h2 id="实现">实现</h2>
-<div class="wrap-code highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">// 字符封装
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Char</span>
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">uint32_t</span> pos; <span style="color:#75715e">// 在字符流的位置
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint32_t</span> val; <span style="color:#75715e">// 字符值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">inline</span> <span style="color:#a6e22e">Char</span>(<span style="color:#66d9ef">uint32_t</span> pos, <span style="color:#66d9ef">uint32_t</span> ch)
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">:</span> pos(pos), val(ch) {}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isalpha</span>() <span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> <span style="color:#f92672">::</span>isalpha(val); } <span style="color:#75715e">// 字母？
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isdigit</span>() <span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> <span style="color:#f92672">::</span>isdigit(val); } <span style="color:#75715e">// 数字
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isalnum</span>() <span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> <span style="color:#f92672">::</span>isalnum(val); } <span style="color:#75715e">// 数字和字母？
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isalpha_</span>() <span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> val <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">||</span> <span style="color:#f92672">::</span>isalpha(val); } <span style="color:#75715e">// 字母、下划线_？
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isalnum_</span>() <span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> val <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">||</span> <span style="color:#f92672">::</span>isalnum(val); } <span style="color:#75715e">// 字母、下划线_、数字？
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 空白字符？
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isWhiteSpace</span>() <span style="color:#66d9ef">const</span>
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">switch</span> (val)
-</span></span><span style="display:flex;"><span>        {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;\t&#39;</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;\v&#39;</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;\r&#39;</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;\n&#39;</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> true;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 空字符？
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isNull</span>() <span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> val <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;\0&#39;</span>; }
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 16进制字符
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isHex</span>() <span style="color:#66d9ef">const</span>
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">&lt;=</span> val <span style="color:#f92672">&amp;&amp;</span> val <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;f&#39;</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> true;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">&lt;=</span> val <span style="color:#f92672">&amp;&amp;</span> val <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;F&#39;</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> true;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> isdigit();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 8进制字符
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isOct</span>() <span style="color:#66d9ef">const</span>
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">&lt;=</span> val <span style="color:#f92672">&amp;&amp;</span> val <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;7&#39;</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 2进制字符
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isBin</span>() <span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">==</span> val <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;1&#39;</span> <span style="color:#f92672">==</span> val; }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 字符判断
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isChar</span>(<span style="color:#66d9ef">uint32_t</span> ch) <span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> val <span style="color:#f92672">==</span> ch; }
-</span></span><span style="display:flex;"><span>};</span></span></code></pre></td></tr></table>
-</div>
-</div>
+<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// 字符封装
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">Char</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="kt">uint32_t</span> <span class="n">pos</span><span class="p">;</span> <span class="c1">// 在字符流的位置
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1"></span>    <span class="kt">uint32_t</span> <span class="n">val</span><span class="p">;</span> <span class="c1">// 字符值
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="kr">inline</span> <span class="nf">Char</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">pos</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">ch</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="o">:</span> <span class="n">pos</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">val</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">isalpha</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="o">::</span><span class="n">isalpha</span><span class="p">(</span><span class="n">val</span><span class="p">);</span> <span class="p">}</span> <span class="c1">// 字母？
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">isdigit</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="o">::</span><span class="n">isdigit</span><span class="p">(</span><span class="n">val</span><span class="p">);</span> <span class="p">}</span> <span class="c1">// 数字
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">isalnum</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="o">::</span><span class="n">isalnum</span><span class="p">(</span><span class="n">val</span><span class="p">);</span> <span class="p">}</span> <span class="c1">// 数字和字母？
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">isalpha_</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">val</span> <span class="o">==</span> <span class="sc">&#39;_&#39;</span> <span class="o">||</span> <span class="o">::</span><span class="n">isalpha</span><span class="p">(</span><span class="n">val</span><span class="p">);</span> <span class="p">}</span> <span class="c1">// 字母、下划线_？
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">isalnum_</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">val</span> <span class="o">==</span> <span class="sc">&#39;_&#39;</span> <span class="o">||</span> <span class="o">::</span><span class="n">isalnum</span><span class="p">(</span><span class="n">val</span><span class="p">);</span> <span class="p">}</span> <span class="c1">// 字母、下划线_、数字？
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="c1">// 空白字符？
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">isWhiteSpace</span><span class="p">()</span> <span class="k">const</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">        <span class="k">switch</span> <span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        <span class="k">case</span> <span class="sc">&#39; &#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">        <span class="k">case</span> <span class="sc">&#39;\t&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">        <span class="k">case</span> <span class="sc">&#39;\v&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">        <span class="k">case</span> <span class="sc">&#39;\r&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">        <span class="k">case</span> <span class="sc">&#39;\n&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">
+</span></span><span class="line"><span class="ln">32</span><span class="cl">    <span class="c1">// 空字符？
+</span></span></span><span class="line"><span class="ln">33</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">isNull</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">val</span> <span class="o">==</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">    <span class="c1">// 16进制字符
+</span></span></span><span class="line"><span class="ln">35</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">isHex</span><span class="p">()</span> <span class="k">const</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="sc">&#39;a&#39;</span> <span class="o">&lt;=</span> <span class="n">val</span> <span class="o">&amp;&amp;</span> <span class="n">val</span> <span class="o">&lt;=</span> <span class="sc">&#39;f&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="sc">&#39;A&#39;</span> <span class="o">&lt;=</span> <span class="n">val</span> <span class="o">&amp;&amp;</span> <span class="n">val</span> <span class="o">&lt;=</span> <span class="sc">&#39;F&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl">        <span class="k">return</span> <span class="n">isdigit</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">42</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">    <span class="c1">// 8进制字符
+</span></span></span><span class="line"><span class="ln">44</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">isOct</span><span class="p">()</span> <span class="k">const</span>
+</span></span><span class="line"><span class="ln">45</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl">        <span class="k">return</span> <span class="sc">&#39;0&#39;</span> <span class="o">&lt;=</span> <span class="n">val</span> <span class="o">&amp;&amp;</span> <span class="n">val</span> <span class="o">&lt;=</span> <span class="sc">&#39;7&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">47</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">48</span><span class="cl">    <span class="c1">// 2进制字符
+</span></span></span><span class="line"><span class="ln">49</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">isBin</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="sc">&#39;0&#39;</span> <span class="o">==</span> <span class="n">val</span> <span class="o">||</span> <span class="sc">&#39;1&#39;</span> <span class="o">==</span> <span class="n">val</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">50</span><span class="cl">
+</span></span><span class="line"><span class="ln">51</span><span class="cl">    <span class="c1">// 字符判断
+</span></span></span><span class="line"><span class="ln">52</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">isChar</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">ch</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">val</span> <span class="o">==</span> <span class="n">ch</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">53</span><span class="cl"><span class="p">};</span></span></span></code></pre></div>
   <footer class="footline">
 
   </footer>
 </article>
-<article class="default">
+<article class="default" autonumbering>
   <header class="headline">
   </header>
   
@@ -299,147 +254,207 @@
 <h2 id="好处">好处</h2>
 <p>在词法分析中对字符流进行抽象有以下几个主要好处：</p>
 <ol>
-    <li>提高处理效率：对输入的字符流进行抽象，可以有效地将连续的字符组合成有意义的单元（如标识符、关键字、数字和运算符）。这有助于减少语法分析阶段需要处理的元素数量，从而提高编译器的整体效率。</li>
-    <li>更少的错误：通过将字符流转换为更高级别的表示，编译器能够更容易地检测出潜在的错误。例如，一个未闭合的字符串常量或注释可能会导致后续的解析错误；通过在词法分析阶段识别这些错误，可以提前报告并提供更准确的错误信息。</li>
-    <li>通用性与可移植性：字符流抽象使得编译器可以不关心具体的字符编码细节，比如ASCII、ISO-8859-1或者Unicode等。这种特性使得编译器能够在多种平台上运行，而无需针对每个平台进行特定的修改。</li>
-    <li>简化程序结构：词法分析器的设计和实现通常会利用字符流抽象的概念，比如使用有限自动机（FA）或正则表达式来匹配模式。这种方法简化了代码，使其更具可读性和维护性。</li>
-    <li>隐藏复杂性：对于程序员而言，他们通常关注于源代码的逻辑和语义，而非底层的字符编码。通过对字符流的抽象，编译器可以让程序员以一种更高层次的语言来表达意图，而不是直接操作底层的字符数据。</li>
+    <li><b>提高处理效率</b>：对输入的字符流进行抽象，可以有效地将连续的字符组合成有意义的单元（如标识符、关键字、数字和运算符）。这有助于减少语法分析阶段需要处理的元素数量，从而提高编译器的整体效率。</li>
+    <li><b>更少的错误</b>：通过将字符流转换为更高级别的表示，编译器能够更容易地检测出潜在的错误。例如，一个未闭合的字符串常量或注释可能会导致后续的解析错误；通过在词法分析阶段识别这些错误，可以提前报告并提供更准确的错误信息。</li>
+    <li><b>通用性与可移植性</b>：字符流抽象使得编译器可以不关心具体的字符编码细节，比如ASCII、ISO-8859-1或者Unicode等。这种特性使得编译器能够在多种平台上运行，而无需针对每个平台进行特定的修改。</li>
+    <li><b>简化程序结构</b>：词法分析器的设计和实现通常会利用字符流抽象的概念，比如使用有限自动机（FA）或正则表达式来匹配模式。这种方法简化了代码，使其更具可读性和维护性。</li>
+    <li><b>隐藏复杂性</b>：对于程序员而言，他们通常关注于源代码的逻辑和语义，而非底层的字符编码。通过对字符流的抽象，编译器可以让程序员以一种更高层次的语言来表达意图，而不是直接操作底层的字符数据。</li>
 </ol>
 总的来说，字符流抽象是编译器设计中的重要概念，它能帮助编译器更好地理解源代码，并有效地生成目标代码。
 <h2 id="实现">实现</h2>
-<div class="wrap-code highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">// 字符串流
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">CharStream</span>
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    CharStream() {}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 打开文件
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">open</span>(<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string <span style="color:#f92672">&amp;</span>path)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> readFile(path, data);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 设置字符串数据
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setData</span>(<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string <span style="color:#f92672">&amp;</span>str)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> str;
-</span></span><span style="display:flex;"><span>        index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">inline</span> std<span style="color:#f92672">::</span>string <span style="color:#f92672">&amp;</span>getData() { <span style="color:#66d9ef">return</span> data; }
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 获取字符串中的一段
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>string getSbu(<span style="color:#66d9ef">uint32_t</span> start, <span style="color:#66d9ef">uint32_t</span> end)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        assert(start <span style="color:#f92672">&lt;</span> end);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> data.substr(start, end <span style="color:#f92672">-</span> start);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 获取下一字符
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Char <span style="color:#a6e22e">next</span>()
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">&lt;</span> data.size())
-</span></span><span style="display:flex;"><span>        {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">uint32_t</span> pos <span style="color:#f92672">=</span> index;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">uint32_t</span> ch <span style="color:#f92672">=</span> data[pos];
-</span></span><span style="display:flex;"><span>            <span style="color:#f92672">++</span>index;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> Char(pos, ch);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Char(data.size(), <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 退回字符
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">back</span>(Char ch)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        index <span style="color:#f92672">=</span> ch.pos;
-</span></span><span style="display:flex;"><span>        assert(index <span style="color:#f92672">&lt;</span> data.size());
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 匹配一个字符
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">match</span>(<span style="color:#66d9ef">char</span> ch, <span style="color:#66d9ef">int</span> off)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">+</span> off <span style="color:#f92672">&gt;</span> data.size())
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> data[index <span style="color:#f92672">+</span> off] <span style="color:#f92672">==</span> ch;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string data; <span style="color:#75715e">// 字符串数据
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint32_t</span> index;   <span style="color:#75715e">// 位置索引
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};</span></span></code></pre></td></tr></table>
-</div>
-</div>
+<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// 字符串流
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">CharStream</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="n">CharStream</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="c1">// 打开文件
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="nf">open</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">path</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="k">return</span> <span class="n">readFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="c1">// 设置字符串数据
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">setData</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="n">str</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">    <span class="kr">inline</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">getData</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">data</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="c1">// 获取字符串中的一段
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">getSbu</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">start</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">end</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        <span class="n">assert</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">        <span class="k">return</span> <span class="n">data</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="c1">// 获取下一字符
+</span></span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="c1"></span>    <span class="n">Char</span> <span class="nf">next</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">            <span class="kt">uint32_t</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">index</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">            <span class="kt">uint32_t</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">pos</span><span class="p">];</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">            <span class="o">++</span><span class="n">index</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">            <span class="k">return</span> <span class="n">Char</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">ch</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">        <span class="k">return</span> <span class="n">Char</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">    <span class="c1">// 退回字符
+</span></span></span><span class="line"><span class="ln">39</span><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="nf">back</span><span class="p">(</span><span class="n">Char</span> <span class="n">ch</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl">        <span class="n">index</span> <span class="o">=</span> <span class="n">ch</span><span class="p">.</span><span class="n">pos</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">42</span><span class="cl">        <span class="n">assert</span><span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">44</span><span class="cl">    <span class="c1">// 匹配一个字符
+</span></span></span><span class="line"><span class="ln">45</span><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="nf">match</span><span class="p">(</span><span class="kt">char</span> <span class="n">ch</span><span class="p">,</span> <span class="kt">int</span> <span class="n">off</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">47</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="n">off</span> <span class="o">&gt;</span> <span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+</span></span><span class="line"><span class="ln">48</span><span class="cl">            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">49</span><span class="cl">        <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="n">off</span><span class="p">]</span> <span class="o">==</span> <span class="n">ch</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">50</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">51</span><span class="cl">
+</span></span><span class="line"><span class="ln">52</span><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln">53</span><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">data</span><span class="p">;</span> <span class="c1">// 字符串数据
+</span></span></span><span class="line"><span class="ln">54</span><span class="cl"><span class="c1"></span>    <span class="kt">uint32_t</span> <span class="n">index</span><span class="p">;</span>   <span class="c1">// 位置索引
+</span></span></span><span class="line"><span class="ln">55</span><span class="cl"><span class="c1"></span><span class="p">};</span></span></span></code></pre></div>
   <footer class="footline">
 
   </footer>
 </article>
-<article class="default">
+<article class="default" autonumbering>
   <header class="headline">
   </header>
   
   <h1 id="词法分析器"> 2.1.3 词法分析器</h1>
   <hr />
 
-  
+  <p>词法分析器（也称为扫描器、分词器或词法分析程序）是编译器或解释器的一部分，负责将输入的源代码字符串分解成一系列有意义的最小单元，这些单元被称为标记（Token）。每个标记代表了语言的一个原子单元，如关键字、标识符、常量、运算符和标点符号等。</p>
+<p>在编译过程中，词法分析器通常是第一个执行的阶段。它从源代码的开头开始，按顺序读取字符，并根据语言的语法规则生成标记流。这些规则通常由正则表达式或者有限状态自动机来定义，它们描述了如何识别特定类型的标记。</p>
+<p>词法分析器的主要任务包括：</p>
+<ul>
+<li>分隔：从连续的字符流中分离出独立的标记。</li>
+<li>标识化：确定每个标记的类型，并可能附带相关的属性值。</li>
+<li>错误处理：检测并报告源代码中的错误，如非法字符、未闭合的字符串或注释等。</li>
+</ul>
+<p>例如，在C++编程语言中，以下源代码片段：</p>
+<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="ln">1</span><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>词法分析器会将其分解为一系列标记：</p>
+<table>
+<thead>
+<tr>
+<th>标记</th>
+<th>类型</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td>关键字</td>
+<td></td>
+</tr>
+<tr>
+<td>main</td>
+<td>标识符</td>
+<td></td>
+</tr>
+<tr>
+<td>(</td>
+<td>符号</td>
+<td></td>
+</tr>
+<tr>
+<td>)</td>
+<td>符号</td>
+<td></td>
+</tr>
+<tr>
+<td>{</td>
+<td>符号</td>
+<td></td>
+</tr>
+<tr>
+<td>int</td>
+<td>关键字</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>标识符</td>
+<td></td>
+</tr>
+<tr>
+<td>=</td>
+<td>符号</td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>整数常量</td>
+<td>10</td>
+</tr>
+<tr>
+<td>;</td>
+<td>符号</td>
+<td></td>
+</tr>
+<tr>
+<td>}</td>
+<td>符号</td>
+<td></td>
+</tr>
+<tr>
+<td>return</td>
+<td>关键字</td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td>整数常量</td>
+<td>0</td>
+</tr>
+<tr>
+<td>;</td>
+<td>符号</td>
+<td></td>
+</tr>
+<tr>
+<td>}</td>
+<td>符号</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>通过这种分割，后续的语法分析器能够更轻松地理解源代码的结构，并进行更复杂的语义检查和代码生成。</p>
+<h2 id="作用">作用</h2>
+<p>词法分析器在编译过程中的主要作用如下：</p>
+<ol>
+    <li> <b>标记化输入源代码</b>：词法分析器将连续的字符序列分解成离散的标记（Token），这些标记代表了语言的基本元素，如关键字、标识符、常量和运算符等。</li>
+    <li><b>提供语法分析所需的输入</b>：词法分析的结果通常是语法分析阶段的主要输入。语法分析器使用这些标记来构建抽象语法树（Abstract Syntax Tree, AST），进而理解程序的结构和语义。</li>
+    <li><b>错误检测</b>：词法分析器可以检测源代码中的常见错误，如未闭合的字符串或注释、非法字符以及一些简单的拼写错误等。早期发现并报告错误有助于提高开发效率和程序质量。</li>
+    <li><b>简化后续处理</b>：通过将复杂的字符流转换为易于处理的标记流，词法分析器降低了后续编译阶段的复杂性。这使得编译器设计者能够专注于更高层次的语法和语义问题。</li>
+    <li><b>增强可读性和可维护性</b>：通过隐藏底层的字符编码细节，词法分析器提高了编译器代码的可读性和可维护性。开发者可以更轻松地理解和修改词法分析器，而不必关心低级别的实现细节。</li>
+    <li><b>支持跨平台编译</b>：由于字符流抽象，词法分析器可以在一定程度上独立于具体的字符编码。这种特性使得编译器能够在多种操作系统和硬件平台上运行，而无需针对每个平台进行特定的修改。</li>
+</ol>
+<p>总的来说，词法分析器是编译过程中的一个重要组成部分，它负责将复杂的字符数据转换为更容易理解和处理的形式，以便后续阶段对源代码进行深入分析和处理。</p>
+<h2 id="词元token定义">词元（Token）定义</h2>
+<h2 id="关键字表">关键字表</h2>
+<h2 id="注解关键字表">注解关键字表</h2>
+<h2 id="解析标识符">解析标识符</h2>
+<h2 id="解析注解关键字">解析注解关键字</h2>
+<h2 id="解析数字常量">解析数字常量</h2>
+<h2 id="解析字符串常量">解析字符串常量</h2>
+<h2 id="解析字符常量">解析字符常量</h2>
+<h2 id="解析操作符">解析操作符</h2>
+<h2 id="解析分隔符">解析分隔符</h2>
+
   <footer class="footline">
 
   </footer>
 </article>
-<article class="default">
+<article class="default" autonumbering>
   <header class="headline">
   </header>
   
@@ -455,8 +470,8 @@
         </div>
       </main>
     </div>
-    <script src="../../js/clipboard.min.js?1702345994" defer></script>
-    <script src="../../js/perfect-scrollbar.min.js?1702345994" defer></script>
-    <script src="../../js/theme.js?1702345994" defer></script>
+    <script src="../../js/clipboard.min.js?1702348711" defer></script>
+    <script src="../../js/perfect-scrollbar.min.js?1702348711" defer></script>
+    <script src="../../js/theme.js?1702348711" defer></script>
   </body>
 </html>

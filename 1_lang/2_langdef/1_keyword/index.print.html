@@ -11,19 +11,19 @@
     <link href="https://lang-vm-rt-c.irscript.github.io/1_lang/2_langdef/1_keyword/index.html" rel="canonical" type="text/html" title="标识符 :: air 编程语言">
     <link href="../../../1_lang/2_langdef/1_keyword/index.xml" rel="alternate" type="application/rss+xml" title="标识符 :: air 编程语言"><link rel="icon" href="../../../images/favicon.png" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="../../../css/fontawesome-all.min.css?1702345994" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/fontawesome-all.min.css?1702345994" rel="stylesheet"></noscript>
-    <link href="../../../css/nucleus.css?1702345994" rel="stylesheet">
-    <link href="../../../css/auto-complete.css?1702345994" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/auto-complete.css?1702345994" rel="stylesheet"></noscript>
-    <link href="../../../css/perfect-scrollbar.min.css?1702345994" rel="stylesheet">
-    <link href="../../../css/fonts.css?1702345994" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/fonts.css?1702345994" rel="stylesheet"></noscript>
-    <link href="../../../css/theme.css?1702345994" rel="stylesheet">
-    <link href="../../../css/theme-auto.css?1702345994" rel="stylesheet" id="variant-style">
-    <link href="../../../css/variant.css?1702345994" rel="stylesheet">
-    <link href="../../../css/print.css?1702345994" rel="stylesheet" media="print">
-    <link href="../../../css/format-print.css?1702345994" rel="stylesheet">
-    <link href="../../../css/ie.css?1702345994" rel="stylesheet">
-    <script src="../../../js/url.js?1702345994"></script>
-    <script src="../../../js/variant.js?1702345994"></script>
+    <link href="../../../css/fontawesome-all.min.css?1702348711" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/fontawesome-all.min.css?1702348711" rel="stylesheet"></noscript>
+    <link href="../../../css/nucleus.css?1702348711" rel="stylesheet">
+    <link href="../../../css/auto-complete.css?1702348711" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/auto-complete.css?1702348711" rel="stylesheet"></noscript>
+    <link href="../../../css/perfect-scrollbar.min.css?1702348711" rel="stylesheet">
+    <link href="../../../css/fonts.css?1702348711" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/fonts.css?1702348711" rel="stylesheet"></noscript>
+    <link href="../../../css/theme.css?1702348711" rel="stylesheet">
+    <link href="../../../css/theme-auto.css?1702348711" rel="stylesheet" id="variant-style">
+    <link href="../../../css/variant.css?1702348711" rel="stylesheet">
+    <link href="../../../css/print.css?1702348711" rel="stylesheet" media="print">
+    <link href="../../../css/format-print.css?1702348711" rel="stylesheet">
+    <link href="../../../css/ie.css?1702348711" rel="stylesheet">
+    <script src="../../../js/url.js?1702348711"></script>
+    <script src="../../../js/variant.js?1702348711"></script>
     <script>
       // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
       // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
@@ -40,9 +40,7 @@
       // some further base stuff
       var baseUriFull='https:\/\/lang-vm-rt-c.irscript.github.io/';
       window.variants && variants.init( [ 'auto', 'relearn-bright', 'relearn-light', 'relearn-dark', 'zen-light', 'zen-dark', 'neon', 'learn', 'blue', 'green', 'red' ] );
-    </script>
-
-<style>
+    </script><style>
    body {
       counter-reset: h2
    }
@@ -95,6 +93,22 @@
       content: counters(item, ".") " ";
       counter-increment: item
    }
+
+   article p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      text-indent: 2rem;
+   }
+
+   article blockquote p {
+      text-indent: 0rem;
+   }
+
+   article ul,
+   ol,
+   dl {
+      margin-left: 1rem;
+   }
 </style>
   </head>
   <body class="mobile-support print disableInlineCopyToClipboard" data-url="../../../1_lang/2_langdef/1_keyword/index.html">
@@ -139,54 +153,27 @@
 </div>
 </div>
 <h2 id="关键字">关键字</h2>
-<div class="wrap-code highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-D" data-lang="D"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#66d9ef">bool</span> 
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>int8 int16 int32 int64
-</span></span><span style="display:flex;"><span>uint8 uint16 uint32 uint64
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">uint</span> sint uintptr
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>flt32 flt64
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span> 
-</span></span><span style="display:flex;"><span>cstring string
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> elsif <span style="color:#66d9ef">else</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">switch</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">default</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#66d9ef">do</span> <span style="color:#66d9ef">while</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">break</span> <span style="color:#66d9ef">continue</span> <span style="color:#66d9ef">goto</span> <span style="color:#66d9ef">return</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">enum</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">interface</span> entrust
-</span></span><span style="display:flex;"><span>destructor constructor
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">protected</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="注解符">注解符</h2>
+<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-D" data-lang="D"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kt">void</span> <span class="kt">bool</span> 
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="n">int8</span> <span class="n">int16</span> <span class="n">int32</span> <span class="n">int64</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="n">uint8</span> <span class="n">uint16</span> <span class="n">uint32</span> <span class="n">uint64</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="kt">uint</span> <span class="n">sint</span> <span class="n">uintptr</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="n">flt32</span> <span class="n">flt64</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="kt">char</span> 
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="n">cstring</span> <span class="nb">string</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="k">if</span> <span class="n">elsif</span> <span class="k">else</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="k">switch</span> <span class="k">case</span> <span class="k">default</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="k">for</span> <span class="k">do</span> <span class="k">while</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="k">break</span> <span class="k">continue</span> <span class="k">goto</span> <span class="k">return</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">
+</span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="kd">struct</span> <span class="nc">enum</span> <span class="kd">class</span> <span class="nc">interface</span> <span class="n">entrust</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="n">destructor</span> <span class="n">constructor</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="kd">const</span> <span class="kd">static</span> <span class="kd">final</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="kd">public</span> <span class="kd">private</span> <span class="kd">protected</span></span></span></code></pre></div><h2 id="注解符">注解符</h2>
 <ul>
 <li>组成：由 @ 符号开始，后接 任意个 字母、数字、_ 组成。</li>
 <li>用途：用于标注一些信息</li>
@@ -226,8 +213,8 @@
         </div>
       </main>
     </div>
-    <script src="../../../js/clipboard.min.js?1702345994" defer></script>
-    <script src="../../../js/perfect-scrollbar.min.js?1702345994" defer></script>
-    <script src="../../../js/theme.js?1702345994" defer></script>
+    <script src="../../../js/clipboard.min.js?1702348711" defer></script>
+    <script src="../../../js/perfect-scrollbar.min.js?1702348711" defer></script>
+    <script src="../../../js/theme.js?1702348711" defer></script>
   </body>
 </html>
