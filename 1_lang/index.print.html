@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.121.0">
+    <meta name="generator" content="Hugo 0.121.1">
     <meta name="generator" content="Relearn 5.20.0">
     <meta name="description" content="站在巨人的肩膀上">
     <meta name="author" content="月明之都">
@@ -11,19 +11,19 @@
     <link href="https://lang-vm-rt-c.irscript.github.io/1_lang/index.html" rel="canonical" type="text/html" title="编程语言 :: air 编程语言">
     <link href="../1_lang/index.xml" rel="alternate" type="application/rss+xml" title="编程语言 :: air 编程语言"><link rel="icon" href="../images/favicon.png" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="../css/fontawesome-all.min.css?1702016278" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/fontawesome-all.min.css?1702016278" rel="stylesheet"></noscript>
-    <link href="../css/nucleus.css?1702016278" rel="stylesheet">
-    <link href="../css/auto-complete.css?1702016278" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/auto-complete.css?1702016278" rel="stylesheet"></noscript>
-    <link href="../css/perfect-scrollbar.min.css?1702016278" rel="stylesheet">
-    <link href="../css/fonts.css?1702016278" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/fonts.css?1702016278" rel="stylesheet"></noscript>
-    <link href="../css/theme.css?1702016278" rel="stylesheet">
-    <link href="../css/theme-auto.css?1702016278" rel="stylesheet" id="variant-style">
-    <link href="../css/variant.css?1702016278" rel="stylesheet">
-    <link href="../css/print.css?1702016278" rel="stylesheet" media="print">
-    <link href="../css/format-print.css?1702016278" rel="stylesheet">
-    <link href="../css/ie.css?1702016278" rel="stylesheet">
-    <script src="../js/url.js?1702016278"></script>
-    <script src="../js/variant.js?1702016278"></script>
+    <link href="../css/fontawesome-all.min.css?1702345994" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/fontawesome-all.min.css?1702345994" rel="stylesheet"></noscript>
+    <link href="../css/nucleus.css?1702345994" rel="stylesheet">
+    <link href="../css/auto-complete.css?1702345994" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/auto-complete.css?1702345994" rel="stylesheet"></noscript>
+    <link href="../css/perfect-scrollbar.min.css?1702345994" rel="stylesheet">
+    <link href="../css/fonts.css?1702345994" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/fonts.css?1702345994" rel="stylesheet"></noscript>
+    <link href="../css/theme.css?1702345994" rel="stylesheet">
+    <link href="../css/theme-auto.css?1702345994" rel="stylesheet" id="variant-style">
+    <link href="../css/variant.css?1702345994" rel="stylesheet">
+    <link href="../css/print.css?1702345994" rel="stylesheet" media="print">
+    <link href="../css/format-print.css?1702345994" rel="stylesheet">
+    <link href="../css/ie.css?1702345994" rel="stylesheet">
+    <script src="../js/url.js?1702345994"></script>
+    <script src="../js/variant.js?1702345994"></script>
     <script>
       // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
       // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
@@ -199,269 +199,538 @@
 <li>::= 是“被定义为”的意思。</li>
 </ul>
 <h3 id="c-语言的-bnf-定义">C 语言的 BNF 定义</h3>
-<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-ebnf" data-lang="ebnf"><span class="line"><span class="cl"><span class="err">%</span><span class="k">token int_const char_const float_const id string enumeration_const</span>
-</span></span><span class="line"><span class="cl"><span class="err">%%</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">translation_unit</span>	<span class="err">:</span> <span class="k">external_decl</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">translation_unit external_decl</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">external_decl</span>		<span class="err">:</span> <span class="k">function_definition</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">function_definition</span>	<span class="err">:</span> <span class="k">decl_specs declarator decl_list compound_stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span>		<span class="k">declarator decl_list compound_stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl_specs declarator</span>		<span class="k">compound_stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span>		<span class="k">declarator </span>	<span class="k">compound_stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">decl</span>			<span class="err">:</span> <span class="k">decl_specs init_declarator_list </span><span class="err">&#39;;&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl_specs</span>			<span class="err">&#39;;&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">decl_list</span>		<span class="err">:</span> <span class="k">decl</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl_list decl</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">decl_specs</span>		<span class="err">:</span> <span class="k">storage_class_spec decl_specs</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">storage_class_spec</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_spec decl_specs</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_spec</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_qualifier decl_specs</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_qualifier</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">storage_class_spec</span>	<span class="err">:</span> <span class="err">&#39;</span><span class="k">auto</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">register</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">static</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">extern</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">typedef</span><span class="err">&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">type_spec</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">void</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">char</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">short</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">int</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">long</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">float</span><span class="err">&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">double</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">signed</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">unsigned</span><span class="err">&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">struct_or_union_spec</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">enum_spec</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">typedef_name</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">type_qualifier</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">const</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">volatile</span><span class="err">&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">struct_or_union_spec</span>	<span class="err">:</span> <span class="k">struct_or_union id </span><span class="err">&#39;{&#39;</span> <span class="k">struct_decl_list </span><span class="err">&#39;}&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">struct_or_union</span>	<span class="err">&#39;{&#39;</span> <span class="k">struct_decl_list </span><span class="err">&#39;}&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">struct_or_union id</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">struct_or_union</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">struct</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="k">union</span><span class="err">&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">struct_decl_list</span>	<span class="err">:</span> <span class="k">struct_decl</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">struct_decl_list struct_decl</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">init_declarator_list</span>	<span class="err">:</span> <span class="k">init_declarator</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">init_declarator_list </span><span class="err">&#39;,&#39;</span> <span class="k">init_declarator</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">init_declarator</span>		<span class="err">:</span> <span class="k">declarator</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">declarator </span><span class="err">&#39;</span><span class="o">=</span><span class="s1">&#39; initializer
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">struct_decl		: spec_qualifier_list struct_declarator_list &#39;</span><span class="p">;</span><span class="err">&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">spec_qualifier_list</span>	<span class="err">:</span> <span class="k">type_spec spec_qualifier_list</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_spec</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_qualifier spec_qualifier_list</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">type_qualifier</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">struct_declarator_list</span>	<span class="err">:</span> <span class="k">struct_declarator</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">struct_declarator_list </span><span class="err">&#39;,&#39;</span> <span class="k">struct_declarator</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">struct_declarator</span>	<span class="err">:</span> <span class="k">declarator</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">declarator </span><span class="err">&#39;:&#39;</span> <span class="k">const_exp</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span>		<span class="err">&#39;:&#39;</span> <span class="k">const_exp</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">enum_spec</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">enum</span><span class="err">&#39;</span> <span class="k">id </span><span class="err">&#39;{&#39;</span> <span class="k">enumerator_list </span><span class="err">&#39;}&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">enum</span><span class="err">&#39;</span>	<span class="err">&#39;{&#39;</span> <span class="k">enumerator_list </span><span class="err">&#39;}&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">enum</span><span class="err">&#39;</span> <span class="k">id</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">enumerator_list</span>		<span class="err">:</span> <span class="k">enumerator</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">enumerator_list </span><span class="err">&#39;,&#39;</span> <span class="k">enumerator</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">enumerator</span>		<span class="err">:</span> <span class="k">id</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">id </span><span class="err">&#39;</span><span class="o">=</span><span class="s1">&#39; const_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">declarator		: pointer direct_declarator
-</span></span></span><span class="line"><span class="cl"><span class="s1">			|	direct_declarator
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">direct_declarator	: id
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="p">(</span><span class="s1">&#39; declarator &#39;</span><span class="p">)</span><span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| direct_declarator &#39;</span><span class="p">[</span><span class="s1">&#39; const_exp &#39;</span><span class="p">]</span><span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| direct_declarator &#39;</span><span class="p">[</span><span class="s1">&#39;		&#39;</span><span class="p">]</span><span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| direct_declarator &#39;</span><span class="p">(</span><span class="s1">&#39; param_type_list &#39;</span><span class="p">)</span><span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| direct_declarator &#39;</span><span class="p">(</span><span class="s1">&#39; id_list &#39;</span><span class="p">)</span><span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| direct_declarator &#39;</span><span class="p">(</span><span class="s1">&#39;		&#39;</span><span class="p">)</span><span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">pointer			: &#39;</span><span class="err">*</span><span class="s1">&#39; type_qualifier_list
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="err">*</span><span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="err">*</span><span class="s1">&#39; type_qualifier_list pointer
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="err">*</span><span class="s1">&#39;			pointer
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">type_qualifier_list	: type_qualifier
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| type_qualifier_list type_qualifier
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">param_type_list		: param_list
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| param_list &#39;</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">.</span><span class="err">..&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">param_list</span>		<span class="err">:</span> <span class="k">param_decl</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">param_list </span><span class="err">&#39;,&#39;</span> <span class="k">param_decl</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">param_decl</span>		<span class="err">:</span> <span class="k">decl_specs declarator</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl_specs abstract_declarator</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">decl_specs</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">id_list</span>			<span class="err">:</span> <span class="k">id</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">id_list </span><span class="err">&#39;,&#39;</span> <span class="k">id</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">initializer</span>		<span class="err">:</span> <span class="k">assignment_exp</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;{&#39;</span> <span class="k">initializer_list </span><span class="err">&#39;}&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;{&#39;</span> <span class="k">initializer_list </span><span class="err">&#39;,&#39;</span> <span class="err">&#39;}&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">initializer_list</span>	<span class="err">:</span> <span class="k">initializer</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">initializer_list </span><span class="err">&#39;,&#39;</span> <span class="k">initializer</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">type_name</span>		<span class="err">:</span> <span class="k">spec_qualifier_list abstract_declarator</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">spec_qualifier_list</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">abstract_declarator</span>	<span class="err">:</span> <span class="k">pointer</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">pointer direct_abstract_declarator</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span>	<span class="k">direct_abstract_declarator</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">direct_abstract_declarator</span><span class="err">:</span> <span class="err">&#39;(&#39;</span> <span class="k">abstract_declarator </span><span class="err">&#39;)&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">direct_abstract_declarator </span><span class="err">&#39;[&#39;</span> <span class="k">const_exp </span><span class="err">&#39;]&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span>				<span class="err">&#39;[&#39;</span> <span class="k">const_exp </span><span class="err">&#39;]&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">direct_abstract_declarator </span><span class="err">&#39;[&#39;</span>	<span class="err">&#39;]&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span>				<span class="err">&#39;[&#39;</span>	<span class="err">&#39;]&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">direct_abstract_declarator </span><span class="err">&#39;(&#39;</span> <span class="k">param_type_list </span><span class="err">&#39;)&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span>				<span class="err">&#39;(&#39;</span> <span class="k">param_type_list </span><span class="err">&#39;)&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">direct_abstract_declarator </span><span class="err">&#39;(&#39;</span>		<span class="err">&#39;)&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span>				<span class="err">&#39;(&#39;</span>		<span class="err">&#39;)&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">typedef_name</span>		<span class="err">:</span> <span class="k">id</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">stat</span>			<span class="err">:</span> <span class="k">labeled_stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">exp_stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">compound_stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">selection_stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">iteration_stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">jump_stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">labeled_stat</span>		<span class="err">:</span> <span class="k">id </span><span class="err">&#39;:&#39;</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">case</span><span class="err">&#39;</span> <span class="k">const_exp </span><span class="err">&#39;:&#39;</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">default</span><span class="err">&#39;</span> <span class="err">&#39;:&#39;</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">exp_stat</span>		<span class="err">:</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span>	<span class="err">&#39;;&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">compound_stat</span>		<span class="err">:</span> <span class="err">&#39;{&#39;</span> <span class="k">decl_list stat_list </span><span class="err">&#39;}&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;{&#39;</span>		<span class="k">stat_list </span><span class="err">&#39;}&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;{&#39;</span> <span class="k">decl_list</span>		<span class="err">&#39;}&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;{&#39;</span>			<span class="err">&#39;}&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">stat_list</span>		<span class="err">:</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">stat_list stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">selection_stat</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">if</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">if</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat </span><span class="err">&#39;</span><span class="k">else</span><span class="err">&#39;</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">switch</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">iteration_stat</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">while</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">do</span><span class="err">&#39;</span> <span class="k">stat </span><span class="err">&#39;</span><span class="k">while</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="err">&#39;;&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>	<span class="err">&#39;)&#39;</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>	<span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>	<span class="err">&#39;;&#39;</span>	<span class="err">&#39;)&#39;</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span>	<span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span>	<span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>	<span class="err">&#39;)&#39;</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span>	<span class="err">&#39;;&#39;</span>	<span class="err">&#39;;&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">for</span><span class="err">&#39;</span> <span class="err">&#39;(&#39;</span>	<span class="err">&#39;;&#39;</span>	<span class="err">&#39;;&#39;</span>	<span class="err">&#39;)&#39;</span> <span class="k">stat</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">jump_stat</span>		<span class="err">:</span> <span class="err">&#39;</span><span class="k">goto</span><span class="err">&#39;</span> <span class="k">id </span><span class="err">&#39;;&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">continue</span><span class="err">&#39;</span> <span class="err">&#39;;&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">break</span><span class="err">&#39;</span> <span class="err">&#39;;&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">return</span><span class="err">&#39;</span> <span class="k">exp </span><span class="err">&#39;;&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;</span><span class="k">return</span><span class="err">&#39;</span>	<span class="err">&#39;;&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">exp</span>			<span class="err">:</span> <span class="k">assignment_exp</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">exp </span><span class="err">&#39;,&#39;</span> <span class="k">assignment_exp</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">assignment_exp</span>		<span class="err">:</span> <span class="k">conditional_exp</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">unary_exp assignment_operator assignment_exp</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">assignment_operator</span>	<span class="err">:</span> <span class="err">&#39;</span><span class="o">=</span><span class="s1">&#39; | &#39;</span><span class="err">*=</span><span class="s1">&#39; | &#39;</span><span class="err">/=</span><span class="s1">&#39; | &#39;</span><span class="err">%=</span><span class="s1">&#39; | &#39;</span><span class="err">+=</span><span class="s1">&#39; | &#39;</span><span class="o">-</span><span class="err">=</span><span class="s1">&#39; | &#39;</span><span class="err">&lt;&lt;=</span><span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="err">&gt;&gt;=</span><span class="s1">&#39; | &#39;</span><span class="err">&amp;=</span><span class="s1">&#39; | &#39;</span><span class="err">^=</span><span class="s1">&#39; | &#39;</span><span class="p">|</span><span class="err">=</span><span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">conditional_exp		: logical_or_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| logical_or_exp &#39;</span><span class="err">?</span><span class="s1">&#39; exp &#39;</span><span class="err">:</span><span class="s1">&#39; conditional_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">const_exp		: conditional_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">logical_or_exp		: logical_and_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| logical_or_exp &#39;</span><span class="p">||</span><span class="s1">&#39; logical_and_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">logical_and_exp		: inclusive_or_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| logical_and_exp &#39;</span><span class="err">&amp;&amp;</span><span class="s1">&#39; inclusive_or_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">inclusive_or_exp	: exclusive_or_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| inclusive_or_exp &#39;</span><span class="p">|</span><span class="s1">&#39; exclusive_or_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">exclusive_or_exp	: and_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| exclusive_or_exp &#39;</span><span class="err">^</span><span class="s1">&#39; and_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">and_exp			: equality_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| and_exp &#39;</span><span class="err">&amp;</span><span class="s1">&#39; equality_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">equality_exp		: relational_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| equality_exp &#39;</span><span class="err">==</span><span class="s1">&#39; relational_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| equality_exp &#39;</span><span class="err">!=</span><span class="s1">&#39; relational_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">relational_exp		: shift_expression
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| relational_exp &#39;</span><span class="err">&lt;</span><span class="s1">&#39; shift_expression
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| relational_exp &#39;</span><span class="err">&gt;</span><span class="s1">&#39; shift_expression
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| relational_exp &#39;</span><span class="err">&lt;=</span><span class="s1">&#39; shift_expression
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| relational_exp &#39;</span><span class="err">&gt;=</span><span class="s1">&#39; shift_expression
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">shift_expression	: additive_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| shift_expression &#39;</span><span class="err">&lt;&lt;</span><span class="s1">&#39; additive_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| shift_expression &#39;</span><span class="err">&gt;&gt;</span><span class="s1">&#39; additive_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">additive_exp		: mult_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| additive_exp &#39;</span><span class="err">+</span><span class="s1">&#39; mult_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| additive_exp &#39;</span><span class="o">-</span><span class="s1">&#39; mult_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">mult_exp		: cast_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| mult_exp &#39;</span><span class="err">*</span><span class="s1">&#39; cast_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| mult_exp &#39;</span><span class="err">/</span><span class="s1">&#39; cast_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| mult_exp &#39;</span><span class="err">%</span><span class="s1">&#39; cast_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">cast_exp		: unary_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="p">(</span><span class="s1">&#39; type_name &#39;</span><span class="p">)</span><span class="s1">&#39; cast_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">unary_exp		: postfix_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="err">++</span><span class="s1">&#39; unary_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="o">--</span><span class="s1">&#39; unary_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| unary_operator cast_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="k">sizeof</span><span class="s1">&#39; unary_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| &#39;</span><span class="k">sizeof</span><span class="s1">&#39; &#39;</span><span class="p">(</span><span class="s1">&#39; type_name &#39;</span><span class="p">)</span><span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">unary_operator		: &#39;</span><span class="err">&amp;</span><span class="s1">&#39; | &#39;</span><span class="err">*</span><span class="s1">&#39; | &#39;</span><span class="err">+</span><span class="s1">&#39; | &#39;</span><span class="o">-</span><span class="s1">&#39; | &#39;</span><span class="err">~</span><span class="s1">&#39; | &#39;</span><span class="err">!</span><span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">			;
-</span></span></span><span class="line"><span class="cl"><span class="s1">postfix_exp		: primary_exp
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| postfix_exp &#39;</span><span class="p">[</span><span class="s1">&#39; exp &#39;</span><span class="p">]</span><span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| postfix_exp &#39;</span><span class="p">(</span><span class="s1">&#39; argument_exp_list &#39;</span><span class="p">)</span><span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| postfix_exp &#39;</span><span class="p">(</span><span class="s1">&#39;			&#39;</span><span class="p">)</span><span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">			| postfix_exp &#39;</span><span class="p">.</span><span class="err">&#39;</span> <span class="k">id</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">postfix_exp </span><span class="err">&#39;-&gt;&#39;</span> <span class="k">id</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">postfix_exp </span><span class="err">&#39;++&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">postfix_exp </span><span class="err">&#39;--&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">primary_exp</span>		<span class="err">:</span> <span class="k">id</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">const</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">string</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="err">&#39;(&#39;</span> <span class="k">exp </span><span class="err">&#39;)&#39;</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">argument_exp_list</span>	<span class="err">:</span> <span class="k">assignment_exp</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">argument_exp_list </span><span class="err">&#39;,&#39;</span> <span class="k">assignment_exp</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">const</span>			<span class="err">:</span> <span class="k">int_const</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">char_const</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">float_const</span>
-</span></span><span class="line"><span class="cl">			<span class="err">|</span> <span class="k">enumeration_const</span>
-</span></span><span class="line"><span class="cl">			<span class="err">;</span></span></span></code></pre></div>
+<div class="wrap-code highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">123
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">124
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">125
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">126
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">127
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">128
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">129
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">130
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">131
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">132
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">133
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">134
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">135
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">136
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">137
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">138
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">139
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">140
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">141
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">142
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">143
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">144
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">145
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">146
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">147
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">148
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">149
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">150
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">151
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">152
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">153
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">154
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">155
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">156
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">157
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">158
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">159
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">160
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">161
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">162
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">163
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">164
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">165
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">166
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">167
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">168
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">169
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">170
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">171
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">172
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">173
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">174
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">175
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">176
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">177
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">178
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">179
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">180
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">181
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">182
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">183
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">184
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">185
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">186
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">187
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">188
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">189
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">190
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">191
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">192
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">193
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">194
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">195
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">196
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">197
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">198
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">199
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">200
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">201
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">202
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">203
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">204
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">205
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">206
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">207
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">208
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">209
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">210
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">211
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">212
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">213
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">214
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">215
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">216
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">217
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">218
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">219
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">220
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">221
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">222
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">223
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">224
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">225
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">226
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">227
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">228
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">229
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">230
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">231
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">232
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">233
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">234
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">235
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">236
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">237
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">238
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">239
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">240
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">241
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">242
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">243
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">244
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">245
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">246
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">247
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">248
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">249
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">250
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">251
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">252
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">253
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">254
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">255
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">256
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">257
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">258
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">259
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">260
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">261
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">262
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">263
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ebnf" data-lang="ebnf"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">%</span><span style="color:#66d9ef">token int_const char_const float_const id string enumeration_const</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">%%</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">translation_unit</span>	<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">external_decl</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">translation_unit external_decl</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">external_decl</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">function_definition</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">decl</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function_definition</span>	<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">decl_specs declarator decl_list compound_stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span>		<span style="color:#66d9ef">declarator decl_list compound_stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">decl_specs declarator</span>		<span style="color:#66d9ef">compound_stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span>		<span style="color:#66d9ef">declarator </span>	<span style="color:#66d9ef">compound_stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">decl</span>			<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">decl_specs init_declarator_list </span><span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">decl_specs</span>			<span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">decl_list</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">decl</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">decl_list decl</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">decl_specs</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">storage_class_spec decl_specs</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">storage_class_spec</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">type_spec decl_specs</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">type_spec</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">type_qualifier decl_specs</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">type_qualifier</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">storage_class_spec</span>	<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">auto</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">register</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">static</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">extern</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">typedef</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type_spec</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">void</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">char</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">short</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">int</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">long</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">float</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">double</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">signed</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">unsigned</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">struct_or_union_spec</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">enum_spec</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">typedef_name</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type_qualifier</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">const</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">volatile</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct_or_union_spec</span>	<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">struct_or_union id </span><span style="color:#960050;background-color:#1e0010">&#39;{&#39;</span> <span style="color:#66d9ef">struct_decl_list </span><span style="color:#960050;background-color:#1e0010">&#39;}&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">struct_or_union</span>	<span style="color:#960050;background-color:#1e0010">&#39;{&#39;</span> <span style="color:#66d9ef">struct_decl_list </span><span style="color:#960050;background-color:#1e0010">&#39;}&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">struct_or_union id</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct_or_union</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">struct</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">union</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct_decl_list</span>	<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">struct_decl</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">struct_decl_list struct_decl</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">init_declarator_list</span>	<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">init_declarator</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">init_declarator_list </span><span style="color:#960050;background-color:#1e0010">&#39;,&#39;</span> <span style="color:#66d9ef">init_declarator</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">init_declarator</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">declarator</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">declarator </span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39; initializer
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">struct_decl		: spec_qualifier_list struct_declarator_list &#39;</span>;<span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">spec_qualifier_list</span>	<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">type_spec spec_qualifier_list</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">type_spec</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">type_qualifier spec_qualifier_list</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">type_qualifier</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct_declarator_list</span>	<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">struct_declarator</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">struct_declarator_list </span><span style="color:#960050;background-color:#1e0010">&#39;,&#39;</span> <span style="color:#66d9ef">struct_declarator</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct_declarator</span>	<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">declarator</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">declarator </span><span style="color:#960050;background-color:#1e0010">&#39;:&#39;</span> <span style="color:#66d9ef">const_exp</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span>		<span style="color:#960050;background-color:#1e0010">&#39;:&#39;</span> <span style="color:#66d9ef">const_exp</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">enum_spec</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">enum</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#66d9ef">id </span><span style="color:#960050;background-color:#1e0010">&#39;{&#39;</span> <span style="color:#66d9ef">enumerator_list </span><span style="color:#960050;background-color:#1e0010">&#39;}&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">enum</span><span style="color:#960050;background-color:#1e0010">&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;{&#39;</span> <span style="color:#66d9ef">enumerator_list </span><span style="color:#960050;background-color:#1e0010">&#39;}&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">enum</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#66d9ef">id</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">enumerator_list</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">enumerator</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">enumerator_list </span><span style="color:#960050;background-color:#1e0010">&#39;,&#39;</span> <span style="color:#66d9ef">enumerator</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">enumerator</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">id</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">id </span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39; const_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">declarator		: pointer direct_declarator
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			|	direct_declarator
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">direct_declarator	: id
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| &#39;</span>(<span style="color:#e6db74">&#39; declarator &#39;</span>)<span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| direct_declarator &#39;</span>[<span style="color:#e6db74">&#39; const_exp &#39;</span>]<span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| direct_declarator &#39;</span>[<span style="color:#e6db74">&#39;		&#39;</span>]<span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| direct_declarator &#39;</span>(<span style="color:#e6db74">&#39; param_type_list &#39;</span>)<span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| direct_declarator &#39;</span>(<span style="color:#e6db74">&#39; id_list &#39;</span>)<span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| direct_declarator &#39;</span>(<span style="color:#e6db74">&#39;		&#39;</span>)<span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">pointer			: &#39;</span><span style="color:#960050;background-color:#1e0010">*</span><span style="color:#e6db74">&#39; type_qualifier_list
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| &#39;</span><span style="color:#960050;background-color:#1e0010">*</span><span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| &#39;</span><span style="color:#960050;background-color:#1e0010">*</span><span style="color:#e6db74">&#39; type_qualifier_list pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| &#39;</span><span style="color:#960050;background-color:#1e0010">*</span><span style="color:#e6db74">&#39;			pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">type_qualifier_list	: type_qualifier
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| type_qualifier_list type_qualifier
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">param_type_list		: param_list
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| param_list &#39;</span>,<span style="color:#e6db74">&#39; &#39;</span>.<span style="color:#960050;background-color:#1e0010">..&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param_list</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">param_decl</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">param_list </span><span style="color:#960050;background-color:#1e0010">&#39;,&#39;</span> <span style="color:#66d9ef">param_decl</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param_decl</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">decl_specs declarator</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">decl_specs abstract_declarator</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">decl_specs</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">id_list</span>			<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">id</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">id_list </span><span style="color:#960050;background-color:#1e0010">&#39;,&#39;</span> <span style="color:#66d9ef">id</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">initializer</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">assignment_exp</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;{&#39;</span> <span style="color:#66d9ef">initializer_list </span><span style="color:#960050;background-color:#1e0010">&#39;}&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;{&#39;</span> <span style="color:#66d9ef">initializer_list </span><span style="color:#960050;background-color:#1e0010">&#39;,&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;}&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">initializer_list</span>	<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">initializer</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">initializer_list </span><span style="color:#960050;background-color:#1e0010">&#39;,&#39;</span> <span style="color:#66d9ef">initializer</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type_name</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">spec_qualifier_list abstract_declarator</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">spec_qualifier_list</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">abstract_declarator</span>	<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">pointer</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">pointer direct_abstract_declarator</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span>	<span style="color:#66d9ef">direct_abstract_declarator</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">direct_abstract_declarator</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span> <span style="color:#66d9ef">abstract_declarator </span><span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">direct_abstract_declarator </span><span style="color:#960050;background-color:#1e0010">&#39;[&#39;</span> <span style="color:#66d9ef">const_exp </span><span style="color:#960050;background-color:#1e0010">&#39;]&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span>				<span style="color:#960050;background-color:#1e0010">&#39;[&#39;</span> <span style="color:#66d9ef">const_exp </span><span style="color:#960050;background-color:#1e0010">&#39;]&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">direct_abstract_declarator </span><span style="color:#960050;background-color:#1e0010">&#39;[&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;]&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span>				<span style="color:#960050;background-color:#1e0010">&#39;[&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;]&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">direct_abstract_declarator </span><span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span> <span style="color:#66d9ef">param_type_list </span><span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span>				<span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span> <span style="color:#66d9ef">param_type_list </span><span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">direct_abstract_declarator </span><span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span>		<span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span>				<span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span>		<span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef_name</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">id</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">stat</span>			<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">labeled_stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">exp_stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">compound_stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">selection_stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">iteration_stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">jump_stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">labeled_stat</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">id </span><span style="color:#960050;background-color:#1e0010">&#39;:&#39;</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">case</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#66d9ef">const_exp </span><span style="color:#960050;background-color:#1e0010">&#39;:&#39;</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">default</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;:&#39;</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">exp_stat</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span>	<span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">compound_stat</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">&#39;{&#39;</span> <span style="color:#66d9ef">decl_list stat_list </span><span style="color:#960050;background-color:#1e0010">&#39;}&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;{&#39;</span>		<span style="color:#66d9ef">stat_list </span><span style="color:#960050;background-color:#1e0010">&#39;}&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;{&#39;</span> <span style="color:#66d9ef">decl_list</span>		<span style="color:#960050;background-color:#1e0010">&#39;}&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;{&#39;</span>			<span style="color:#960050;background-color:#1e0010">&#39;}&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">stat_list</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">stat_list stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">selection_stat</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">if</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">if</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span> <span style="color:#66d9ef">stat </span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">else</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">switch</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">iteration_stat</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">while</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">do</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#66d9ef">stat </span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">while</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">for</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">for</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">for</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">for</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">for</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">for</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">for</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">for</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span> <span style="color:#66d9ef">stat</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">jump_stat</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">goto</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#66d9ef">id </span><span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">continue</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">break</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">return</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">return</span><span style="color:#960050;background-color:#1e0010">&#39;</span>	<span style="color:#960050;background-color:#1e0010">&#39;;&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">exp</span>			<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">assignment_exp</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;,&#39;</span> <span style="color:#66d9ef">assignment_exp</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assignment_exp</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">conditional_exp</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">unary_exp assignment_operator assignment_exp</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assignment_operator</span>	<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39; | &#39;</span><span style="color:#960050;background-color:#1e0010">*=</span><span style="color:#e6db74">&#39; | &#39;</span><span style="color:#960050;background-color:#1e0010">/=</span><span style="color:#e6db74">&#39; | &#39;</span><span style="color:#960050;background-color:#1e0010">%=</span><span style="color:#e6db74">&#39; | &#39;</span><span style="color:#960050;background-color:#1e0010">+=</span><span style="color:#e6db74">&#39; | &#39;</span><span style="color:#f92672">-</span><span style="color:#960050;background-color:#1e0010">=</span><span style="color:#e6db74">&#39; | &#39;</span><span style="color:#960050;background-color:#1e0010">&lt;&lt;=</span><span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| &#39;</span><span style="color:#960050;background-color:#1e0010">&gt;&gt;=</span><span style="color:#e6db74">&#39; | &#39;</span><span style="color:#960050;background-color:#1e0010">&amp;=</span><span style="color:#e6db74">&#39; | &#39;</span><span style="color:#960050;background-color:#1e0010">^=</span><span style="color:#e6db74">&#39; | &#39;</span>|<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">conditional_exp		: logical_or_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| logical_or_exp &#39;</span><span style="color:#960050;background-color:#1e0010">?</span><span style="color:#e6db74">&#39; exp &#39;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#39; conditional_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">const_exp		: conditional_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">logical_or_exp		: logical_and_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| logical_or_exp &#39;</span>||<span style="color:#e6db74">&#39; logical_and_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">logical_and_exp		: inclusive_or_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| logical_and_exp &#39;</span><span style="color:#960050;background-color:#1e0010">&amp;&amp;</span><span style="color:#e6db74">&#39; inclusive_or_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">inclusive_or_exp	: exclusive_or_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| inclusive_or_exp &#39;</span>|<span style="color:#e6db74">&#39; exclusive_or_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">exclusive_or_exp	: and_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| exclusive_or_exp &#39;</span><span style="color:#960050;background-color:#1e0010">^</span><span style="color:#e6db74">&#39; and_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">and_exp			: equality_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| and_exp &#39;</span><span style="color:#960050;background-color:#1e0010">&amp;</span><span style="color:#e6db74">&#39; equality_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">equality_exp		: relational_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| equality_exp &#39;</span><span style="color:#960050;background-color:#1e0010">==</span><span style="color:#e6db74">&#39; relational_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| equality_exp &#39;</span><span style="color:#960050;background-color:#1e0010">!=</span><span style="color:#e6db74">&#39; relational_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">relational_exp		: shift_expression
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| relational_exp &#39;</span><span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#e6db74">&#39; shift_expression
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| relational_exp &#39;</span><span style="color:#960050;background-color:#1e0010">&gt;</span><span style="color:#e6db74">&#39; shift_expression
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| relational_exp &#39;</span><span style="color:#960050;background-color:#1e0010">&lt;=</span><span style="color:#e6db74">&#39; shift_expression
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| relational_exp &#39;</span><span style="color:#960050;background-color:#1e0010">&gt;=</span><span style="color:#e6db74">&#39; shift_expression
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">shift_expression	: additive_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| shift_expression &#39;</span><span style="color:#960050;background-color:#1e0010">&lt;&lt;</span><span style="color:#e6db74">&#39; additive_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| shift_expression &#39;</span><span style="color:#960050;background-color:#1e0010">&gt;&gt;</span><span style="color:#e6db74">&#39; additive_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">additive_exp		: mult_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| additive_exp &#39;</span><span style="color:#960050;background-color:#1e0010">+</span><span style="color:#e6db74">&#39; mult_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| additive_exp &#39;</span><span style="color:#f92672">-</span><span style="color:#e6db74">&#39; mult_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">mult_exp		: cast_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| mult_exp &#39;</span><span style="color:#960050;background-color:#1e0010">*</span><span style="color:#e6db74">&#39; cast_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| mult_exp &#39;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#e6db74">&#39; cast_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| mult_exp &#39;</span><span style="color:#960050;background-color:#1e0010">%</span><span style="color:#e6db74">&#39; cast_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">cast_exp		: unary_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| &#39;</span>(<span style="color:#e6db74">&#39; type_name &#39;</span>)<span style="color:#e6db74">&#39; cast_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">unary_exp		: postfix_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| &#39;</span><span style="color:#960050;background-color:#1e0010">++</span><span style="color:#e6db74">&#39; unary_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| &#39;</span><span style="color:#f92672">--</span><span style="color:#e6db74">&#39; unary_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| unary_operator cast_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| &#39;</span><span style="color:#66d9ef">sizeof</span><span style="color:#e6db74">&#39; unary_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| &#39;</span><span style="color:#66d9ef">sizeof</span><span style="color:#e6db74">&#39; &#39;</span>(<span style="color:#e6db74">&#39; type_name &#39;</span>)<span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">unary_operator		: &#39;</span><span style="color:#960050;background-color:#1e0010">&amp;</span><span style="color:#e6db74">&#39; | &#39;</span><span style="color:#960050;background-color:#1e0010">*</span><span style="color:#e6db74">&#39; | &#39;</span><span style="color:#960050;background-color:#1e0010">+</span><span style="color:#e6db74">&#39; | &#39;</span><span style="color:#f92672">-</span><span style="color:#e6db74">&#39; | &#39;</span><span style="color:#960050;background-color:#1e0010">~</span><span style="color:#e6db74">&#39; | &#39;</span><span style="color:#960050;background-color:#1e0010">!</span><span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">postfix_exp		: primary_exp
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| postfix_exp &#39;</span>[<span style="color:#e6db74">&#39; exp &#39;</span>]<span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| postfix_exp &#39;</span>(<span style="color:#e6db74">&#39; argument_exp_list &#39;</span>)<span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| postfix_exp &#39;</span>(<span style="color:#e6db74">&#39;			&#39;</span>)<span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">			| postfix_exp &#39;</span>.<span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#66d9ef">id</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">postfix_exp </span><span style="color:#960050;background-color:#1e0010">&#39;-&gt;&#39;</span> <span style="color:#66d9ef">id</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">postfix_exp </span><span style="color:#960050;background-color:#1e0010">&#39;++&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">postfix_exp </span><span style="color:#960050;background-color:#1e0010">&#39;--&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">primary_exp</span>		<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">id</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#960050;background-color:#1e0010">&#39;(&#39;</span> <span style="color:#66d9ef">exp </span><span style="color:#960050;background-color:#1e0010">&#39;)&#39;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">argument_exp_list</span>	<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">assignment_exp</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">argument_exp_list </span><span style="color:#960050;background-color:#1e0010">&#39;,&#39;</span> <span style="color:#66d9ef">assignment_exp</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span>			<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">int_const</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">char_const</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">float_const</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">enumeration_const</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
   <footer class="footline">
 
   </footer>
@@ -548,25 +817,51 @@
 </table>
 <h3 id="ebnf-示例">EBNF 示例</h3>
 <p>以下提供一些示例以直观的理解EBNF。</p>
-<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-ebnf" data-lang="ebnf"><span class="line"><span class="cl"><span class="k">digit excluding zero </span><span class="o">=</span> <span class="s2">&#34;1&#34;</span> <span class="p">|</span> <span class="s2">&#34;2&#34;</span> <span class="p">|</span> <span class="s2">&#34;3&#34;</span> <span class="p">|</span> <span class="s2">&#34;4&#34;</span> <span class="p">|</span> <span class="s2">&#34;5&#34;</span> <span class="p">|</span> <span class="s2">&#34;6&#34;</span> <span class="p">|</span> <span class="s2">&#34;7&#34;</span> <span class="p">|</span> <span class="s2">&#34;8&#34;</span> <span class="p">|</span> <span class="s2">&#34;9&#34;</span> <span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">digit                </span><span class="o">=</span> <span class="s2">&#34;0&#34;</span> <span class="p">|</span> <span class="k">digit excluding zero </span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">natural number </span><span class="o">=</span> <span class="k">digit excluding zero</span><span class="p">,</span> <span class="p">{</span> <span class="k">digit </span><span class="p">}</span> <span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">integer </span><span class="o">=</span> <span class="s2">&#34;0&#34;</span> <span class="p">|</span> <span class="p">[</span> <span class="s2">&#34;-&#34;</span> <span class="p">],</span> <span class="k">natural number </span><span class="p">;</span></span></span></code></pre></div><ul>
+<div class="wrap-code highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ebnf" data-lang="ebnf"><span style="display:flex;"><span><span style="color:#66d9ef">digit excluding zero </span><span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1&#34;</span> | <span style="color:#e6db74">&#34;2&#34;</span> | <span style="color:#e6db74">&#34;3&#34;</span> | <span style="color:#e6db74">&#34;4&#34;</span> | <span style="color:#e6db74">&#34;5&#34;</span> | <span style="color:#e6db74">&#34;6&#34;</span> | <span style="color:#e6db74">&#34;7&#34;</span> | <span style="color:#e6db74">&#34;8&#34;</span> | <span style="color:#e6db74">&#34;9&#34;</span> ;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">digit                </span><span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0&#34;</span> | <span style="color:#66d9ef">digit excluding zero </span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">natural number </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">digit excluding zero</span>, { <span style="color:#66d9ef">digit </span>} ;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">integer </span><span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0&#34;</span> | [ <span style="color:#e6db74">&#34;-&#34;</span> ], <span style="color:#66d9ef">natural number </span>;</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>digit excluding zero 可以是 1到9任意一个字符，digit则扩展为0到9任意一个字符。</li>
 <li>natural number可以是1、2、…、10、…、12345、…，因为{}代表重复任意次，包括0次。</li>
 <li>integer则可以是0或者可能带个负号的自然数。</li>
 </ul>
 <p>这是用EBNF描述的EBNF自身语法：</p>
-<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-ebnf" data-lang="ebnf"><span class="line"><span class="cl"><span class="k">Production     </span><span class="o">=</span> <span class="k">NonTerminal </span><span class="s2">&#34;=&#34;</span> <span class="k">Expression </span><span class="s2">&#34;.&#34;</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="k">Expression     </span><span class="o">=</span> <span class="k">Term </span><span class="p">{</span><span class="s2">&#34;|&#34;</span> <span class="k">Term</span><span class="p">}.</span>
-</span></span><span class="line"><span class="cl"><span class="k">Term           </span><span class="o">=</span> <span class="k">Factor </span><span class="p">{</span><span class="k">Factor</span><span class="p">}.</span>
-</span></span><span class="line"><span class="cl"><span class="k">Factor         </span><span class="o">=</span> <span class="k">NonTerminal</span>
-</span></span><span class="line"><span class="cl">                 <span class="p">|</span> <span class="k">Terminal</span>
-</span></span><span class="line"><span class="cl">                 <span class="p">|</span> <span class="s2">&#34;(&#34;</span> <span class="k">Expression </span><span class="s2">&#34;)&#34;</span>
-</span></span><span class="line"><span class="cl">                 <span class="p">|</span> <span class="s2">&#34;[&#34;</span> <span class="k">Expression </span><span class="s2">&#34;]&#34;</span>
-</span></span><span class="line"><span class="cl">                 <span class="p">|</span> <span class="s2">&#34;{&#34;</span> <span class="k">Expression </span><span class="s2">&#34;}&#34;</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="k">Terminal       </span><span class="o">=</span> <span class="k">Identifier </span><span class="p">|</span> <span class="err">“</span><span class="s2">&#34;“ &lt;any char&gt; “&#34;</span><span class="err">“</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="k">NonTerminal    </span><span class="o">=</span> <span class="k">Identifier</span><span class="p">.</span></span></span></code></pre></div><h2 id="增强巴科斯范式abnf">增强巴科斯范式：ABNF</h2>
+<div class="wrap-code highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ebnf" data-lang="ebnf"><span style="display:flex;"><span><span style="color:#66d9ef">Production     </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">NonTerminal </span><span style="color:#e6db74">&#34;=&#34;</span> <span style="color:#66d9ef">Expression </span><span style="color:#e6db74">&#34;.&#34;</span>.
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Expression     </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">Term </span>{<span style="color:#e6db74">&#34;|&#34;</span> <span style="color:#66d9ef">Term</span>}.
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Term           </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">Factor </span>{<span style="color:#66d9ef">Factor</span>}.
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Factor         </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">NonTerminal</span>
+</span></span><span style="display:flex;"><span>                 | <span style="color:#66d9ef">Terminal</span>
+</span></span><span style="display:flex;"><span>                 | <span style="color:#e6db74">&#34;(&#34;</span> <span style="color:#66d9ef">Expression </span><span style="color:#e6db74">&#34;)&#34;</span>
+</span></span><span style="display:flex;"><span>                 | <span style="color:#e6db74">&#34;[&#34;</span> <span style="color:#66d9ef">Expression </span><span style="color:#e6db74">&#34;]&#34;</span>
+</span></span><span style="display:flex;"><span>                 | <span style="color:#e6db74">&#34;{&#34;</span> <span style="color:#66d9ef">Expression </span><span style="color:#e6db74">&#34;}&#34;</span>.
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Terminal       </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">Identifier </span>| <span style="color:#960050;background-color:#1e0010">“</span><span style="color:#e6db74">&#34;“ &lt;any char&gt; “&#34;</span><span style="color:#960050;background-color:#1e0010">“</span>.
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">NonTerminal    </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">Identifier</span>.</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="增强巴科斯范式abnf">增强巴科斯范式：ABNF</h2>
 <p>RFC2234 定义了扩展的巴科斯范式(ABNF)。近年来在Internet的定义中 ABNF 被广泛使用。ABNF 做了更多的改进。扩充巴科斯-瑙尔范式(ABNF)基于了巴科斯-瑙尔范式(BNF)，但由它自己的语法和推导规则构成。这种元语言的发起原则是描述作为通信协议(双向规范)的语言的形式系统。它建档于 RFC 4234 中通常充当 IETF 通信协议的定义语言。</p>
 <h3 id="abnf-规则">ABNF 规则</h3>
 <p>一个ABNF规范是一些推导规则的集合，书写为：规则 = 定义;注释CR LF
@@ -1001,17 +1296,40 @@ group = (elem fubar) / (tarfu snafu)
 <li>竖线( | )表示在其左右两边任选一项，相当于&quot;OR&quot;的意思。</li>
 <li>= 是“被定义为”的意思。</li>
 </ul>
-<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-ebnf" data-lang="ebnf"><span class="line"><span class="cl">    <span class="k">digit    </span><span class="o">=</span> <span class="p">[</span><span class="err">0</span><span class="o">-</span><span class="err">9</span><span class="p">]</span>        <span class="p">;</span><span class="err">数字字符</span>
-</span></span><span class="line"><span class="cl">    <span class="k">alpha    </span><span class="o">=</span> <span class="p">[</span><span class="k">a-z</span><span class="p">,</span><span class="k">A-Z</span><span class="p">]</span>     <span class="p">;</span><span class="err">字母字符</span>
-</span></span><span class="line"><span class="cl">    <span class="k">alpha_   </span><span class="o">=</span> <span class="p">[</span><span class="k">a-z</span><span class="p">,</span><span class="k">A-Z</span><span class="p">,</span><span class="err">_</span><span class="p">]</span>   <span class="p">;</span><span class="err">含下划线&#39;_&#39;的字母字符</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">sign     </span><span class="o">=</span> <span class="p">[</span><span class="err">+</span><span class="p">,</span><span class="o">-</span><span class="p">]</span>         <span class="p">;</span><span class="err">正负符号</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">intnum   </span><span class="o">=</span> <span class="p">[</span><span class="err">$</span><span class="k">sign</span><span class="p">]</span> <span class="p">{</span><span class="err">$</span><span class="k">digit</span><span class="p">}</span>     <span class="p">;</span><span class="err">整数字符串</span>
-</span></span><span class="line"><span class="cl">    <span class="k">fltnum   </span><span class="o">=</span> <span class="err">$</span><span class="k">intnum </span><span class="s1">&#39;.&#39;</span> <span class="p">{</span><span class="k">digit</span><span class="p">}</span> <span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">|</span><span class="s1">&#39;e&#39;</span><span class="p">]</span> <span class="p">[</span><span class="err">$</span><span class="k">intnum</span><span class="p">]</span>   <span class="p">;</span><span class="err">实数字符串</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">number    </span><span class="o">=</span> <span class="p">{</span><span class="k">digit</span><span class="p">}</span><span class="err">*</span></span></span></code></pre></div><h2 id="语法定义">语法定义</h2>
-<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-ebnf" data-lang="ebnf"><span class="line"><span class="cl">    <span class="err">&lt;</span><span class="k">digit</span><span class="err">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="err">0</span><span class="o">-</span><span class="err">9</span><span class="p">)</span> <span class="p">;</span><span class="err">数字字符</span></span></span></code></pre></div>
+<div class="wrap-code highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ebnf" data-lang="ebnf"><span style="display:flex;"><span>    <span style="color:#66d9ef">digit    </span><span style="color:#f92672">=</span> [<span style="color:#960050;background-color:#1e0010">0</span><span style="color:#f92672">-</span><span style="color:#960050;background-color:#1e0010">9</span>]        ;<span style="color:#960050;background-color:#1e0010">数字字符</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">alpha    </span><span style="color:#f92672">=</span> [<span style="color:#66d9ef">a-z</span>,<span style="color:#66d9ef">A-Z</span>]     ;<span style="color:#960050;background-color:#1e0010">字母字符</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">alpha_   </span><span style="color:#f92672">=</span> [<span style="color:#66d9ef">a-z</span>,<span style="color:#66d9ef">A-Z</span>,<span style="color:#960050;background-color:#1e0010">_</span>]   ;<span style="color:#960050;background-color:#1e0010">含下划线&#39;_&#39;的字母字符</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">sign     </span><span style="color:#f92672">=</span> [<span style="color:#960050;background-color:#1e0010">+</span>,<span style="color:#f92672">-</span>]         ;<span style="color:#960050;background-color:#1e0010">正负符号</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">intnum   </span><span style="color:#f92672">=</span> [<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#66d9ef">sign</span>] {<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#66d9ef">digit</span>}     ;<span style="color:#960050;background-color:#1e0010">整数字符串</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fltnum   </span><span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#66d9ef">intnum </span><span style="color:#e6db74">&#39;.&#39;</span> {<span style="color:#66d9ef">digit</span>} [<span style="color:#e6db74">&#39;E&#39;</span>|<span style="color:#e6db74">&#39;e&#39;</span>] [<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#66d9ef">intnum</span>]   ;<span style="color:#960050;background-color:#1e0010">实数字符串</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">number    </span><span style="color:#f92672">=</span> {<span style="color:#66d9ef">digit</span>}<span style="color:#960050;background-color:#1e0010">*</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="语法定义">语法定义</h2>
+<div class="wrap-code highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ebnf" data-lang="ebnf"><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#66d9ef">digit</span><span style="color:#960050;background-color:#1e0010">&gt;</span> <span style="color:#f92672">=</span> (<span style="color:#960050;background-color:#1e0010">0</span><span style="color:#f92672">-</span><span style="color:#960050;background-color:#1e0010">9</span>) ;<span style="color:#960050;background-color:#1e0010">数字字符</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
   <footer class="footline">
 
   </footer>
@@ -1039,27 +1357,54 @@ group = (elem fubar) / (tarfu snafu)
 </div>
 </div>
 <h2 id="关键字">关键字</h2>
-<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-D" data-lang="D"><span class="line"><span class="cl"><span class="kt">void</span> <span class="kt">bool</span> 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">int8</span> <span class="n">int16</span> <span class="n">int32</span> <span class="n">int64</span>
-</span></span><span class="line"><span class="cl"><span class="n">uint8</span> <span class="n">uint16</span> <span class="n">uint32</span> <span class="n">uint64</span>
-</span></span><span class="line"><span class="cl"><span class="kt">uint</span> <span class="n">sint</span> <span class="n">uintptr</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">flt32</span> <span class="n">flt64</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">char</span> 
-</span></span><span class="line"><span class="cl"><span class="n">cstring</span> <span class="nb">string</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">elsif</span> <span class="k">else</span>
-</span></span><span class="line"><span class="cl"><span class="k">switch</span> <span class="k">case</span> <span class="k">default</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="k">do</span> <span class="k">while</span>
-</span></span><span class="line"><span class="cl"><span class="k">break</span> <span class="k">continue</span> <span class="k">goto</span> <span class="k">return</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">struct</span> <span class="nc">enum</span> <span class="kd">class</span> <span class="nc">interface</span> <span class="n">entrust</span>
-</span></span><span class="line"><span class="cl"><span class="n">destructor</span> <span class="n">constructor</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">const</span> <span class="kd">static</span> <span class="kd">final</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">private</span> <span class="kd">protected</span></span></span></code></pre></div><h2 id="注解符">注解符</h2>
+<div class="wrap-code highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-D" data-lang="D"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#66d9ef">bool</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>int8 int16 int32 int64
+</span></span><span style="display:flex;"><span>uint8 uint16 uint32 uint64
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">uint</span> sint uintptr
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>flt32 flt64
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span> 
+</span></span><span style="display:flex;"><span>cstring string
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> elsif <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">switch</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">default</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#66d9ef">do</span> <span style="color:#66d9ef">while</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">break</span> <span style="color:#66d9ef">continue</span> <span style="color:#66d9ef">goto</span> <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">enum</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">interface</span> entrust
+</span></span><span style="display:flex;"><span>destructor constructor
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">protected</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="注解符">注解符</h2>
 <ul>
 <li>组成：由 @ 符号开始，后接 任意个 字母、数字、_ 组成。</li>
 <li>用途：用于标注一些信息</li>
@@ -1101,8 +1446,8 @@ group = (elem fubar) / (tarfu snafu)
         </div>
       </main>
     </div>
-    <script src="../js/clipboard.min.js?1702016278" defer></script>
-    <script src="../js/perfect-scrollbar.min.js?1702016278" defer></script>
-    <script src="../js/theme.js?1702016278" defer></script>
+    <script src="../js/clipboard.min.js?1702345994" defer></script>
+    <script src="../js/perfect-scrollbar.min.js?1702345994" defer></script>
+    <script src="../js/theme.js?1702345994" defer></script>
   </body>
 </html>

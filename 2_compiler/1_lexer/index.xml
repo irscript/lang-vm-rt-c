@@ -11,14 +11,24 @@
       <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/1_char/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/1_char/index.html</guid>
-      <description></description>
+      <description>字符抽象是编译器在处理源代码时的一种重要机制。在编程中，我们使用的字符实际上可以被看作是特定的整数值（通常是ASCII值或者Unicode值）。编译器在读取源代码时，会将这些字符转换成对应的整数值，并进行相应的操作。
+例如，在C语言中，我们可以使用字符字面量来表示单个字符，如&amp;rsquo;a&amp;rsquo;或&#39;5&amp;rsquo;。编译器会将这些字符字面量解析为它们对应的整数值，并在需要的时候将其转换回字符形式。
+此外，编译器还会对字符串进行特殊的处理。在C语言中，字符串实际上是字符数组，每个元素都包含了字符的整数值。当编译器遇到一个字符串字面量，如&amp;quot;Hello, world!&amp;quot;，它会创建一个包含所有字符的数组，并在末尾添加一个空字符（其整数值通常为0），以表示字符串的结束。
+总的来说，字符抽象使得编译器能够有效地处理文本数据，并且不需要程序员关注底层的细节。通过这种方式，程序员可以更加专注于编写逻辑清晰、易于维护的代码。
+好处 在词法分析中，对字符抽象的好处主要体现在以下几个方面：
+简化处理逻辑：通过将输入的字符序列转换为一个更高级别的表示（如单词或符号），编译器可以忽略掉字符编码的细节，简化处理过程。例如，无论源代码使用的是ASCII还是Unicode编码，编译器都可以将其统一视为一个整数值流。 提高识别效率：通过对字符进行分类和归类，可以更快地识别出有意义的单词和符号。比如，在识别关键字时，只需要检查某个字符串是否与预定义的关键字列表匹配即可，而不需要关心每个字符的具体值。 便于错误检测：词法分析阶段通常会首先执行错误检测，如检查拼写错误、未闭合的括号等。使用字符抽象可以帮助编译器更容易地定位这些问题，并提供有用的错误信息。 减少后续阶段的工作量：对字符进行抽象后生成的词法单元是语法分析阶段的主要输入。如果在词法分析阶段就能够正确地区分不同类型的词素（如标识符、数字、运算符等），那么语法分析阶段就可以直接使用这些词素，而不需要重新处理原始的字符数据。 支持跨平台编译：对于不同的操作系统和硬件平台，可能使用的字符编码不同。通过在词法分析阶段进行字符抽象，编译器可以在一定程度上独立于具体的字符编码，从而提高代码的可移植性。 通过字符抽象，词法分析器能够以一种更加高效且平台无关的方式处理源代码，使得整个编译过程更加可靠和健壮。 实现 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 // 字符封装 struct Char { uint32_t pos; // 在字符流的位置 uint32_t val; // 字符值 inline Char(uint32_t pos, uint32_t ch) : pos(pos), val(ch) {} inline bool isalpha() const { return ::isalpha(val); } // 字母？ inline bool isdigit() const { return ::isdigit(val); } // 数字 inline bool isalnum() const { return ::isalnum(val); } // 数字和字母？ inline bool isalpha_() const { return val == &amp;#39;_&amp;#39; || ::isalpha(val); } // 字母、下划线_？ inline bool isalnum_() const { return val == &amp;#39;_&amp;#39; || ::isalnum(val); } // 字母、下划线_、数字？ // 空白字符？ inline bool isWhiteSpace() const { switch (val) { case &amp;#39; &amp;#39;: case &amp;#39;\t&amp;#39;: case &amp;#39;\v&amp;#39;: case &amp;#39;\r&amp;#39;: case &amp;#39;\n&amp;#39;: return true; } return false; } // 空字符？ inline bool isNull() const { return val == &amp;#39;\0&amp;#39;; } // 16进制字符 inline bool isHex() const { if (&amp;#39;a&amp;#39; &amp;lt;= val &amp;amp;&amp;amp; val &amp;lt;= &amp;#39;f&amp;#39;) return true; if (&amp;#39;A&amp;#39; &amp;lt;= val &amp;amp;&amp;amp; val &amp;lt;= &amp;#39;F&amp;#39;) return true; return isdigit(); } // 8进制字符 inline bool isOct() const { return &amp;#39;0&amp;#39; &amp;lt;= val &amp;amp;&amp;amp; val &amp;lt;= &amp;#39;7&amp;#39;; } // 2进制字符 inline bool isBin() const { return &amp;#39;0&amp;#39; == val || &amp;#39;1&amp;#39; == val; } // 字符判断 inline bool isChar(uint32_t ch) const { return val == ch; } }; </description>
     </item>
     <item>
       <title>字符流抽象</title>
       <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/2_stream/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/2_stream/index.html</guid>
-      <description></description>
+      <description>字符流抽象是指在编程和软件开发中，将底层的字节流或字符编码处理细节隐藏起来，提供一个更高级别的接口来操作文本数据。这样做的目的是简化程序设计，提高代码可读性，并使开发者可以专注于应用程序的逻辑和语义，而不是底层的实现细节。
+在编译器中，词法分析阶段通常会对输入的源代码进行字符流抽象。这一阶段会将原始的字符序列转换为一系列有意义的单元，如标识符、关键字、数字、运算符等，这些单元被称为词法单元（或称为标记、符号）。每个词法单元都有对应的类型和值，这使得后续的语法分析和语义分析阶段能够更容易地理解和处理源代码。
+此外，字符流抽象也经常出现在IO库的设计中，例如Java中的Reader和Writer类，或者C++中的iostream库。这些库提供了一个统一的方式来读取和写入字符流，无论底层的字符编码如何变化。使用这些库的开发者通常不需要关心字符编码的具体细节，从而可以更加高效地编写跨平台和兼容多种字符集的代码。
+总的来说，字符流抽象是一种强大的工具，它可以帮助程序员更好地处理文本数据，而无需深入了解底层的字符编码细节。
+好处 在词法分析中对字符流进行抽象有以下几个主要好处：
+提高处理效率：对输入的字符流进行抽象，可以有效地将连续的字符组合成有意义的单元（如标识符、关键字、数字和运算符）。这有助于减少语法分析阶段需要处理的元素数量，从而提高编译器的整体效率。 更少的错误：通过将字符流转换为更高级别的表示，编译器能够更容易地检测出潜在的错误。例如，一个未闭合的字符串常量或注释可能会导致后续的解析错误；通过在词法分析阶段识别这些错误，可以提前报告并提供更准确的错误信息。 通用性与可移植性：字符流抽象使得编译器可以不关心具体的字符编码细节，比如ASCII、ISO-8859-1或者Unicode等。这种特性使得编译器能够在多种平台上运行，而无需针对每个平台进行特定的修改。 简化程序结构：词法分析器的设计和实现通常会利用字符流抽象的概念，比如使用有限自动机（FA）或正则表达式来匹配模式。这种方法简化了代码，使其更具可读性和维护性。 隐藏复杂性：对于程序员而言，他们通常关注于源代码的逻辑和语义，而非底层的字符编码。通过对字符流的抽象，编译器可以让程序员以一种更高层次的语言来表达意图，而不是直接操作底层的字符数据。 总的来说，字符流抽象是编译器设计中的重要概念，它能帮助编译器更好地理解源代码，并有效地生成目标代码。 实现 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 // 字符串流 struct CharStream { CharStream() {} // 打开文件 bool open(const std::string &amp;amp;path) { return readFile(path, data); } // 设置字符串数据 inline void setData(const std::string &amp;amp;str) { data = str; index = 0; } inline std::string &amp;amp;getData() { return data; } // 获取字符串中的一段 std::string getSbu(uint32_t start, uint32_t end) { assert(start &amp;lt; end); return data.</description>
     </item>
     <item>
       <title>词法分析器</title>

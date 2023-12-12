@@ -19,7 +19,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://lang-vm-rt-c.irscript.github.io/1_lang/2_langdef/index.html</guid>
       <description>词法定义 词法规则
-在引号中的字( &amp;lsquo;word&amp;rsquo; )代表着这些字符本身。 尖括号( &amp;lt; &amp;gt; )内包含的为必选项。 方括号( [ ] )内包含的为可选项。 大括号( { } )内包含的为可重复0至无数次的项，后接 &amp;lsquo;*&amp;rsquo;，表示至少一次。 竖线( | )表示在其左右两边任选一项，相当于&amp;quot;OR&amp;quot;的意思。 = 是“被定义为”的意思。 digit = [0-9] ;数字字符 alpha = [a-z,A-Z] ;字母字符 alpha_ = [a-z,A-Z,_] ;含下划线&amp;#39;_&amp;#39;的字母字符 sign = [+,-] ;正负符号 intnum = [$sign] {$digit} ;整数字符串 fltnum = $intnum &amp;#39;.&amp;#39; {digit} [&amp;#39;E&amp;#39;|&amp;#39;e&amp;#39;] [$intnum] ;实数字符串 number = {digit}*语法定义 &amp;lt;digit&amp;gt; = (0-9) ;数字字符</description>
+在引号中的字( &amp;lsquo;word&amp;rsquo; )代表着这些字符本身。 尖括号( &amp;lt; &amp;gt; )内包含的为必选项。 方括号( [ ] )内包含的为可选项。 大括号( { } )内包含的为可重复0至无数次的项，后接 &amp;lsquo;*&amp;rsquo;，表示至少一次。 竖线( | )表示在其左右两边任选一项，相当于&amp;quot;OR&amp;quot;的意思。 = 是“被定义为”的意思。 1 2 3 4 5 6 7 8 9 10 digit = [0-9] ;数字字符 alpha = [a-z,A-Z] ;字母字符 alpha_ = [a-z,A-Z,_] ;含下划线&amp;#39;_&amp;#39;的字母字符 sign = [+,-] ;正负符号 intnum = [$sign] {$digit} ;整数字符串 fltnum = $intnum &amp;#39;.&amp;#39; {digit} [&amp;#39;E&amp;#39;|&amp;#39;e&amp;#39;] [$intnum] ;实数字符串 number = {digit}* 语法定义 1 &amp;lt;digit&amp;gt; = (0-9) ;数字字符 </description>
     </item>
   </channel>
 </rss>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.121.0">
+    <meta name="generator" content="Hugo 0.121.1">
     <meta name="generator" content="Relearn 5.20.0">
     <meta name="description" content="站在巨人的肩膀上">
     <meta name="author" content="月明之都">
@@ -11,18 +11,18 @@
     <link href="../../../2_compiler/1_lexer/2_stream/index.xml" rel="alternate" type="application/rss+xml" title="字符流抽象 :: air 编程语言">
     <link href="../../../2_compiler/1_lexer/2_stream/index.print.html" rel="alternate" type="text/html" title="字符流抽象 :: air 编程语言"><link rel="icon" href="../../../images/favicon.png" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="../../../css/fontawesome-all.min.css?1702016278" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/fontawesome-all.min.css?1702016278" rel="stylesheet"></noscript>
-    <link href="../../../css/nucleus.css?1702016278" rel="stylesheet">
-    <link href="../../../css/auto-complete.css?1702016278" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/auto-complete.css?1702016278" rel="stylesheet"></noscript>
-    <link href="../../../css/perfect-scrollbar.min.css?1702016278" rel="stylesheet">
-    <link href="../../../css/fonts.css?1702016278" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/fonts.css?1702016278" rel="stylesheet"></noscript>
-    <link href="../../../css/theme.css?1702016278" rel="stylesheet">
-    <link href="../../../css/theme-auto.css?1702016278" rel="stylesheet" id="variant-style">
-    <link href="../../../css/variant.css?1702016278" rel="stylesheet">
-    <link href="../../../css/print.css?1702016278" rel="stylesheet" media="print">
-    <link href="../../../css/ie.css?1702016278" rel="stylesheet">
-    <script src="../../../js/url.js?1702016278"></script>
-    <script src="../../../js/variant.js?1702016278"></script>
+    <link href="../../../css/fontawesome-all.min.css?1702345994" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/fontawesome-all.min.css?1702345994" rel="stylesheet"></noscript>
+    <link href="../../../css/nucleus.css?1702345994" rel="stylesheet">
+    <link href="../../../css/auto-complete.css?1702345994" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/auto-complete.css?1702345994" rel="stylesheet"></noscript>
+    <link href="../../../css/perfect-scrollbar.min.css?1702345994" rel="stylesheet">
+    <link href="../../../css/fonts.css?1702345994" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/fonts.css?1702345994" rel="stylesheet"></noscript>
+    <link href="../../../css/theme.css?1702345994" rel="stylesheet">
+    <link href="../../../css/theme-auto.css?1702345994" rel="stylesheet" id="variant-style">
+    <link href="../../../css/variant.css?1702345994" rel="stylesheet">
+    <link href="../../../css/print.css?1702345994" rel="stylesheet" media="print">
+    <link href="../../../css/ie.css?1702345994" rel="stylesheet">
+    <script src="../../../js/url.js?1702345994"></script>
+    <script src="../../../js/variant.js?1702345994"></script>
     <script>
       // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
       // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
@@ -122,6 +122,7 @@
             <span id="sidebar-toggle-span">
               <a href="#" id="sidebar-toggle" class="topbar-link" title='导航 (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
             </span>
+            <span id="toc-menu" title='目录 (CTRL+ALT+t)'><i class="fas fa-list-alt fa-fw"></i></span>
             <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
               <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="../../../index.html"><span itemprop="name">airlang</span></a><meta itemprop="position" content="1"> &gt; </li>
               <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="../../../2_compiler/index.html"><span itemprop="name">编译器</span></a><meta itemprop="position" content="2"> &gt; </li>
@@ -129,6 +130,16 @@
               <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">字符流抽象</span><meta itemprop="position" content="4"></li>
             </ol>
           </div>
+<div class="default-animation progress">
+  <div class="toc-wrapper">
+    <div><nav id="TableOfContents">
+  <ul>
+    <li><a href="#好处">好处</a></li>
+    <li><a href="#实现">实现</a></li>
+  </ul>
+</nav></div>
+  </div>
+</div>
         </div>
       </nav>
       <main id="body-inner" class="highlightable default" tabindex="-1">
@@ -140,7 +151,137 @@
   <h1 id="字符流抽象"> 2.1.2 字符流抽象</h1>
   <hr />
 
-  
+  <p>字符流抽象是指在编程和软件开发中，将底层的字节流或字符编码处理细节隐藏起来，提供一个更高级别的接口来操作文本数据。这样做的目的是简化程序设计，提高代码可读性，并使开发者可以专注于应用程序的逻辑和语义，而不是底层的实现细节。</p>
+<p>在编译器中，词法分析阶段通常会对输入的源代码进行字符流抽象。这一阶段会将原始的字符序列转换为一系列有意义的单元，如标识符、关键字、数字、运算符等，这些单元被称为词法单元（或称为标记、符号）。每个词法单元都有对应的类型和值，这使得后续的语法分析和语义分析阶段能够更容易地理解和处理源代码。</p>
+<p>此外，字符流抽象也经常出现在IO库的设计中，例如Java中的Reader和Writer类，或者C++中的iostream库。这些库提供了一个统一的方式来读取和写入字符流，无论底层的字符编码如何变化。使用这些库的开发者通常不需要关心字符编码的具体细节，从而可以更加高效地编写跨平台和兼容多种字符集的代码。</p>
+<p>总的来说，字符流抽象是一种强大的工具，它可以帮助程序员更好地处理文本数据，而无需深入了解底层的字符编码细节。</p>
+<h2 id="好处">好处</h2>
+<p>在词法分析中对字符流进行抽象有以下几个主要好处：</p>
+<ol>
+    <li>提高处理效率：对输入的字符流进行抽象，可以有效地将连续的字符组合成有意义的单元（如标识符、关键字、数字和运算符）。这有助于减少语法分析阶段需要处理的元素数量，从而提高编译器的整体效率。</li>
+    <li>更少的错误：通过将字符流转换为更高级别的表示，编译器能够更容易地检测出潜在的错误。例如，一个未闭合的字符串常量或注释可能会导致后续的解析错误；通过在词法分析阶段识别这些错误，可以提前报告并提供更准确的错误信息。</li>
+    <li>通用性与可移植性：字符流抽象使得编译器可以不关心具体的字符编码细节，比如ASCII、ISO-8859-1或者Unicode等。这种特性使得编译器能够在多种平台上运行，而无需针对每个平台进行特定的修改。</li>
+    <li>简化程序结构：词法分析器的设计和实现通常会利用字符流抽象的概念，比如使用有限自动机（FA）或正则表达式来匹配模式。这种方法简化了代码，使其更具可读性和维护性。</li>
+    <li>隐藏复杂性：对于程序员而言，他们通常关注于源代码的逻辑和语义，而非底层的字符编码。通过对字符流的抽象，编译器可以让程序员以一种更高层次的语言来表达意图，而不是直接操作底层的字符数据。</li>
+</ol>
+总的来说，字符流抽象是编译器设计中的重要概念，它能帮助编译器更好地理解源代码，并有效地生成目标代码。
+<h2 id="实现">实现</h2>
+<div class="wrap-code highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">// 字符串流
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">CharStream</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    CharStream() {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 打开文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">open</span>(<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string <span style="color:#f92672">&amp;</span>path)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> readFile(path, data);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 设置字符串数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setData</span>(<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string <span style="color:#f92672">&amp;</span>str)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> str;
+</span></span><span style="display:flex;"><span>        index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">inline</span> std<span style="color:#f92672">::</span>string <span style="color:#f92672">&amp;</span>getData() { <span style="color:#66d9ef">return</span> data; }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 获取字符串中的一段
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>string getSbu(<span style="color:#66d9ef">uint32_t</span> start, <span style="color:#66d9ef">uint32_t</span> end)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        assert(start <span style="color:#f92672">&lt;</span> end);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> data.substr(start, end <span style="color:#f92672">-</span> start);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 获取下一字符
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Char <span style="color:#a6e22e">next</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">&lt;</span> data.size())
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">uint32_t</span> pos <span style="color:#f92672">=</span> index;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">uint32_t</span> ch <span style="color:#f92672">=</span> data[pos];
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">++</span>index;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> Char(pos, ch);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Char(data.size(), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 退回字符
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">back</span>(Char ch)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        index <span style="color:#f92672">=</span> ch.pos;
+</span></span><span style="display:flex;"><span>        assert(index <span style="color:#f92672">&lt;</span> data.size());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 匹配一个字符
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">match</span>(<span style="color:#66d9ef">char</span> ch, <span style="color:#66d9ef">int</span> off)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">+</span> off <span style="color:#f92672">&gt;</span> data.size())
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> data[index <span style="color:#f92672">+</span> off] <span style="color:#f92672">==</span> ch;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string data; <span style="color:#75715e">// 字符串数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint32_t</span> index;   <span style="color:#75715e">// 位置索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};</span></span></code></pre></td></tr></table>
+</div>
+</div>
   <footer class="footline">
 
   </footer>
@@ -162,12 +303,12 @@
         <script>
           var contentLangs=['zh'];
         </script>
-        <script src="../../../js/auto-complete.js?1702016278" defer></script>
-        <script src="../../../js/lunr/lunr.min.js?1702016278" defer></script>
-        <script src="../../../js/lunr/lunr.stemmer.support.min.js?1702016278" defer></script>
-        <script src="../../../js/lunr/lunr.multi.min.js?1702016278" defer></script>
-        <script src="../../../js/lunr/lunr.zh.min.js?1702016278" defer></script>
-        <script src="../../../js/search.js?1702016278" defer></script>
+        <script src="../../../js/auto-complete.js?1702345994" defer></script>
+        <script src="../../../js/lunr/lunr.min.js?1702345994" defer></script>
+        <script src="../../../js/lunr/lunr.stemmer.support.min.js?1702345994" defer></script>
+        <script src="../../../js/lunr/lunr.multi.min.js?1702345994" defer></script>
+        <script src="../../../js/lunr/lunr.zh.min.js?1702345994" defer></script>
+        <script src="../../../js/search.js?1702345994" defer></script>
       </div>
       <div id="homelinks" class="default-animation">
         <hr class="padding">
@@ -262,8 +403,8 @@
         </div>
       </div>
     </aside>
-    <script src="../../../js/clipboard.min.js?1702016278" defer></script>
-    <script src="../../../js/perfect-scrollbar.min.js?1702016278" defer></script>
-    <script src="../../../js/theme.js?1702016278" defer></script>
+    <script src="../../../js/clipboard.min.js?1702345994" defer></script>
+    <script src="../../../js/perfect-scrollbar.min.js?1702345994" defer></script>
+    <script src="../../../js/theme.js?1702345994" defer></script>
   </body>
 </html>

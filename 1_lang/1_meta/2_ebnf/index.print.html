@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.121.0">
+    <meta name="generator" content="Hugo 0.121.1">
     <meta name="generator" content="Relearn 5.20.0">
     <meta name="description" content="站在巨人的肩膀上">
     <meta name="author" content="月明之都">
@@ -11,19 +11,19 @@
     <link href="https://lang-vm-rt-c.irscript.github.io/1_lang/1_meta/2_ebnf/index.html" rel="canonical" type="text/html" title="扩展巴科斯范式：EBNF :: air 编程语言">
     <link href="../../../1_lang/1_meta/2_ebnf/index.xml" rel="alternate" type="application/rss+xml" title="扩展巴科斯范式：EBNF :: air 编程语言"><link rel="icon" href="../../../images/favicon.png" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="../../../css/fontawesome-all.min.css?1702016278" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/fontawesome-all.min.css?1702016278" rel="stylesheet"></noscript>
-    <link href="../../../css/nucleus.css?1702016278" rel="stylesheet">
-    <link href="../../../css/auto-complete.css?1702016278" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/auto-complete.css?1702016278" rel="stylesheet"></noscript>
-    <link href="../../../css/perfect-scrollbar.min.css?1702016278" rel="stylesheet">
-    <link href="../../../css/fonts.css?1702016278" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/fonts.css?1702016278" rel="stylesheet"></noscript>
-    <link href="../../../css/theme.css?1702016278" rel="stylesheet">
-    <link href="../../../css/theme-auto.css?1702016278" rel="stylesheet" id="variant-style">
-    <link href="../../../css/variant.css?1702016278" rel="stylesheet">
-    <link href="../../../css/print.css?1702016278" rel="stylesheet" media="print">
-    <link href="../../../css/format-print.css?1702016278" rel="stylesheet">
-    <link href="../../../css/ie.css?1702016278" rel="stylesheet">
-    <script src="../../../js/url.js?1702016278"></script>
-    <script src="../../../js/variant.js?1702016278"></script>
+    <link href="../../../css/fontawesome-all.min.css?1702345994" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/fontawesome-all.min.css?1702345994" rel="stylesheet"></noscript>
+    <link href="../../../css/nucleus.css?1702345994" rel="stylesheet">
+    <link href="../../../css/auto-complete.css?1702345994" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/auto-complete.css?1702345994" rel="stylesheet"></noscript>
+    <link href="../../../css/perfect-scrollbar.min.css?1702345994" rel="stylesheet">
+    <link href="../../../css/fonts.css?1702345994" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../../css/fonts.css?1702345994" rel="stylesheet"></noscript>
+    <link href="../../../css/theme.css?1702345994" rel="stylesheet">
+    <link href="../../../css/theme-auto.css?1702345994" rel="stylesheet" id="variant-style">
+    <link href="../../../css/variant.css?1702345994" rel="stylesheet">
+    <link href="../../../css/print.css?1702345994" rel="stylesheet" media="print">
+    <link href="../../../css/format-print.css?1702345994" rel="stylesheet">
+    <link href="../../../css/ie.css?1702345994" rel="stylesheet">
+    <script src="../../../js/url.js?1702345994"></script>
+    <script src="../../../js/variant.js?1702345994"></script>
     <script>
       // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
       // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
@@ -200,25 +200,51 @@
 </table>
 <h3 id="ebnf-示例">EBNF 示例</h3>
 <p>以下提供一些示例以直观的理解EBNF。</p>
-<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-ebnf" data-lang="ebnf"><span class="line"><span class="cl"><span class="k">digit excluding zero </span><span class="o">=</span> <span class="s2">&#34;1&#34;</span> <span class="p">|</span> <span class="s2">&#34;2&#34;</span> <span class="p">|</span> <span class="s2">&#34;3&#34;</span> <span class="p">|</span> <span class="s2">&#34;4&#34;</span> <span class="p">|</span> <span class="s2">&#34;5&#34;</span> <span class="p">|</span> <span class="s2">&#34;6&#34;</span> <span class="p">|</span> <span class="s2">&#34;7&#34;</span> <span class="p">|</span> <span class="s2">&#34;8&#34;</span> <span class="p">|</span> <span class="s2">&#34;9&#34;</span> <span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">digit                </span><span class="o">=</span> <span class="s2">&#34;0&#34;</span> <span class="p">|</span> <span class="k">digit excluding zero </span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">natural number </span><span class="o">=</span> <span class="k">digit excluding zero</span><span class="p">,</span> <span class="p">{</span> <span class="k">digit </span><span class="p">}</span> <span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">integer </span><span class="o">=</span> <span class="s2">&#34;0&#34;</span> <span class="p">|</span> <span class="p">[</span> <span class="s2">&#34;-&#34;</span> <span class="p">],</span> <span class="k">natural number </span><span class="p">;</span></span></span></code></pre></div><ul>
+<div class="wrap-code highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ebnf" data-lang="ebnf"><span style="display:flex;"><span><span style="color:#66d9ef">digit excluding zero </span><span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1&#34;</span> | <span style="color:#e6db74">&#34;2&#34;</span> | <span style="color:#e6db74">&#34;3&#34;</span> | <span style="color:#e6db74">&#34;4&#34;</span> | <span style="color:#e6db74">&#34;5&#34;</span> | <span style="color:#e6db74">&#34;6&#34;</span> | <span style="color:#e6db74">&#34;7&#34;</span> | <span style="color:#e6db74">&#34;8&#34;</span> | <span style="color:#e6db74">&#34;9&#34;</span> ;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">digit                </span><span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0&#34;</span> | <span style="color:#66d9ef">digit excluding zero </span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">natural number </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">digit excluding zero</span>, { <span style="color:#66d9ef">digit </span>} ;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">integer </span><span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0&#34;</span> | [ <span style="color:#e6db74">&#34;-&#34;</span> ], <span style="color:#66d9ef">natural number </span>;</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>digit excluding zero 可以是 1到9任意一个字符，digit则扩展为0到9任意一个字符。</li>
 <li>natural number可以是1、2、…、10、…、12345、…，因为{}代表重复任意次，包括0次。</li>
 <li>integer则可以是0或者可能带个负号的自然数。</li>
 </ul>
 <p>这是用EBNF描述的EBNF自身语法：</p>
-<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-ebnf" data-lang="ebnf"><span class="line"><span class="cl"><span class="k">Production     </span><span class="o">=</span> <span class="k">NonTerminal </span><span class="s2">&#34;=&#34;</span> <span class="k">Expression </span><span class="s2">&#34;.&#34;</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="k">Expression     </span><span class="o">=</span> <span class="k">Term </span><span class="p">{</span><span class="s2">&#34;|&#34;</span> <span class="k">Term</span><span class="p">}.</span>
-</span></span><span class="line"><span class="cl"><span class="k">Term           </span><span class="o">=</span> <span class="k">Factor </span><span class="p">{</span><span class="k">Factor</span><span class="p">}.</span>
-</span></span><span class="line"><span class="cl"><span class="k">Factor         </span><span class="o">=</span> <span class="k">NonTerminal</span>
-</span></span><span class="line"><span class="cl">                 <span class="p">|</span> <span class="k">Terminal</span>
-</span></span><span class="line"><span class="cl">                 <span class="p">|</span> <span class="s2">&#34;(&#34;</span> <span class="k">Expression </span><span class="s2">&#34;)&#34;</span>
-</span></span><span class="line"><span class="cl">                 <span class="p">|</span> <span class="s2">&#34;[&#34;</span> <span class="k">Expression </span><span class="s2">&#34;]&#34;</span>
-</span></span><span class="line"><span class="cl">                 <span class="p">|</span> <span class="s2">&#34;{&#34;</span> <span class="k">Expression </span><span class="s2">&#34;}&#34;</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="k">Terminal       </span><span class="o">=</span> <span class="k">Identifier </span><span class="p">|</span> <span class="err">“</span><span class="s2">&#34;“ &lt;any char&gt; “&#34;</span><span class="err">“</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="k">NonTerminal    </span><span class="o">=</span> <span class="k">Identifier</span><span class="p">.</span></span></span></code></pre></div><h2 id="增强巴科斯范式abnf">增强巴科斯范式：ABNF</h2>
+<div class="wrap-code highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ebnf" data-lang="ebnf"><span style="display:flex;"><span><span style="color:#66d9ef">Production     </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">NonTerminal </span><span style="color:#e6db74">&#34;=&#34;</span> <span style="color:#66d9ef">Expression </span><span style="color:#e6db74">&#34;.&#34;</span>.
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Expression     </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">Term </span>{<span style="color:#e6db74">&#34;|&#34;</span> <span style="color:#66d9ef">Term</span>}.
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Term           </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">Factor </span>{<span style="color:#66d9ef">Factor</span>}.
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Factor         </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">NonTerminal</span>
+</span></span><span style="display:flex;"><span>                 | <span style="color:#66d9ef">Terminal</span>
+</span></span><span style="display:flex;"><span>                 | <span style="color:#e6db74">&#34;(&#34;</span> <span style="color:#66d9ef">Expression </span><span style="color:#e6db74">&#34;)&#34;</span>
+</span></span><span style="display:flex;"><span>                 | <span style="color:#e6db74">&#34;[&#34;</span> <span style="color:#66d9ef">Expression </span><span style="color:#e6db74">&#34;]&#34;</span>
+</span></span><span style="display:flex;"><span>                 | <span style="color:#e6db74">&#34;{&#34;</span> <span style="color:#66d9ef">Expression </span><span style="color:#e6db74">&#34;}&#34;</span>.
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Terminal       </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">Identifier </span>| <span style="color:#960050;background-color:#1e0010">“</span><span style="color:#e6db74">&#34;“ &lt;any char&gt; “&#34;</span><span style="color:#960050;background-color:#1e0010">“</span>.
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">NonTerminal    </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">Identifier</span>.</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="增强巴科斯范式abnf">增强巴科斯范式：ABNF</h2>
 <p>RFC2234 定义了扩展的巴科斯范式(ABNF)。近年来在Internet的定义中 ABNF 被广泛使用。ABNF 做了更多的改进。扩充巴科斯-瑙尔范式(ABNF)基于了巴科斯-瑙尔范式(BNF)，但由它自己的语法和推导规则构成。这种元语言的发起原则是描述作为通信协议(双向规范)的语言的形式系统。它建档于 RFC 4234 中通常充当 IETF 通信协议的定义语言。</p>
 <h3 id="abnf-规则">ABNF 规则</h3>
 <p>一个ABNF规范是一些推导规则的集合，书写为：规则 = 定义;注释CR LF
@@ -426,8 +452,8 @@ group = (elem fubar) / (tarfu snafu)
         </div>
       </main>
     </div>
-    <script src="../../../js/clipboard.min.js?1702016278" defer></script>
-    <script src="../../../js/perfect-scrollbar.min.js?1702016278" defer></script>
-    <script src="../../../js/theme.js?1702016278" defer></script>
+    <script src="../../../js/clipboard.min.js?1702345994" defer></script>
+    <script src="../../../js/perfect-scrollbar.min.js?1702345994" defer></script>
+    <script src="../../../js/theme.js?1702345994" defer></script>
   </body>
 </html>
