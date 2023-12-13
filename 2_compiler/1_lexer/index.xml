@@ -42,15 +42,35 @@
 1int main() { 2 int x = 10; 3 return 0; 4}词法分析器会将其分解为一系列标记：
 标记 类型 值 int 关键字 main 标识符 ( 符号 ) 符号 { 符号 int 关键字 x 标识符 = 符号 10 整数常量 10 ; 符号 } 符号 return 关键字 0 整数常量 0 ; 符号 } 符号 通过这种分割，后续的语法分析器能够更轻松地理解源代码的结构，并进行更复杂的语义检查和代码生成。
 作用 词法分析器在编译过程中的主要作用如下：
-标记化输入源代码：词法分析器将连续的字符序列分解成离散的标记（Token），这些标记代表了语言的基本元素，如关键字、标识符、常量和运算符等。 提供语法分析所需的输入：词法分析的结果通常是语法分析阶段的主要输入。语法分析器使用这些标记来构建抽象语法树（Abstract Syntax Tree, AST），进而理解程序的结构和语义。 错误检测：词法分析器可以检测源代码中的常见错误，如未闭合的字符串或注释、非法字符以及一些简单的拼写错误等。早期发现并报告错误有助于提高开发效率和程序质量。 简化后续处理：通过将复杂的字符流转换为易于处理的标记流，词法分析器降低了后续编译阶段的复杂性。这使得编译器设计者能够专注于更高层次的语法和语义问题。 增强可读性和可维护性：通过隐藏底层的字符编码细节，词法分析器提高了编译器代码的可读性和可维护性。开发者可以更轻松地理解和修改词法分析器，而不必关心低级别的实现细节。 支持跨平台编译：由于字符流抽象，词法分析器可以在一定程度上独立于具体的字符编码。这种特性使得编译器能够在多种操作系统和硬件平台上运行，而无需针对每个平台进行特定的修改。 总的来说，词法分析器是编译过程中的一个重要组成部分，它负责将复杂的字符数据转换为更容易理解和处理的形式，以便后续阶段对源代码进行深入分析和处理。
-词元（Token）定义 关键字表 注解关键字表 解析标识符 解析注解关键字 解析数字常量 解析字符串常量 解析字符常量 解析操作符 解析分隔符 </description>
+标记化输入源代码：词法分析器将连续的字符序列分解成离散的标记（Token），这些标记代表了语言的基本元素，如关键字、标识符、常量和运算符等。 提供语法分析所需的输入：词法分析的结果通常是语法分析阶段的主要输入。语法分析器使用这些标记来构建抽象语法树（Abstract Syntax Tree, AST），进而理解程序的结构和语义。 错误检测：词法分析器可以检测源代码中的常见错误，如未闭合的字符串或注释、非法字符以及一些简单的拼写错误等。早期发现并报告错误有助于提高开发效率和程序质量。 简化后续处理：通过将复杂的字符流转换为易于处理的标记流，词法分析器降低了后续编译阶段的复杂性。这使得编译器设计者能够专注于更高层次的语法和语义问题。 增强可读性和可维护性：通过隐藏底层的字符编码细节，词法分析器提高了编译器代码的可读性和可维护性。开发者可以更轻松地理解和修改词法分析器，而不必关心低级别的实现细节。 支持跨平台编译：由于字符流抽象，词法分析器可以在一定程度上独立于具体的字符编码。这种特性使得编译器能够在多种操作系统和硬件平台上运行，而无需针对每个平台进行特定的修改。 总的来说，词法分析器是编译过程中的一个重要组成部分，它负责将复杂的字符数据转换为更容易理解和处理的形式，以便后续阶段对源代码进行深入分析和处理。</description>
+    </item>
+    <item>
+      <title>词元(Token)定义</title>
+      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/4_token/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/4_token/index.html</guid>
+      <description>词元类别 1// 词元类别 2enum class TkKind : uint16_t 3{ 4 Unknown, // 未知 5 SingleComments, // 单行注释 6 MultipleComments, // 多行注释 7 Annotate, // 注解 8 KeyWord, // 关键字 9 Identifier, // 标志符 10 StringLiteral, // 存在转义的字符串常量 11 StringLiteral2, // 不转义的字符串常量 12 CharLiteral, // 字符常量 13 SIntLiteral, // 有符号整形字符串常量 14 UIntLiteral, // 无符号整形字符串常量 15 Flt32Literal, // 浮点字符串常量 16 Flt64Literal, // 浮点字符串常量 17 Separator, // 分隔符 18 Operator, // 操作符 19 EOS, // 字符流结束 20};分隔符 1// 分隔符 2enum class TkSpEnum : uint16_t 3{ 4 Unknown, // 未知 5 OpenBracket, // [ 左方括号 6 CloseBracket, // ] 右方括号 7 OpenParen, // ( 左括号 8 CloseParen, // ) 右括号 9 OpenBrace, // { 左花括号 10 CloseBrace, // } 右花括号 11 CBSemiColon, // }; 右花括号和分号 12 Colon, // : 冒号 13 SemiColon, // ; 分号 14 Comma, // , 逗号 15 Ellipsis, // .</description>
+    </item>
+    <item>
+      <title>关键字映射表</title>
+      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/5_maptable/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/5_maptable/index.html</guid>
+      <description>类定义 1struct MapTable 2{ 3 // 初始化信息 4 static void init(); 5 // 查找关键字 6 static TkKeyWord findKeyword(const std::string &amp;amp;szTok) 7 { 8 auto find = mapKey.find(szTok); 9 if (find == mapKey.end()) 10 return TkKeyWord::Unknown; 11 return find-&amp;gt;second; 12 } 13 // 查找标注关键字 14 static TkAnnotate findAnnword(const std::string &amp;amp;szTok) 15 { 16 auto find = mapAnn.find(szTok); 17 if (find == mapAnn.end()) 18 return TkAnnotate::Unknown; 19 return find-&amp;gt;second; 20 } 21 // 查找操作符优先级 22 static int32_t findOpPriority(TkOpEnum op) 23 { 24 auto find = mapOp.</description>
+    </item>
+    <item>
+      <title>词法分析实现</title>
+      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/6_scan/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/6_scan/index.html</guid>
+      <description>类定义 1struct Lexer 2{ 3 Lexer(CharStream &amp;amp;ics) : pos(0,1), stream(ics) {} 4 5 // 获取词元 6 Token getNext(); 7 // 退回词元 8 void backToken(Token &amp;amp;tok) 9 { 10 stream.back(Char(tok.pos.pos, 0)); 11 pos = tok.pos; 12 } 13 14private: 15 // 跳过空白字符 16 inline void SkipWhiteSpaces() 17 { 18 Char ch = stream.next(); 19 while (ch.isWhiteSpace()) 20 { 21 if (ch.val == &amp;#39;\n&amp;#39;) 22 pos.line++; 23 ch = stream.next(); 24 } 25 stream.</description>
     </item>
     <item>
       <title>案列测试</title>
-      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/4_test/index.html</link>
+      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/7_test/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/4_test/index.html</guid>
-      <description></description>
+      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/7_test/index.html</guid>
+      <description>测试文本 1//词法分析测试 2 3/*普通关键字*/ 4package 5require 6using 7void 8bool 9int8 10int16 11int32 12int64 13uint8 14uint16 15uint32 16uint64 17sint 18uint 19pointer 20flt32 21flt64 22string 23cstring 24char 25any 26null 27false 28true 29in 30break 31continue 32goto 33return 34do 35while 36for 37foreach 38if 39elsif 40else 41switch 42case 43default 44private 45protected 46public 47static 48const 49final 50enum 51union 52struct 53entrust 54class 55interface 56this 57super 58friend 59new 60sizeof 61typeof 62instanceof 63cast 64try 65catch 66finally 67throw 68await 69synched 70 71/*注解关键字*/ 72@file 73@func 74@line 75@buildin 76@async 77@volatile 78@inline 79@virtual 80@override 81@operator 82 83/*操作符*/ 84.</description>
     </item>
   </channel>
 </rss>

@@ -40,13 +40,22 @@
     <loc>https://lang-vm-rt-c.irscript.github.io/1_lang/1_meta/3_abnf/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/4_test/index.html</loc>
+    <loc>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/4_token/index.html</loc>
   </url>
   <url>
     <loc>https://lang-vm-rt-c.irscript.github.io/4_bytecode/index.html</loc>
   </url>
   <url>
+    <loc>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/5_maptable/index.html</loc>
+  </url>
+  <url>
     <loc>https://lang-vm-rt-c.irscript.github.io/5_vmrt/index.html</loc>
+  </url>
+  <url>
+    <loc>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/6_scan/index.html</loc>
+  </url>
+  <url>
+    <loc>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/7_test/index.html</loc>
   </url>
   <url>
     <loc>https://lang-vm-rt-c.irscript.github.io/index.html</loc>
