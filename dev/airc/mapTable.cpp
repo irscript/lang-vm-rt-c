@@ -75,7 +75,7 @@ namespace air
 
         mapKey.insert({"static", TkKeyWord::Static});
         mapKey.insert({"const", TkKeyWord::Const});
-        mapKey.insert({"final", TkKeyWord::final});
+        mapKey.insert({"final", TkKeyWord::Final});
 
         mapKey.insert({"enum", TkKeyWord::Enum});
         mapKey.insert({"union", TkKeyWord::Union});

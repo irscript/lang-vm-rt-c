@@ -166,7 +166,7 @@ namespace air
         Public,    // 公开的
         Static,    // 静态的
         Const,     // 常量（不可修改）的
-        final,     // 只读的
+        Final,     // 只读的
 
         // 扩展类型
         Enum,
