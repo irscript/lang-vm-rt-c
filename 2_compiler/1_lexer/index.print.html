@@ -11,19 +11,19 @@
     <link href="https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/index.html" rel="canonical" type="text/html" title="词法分析 :: air 编程语言">
     <link href="../../2_compiler/1_lexer/index.xml" rel="alternate" type="application/rss+xml" title="词法分析 :: air 编程语言"><link rel="icon" href="../../images/favicon.png" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="../../css/fontawesome-all.min.css?1702442809" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/fontawesome-all.min.css?1702442809" rel="stylesheet"></noscript>
-    <link href="../../css/nucleus.css?1702442809" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1702442809" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/auto-complete.css?1702442809" rel="stylesheet"></noscript>
-    <link href="../../css/perfect-scrollbar.min.css?1702442809" rel="stylesheet">
-    <link href="../../css/fonts.css?1702442809" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/fonts.css?1702442809" rel="stylesheet"></noscript>
-    <link href="../../css/theme.css?1702442809" rel="stylesheet">
-    <link href="../../css/theme-auto.css?1702442809" rel="stylesheet" id="variant-style">
-    <link href="../../css/variant.css?1702442809" rel="stylesheet">
-    <link href="../../css/print.css?1702442809" rel="stylesheet" media="print">
-    <link href="../../css/format-print.css?1702442809" rel="stylesheet">
-    <link href="../../css/ie.css?1702442809" rel="stylesheet">
-    <script src="../../js/url.js?1702442809"></script>
-    <script src="../../js/variant.js?1702442809"></script>
+    <link href="../../css/fontawesome-all.min.css?1702444128" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/fontawesome-all.min.css?1702444128" rel="stylesheet"></noscript>
+    <link href="../../css/nucleus.css?1702444128" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1702444128" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/auto-complete.css?1702444128" rel="stylesheet"></noscript>
+    <link href="../../css/perfect-scrollbar.min.css?1702444128" rel="stylesheet">
+    <link href="../../css/fonts.css?1702444128" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../../css/fonts.css?1702444128" rel="stylesheet"></noscript>
+    <link href="../../css/theme.css?1702444128" rel="stylesheet">
+    <link href="../../css/theme-auto.css?1702444128" rel="stylesheet" id="variant-style">
+    <link href="../../css/variant.css?1702444128" rel="stylesheet">
+    <link href="../../css/print.css?1702444128" rel="stylesheet" media="print">
+    <link href="../../css/format-print.css?1702444128" rel="stylesheet">
+    <link href="../../css/ie.css?1702444128" rel="stylesheet">
+    <script src="../../js/url.js?1702444128"></script>
+    <script src="../../js/variant.js?1702444128"></script>
     <script>
       // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
       // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
@@ -662,7 +662,106 @@
 </span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c1"></span>    <span class="n">Override</span><span class="p">,</span> <span class="c1">// @override
 </span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="c1"></span>    <span class="n">Operator</span><span class="p">,</span> <span class="c1">// @operator
 </span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="p">};</span></span></span></code></pre></div><h2 id="词元定义">词元定义</h2>
+<div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">struct</span> <span class="nc">TokPos</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kt">uint32_t</span> <span class="n">pos</span><span class="p">;</span>  <span class="c1">// 起始位置
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="c1"></span>    <span class="kt">uint32_t</span> <span class="n">line</span><span class="p">;</span> <span class="c1">// 行号
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="n">TokPos</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">line</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="o">:</span> <span class="n">pos</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">toString</span><span class="p">()</span> <span class="k">const</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">ss</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">
+</span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;[ line: &#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="n">line</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; ,pos &#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="n">pos</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; ]&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">        <span class="k">return</span> <span class="n">ss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">
+</span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="k">struct</span> <span class="nc">Token</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">txt</span><span class="p">;</span> <span class="c1">// 词元对应的文本
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="c1"></span>    <span class="n">TokPos</span> <span class="n">pos</span><span class="p">;</span>      <span class="c1">// 词元的起始位置
+</span></span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="c1"></span>    <span class="n">TkKind</span> <span class="n">kind</span><span class="p">;</span>     <span class="c1">// 词元的类别
+</span></span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="c1"></span>    <span class="k">union</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">        <span class="n">TkAnnotate</span> <span class="n">ann</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">        <span class="n">TkKeyWord</span> <span class="n">key</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">        <span class="n">TkSpEnum</span> <span class="n">sp</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">        <span class="n">TkOpEnum</span> <span class="n">op</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">    <span class="p">}</span> <span class="n">code</span><span class="p">;</span> <span class="c1">// 词元编码
+</span></span></span><span class="line"><span class="ln">34</span><span class="cl"><span class="c1"></span>    <span class="k">union</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">        <span class="kt">uint32_t</span> <span class="n">i32</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">        <span class="kt">uint64_t</span> <span class="n">i64</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">        <span class="kt">float</span> <span class="n">f32</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">        <span class="kt">double</span> <span class="n">f64</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">    <span class="p">}</span> <span class="n">val</span><span class="p">;</span> <span class="c1">// 词元常量值
+</span></span></span><span class="line"><span class="ln">41</span><span class="cl"><span class="c1"></span>    <span class="c1">// std::string str; // 词元对应的字符串常量
+</span></span></span><span class="line"><span class="ln">42</span><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">    <span class="n">Token</span><span class="p">(</span><span class="n">TkKind</span> <span class="n">kind</span> <span class="o">=</span> <span class="n">TkKind</span><span class="o">::</span><span class="n">Unknown</span><span class="p">)</span> <span class="o">:</span> <span class="n">kind</span><span class="p">(</span><span class="n">kind</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">44</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">45</span><span class="cl">        <span class="n">code</span><span class="p">.</span><span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">TkKeyWord</span><span class="o">::</span><span class="n">Unknown</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl">        <span class="n">val</span><span class="p">.</span><span class="n">i64</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">47</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">48</span><span class="cl">
+</span></span><span class="line"><span class="ln">49</span><span class="cl">    <span class="kt">void</span> <span class="nf">addchar</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">ch</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">50</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">51</span><span class="cl">        <span class="n">txt</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">ch</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">52</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">53</span><span class="cl">
+</span></span><span class="line"><span class="ln">54</span><span class="cl">    <span class="c1">// 检查普通关键字
+</span></span></span><span class="line"><span class="ln">55</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">checkKeyword</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">56</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">57</span><span class="cl">        <span class="k">auto</span> <span class="n">reskey</span> <span class="o">=</span> <span class="n">MapTable</span><span class="o">::</span><span class="n">findKeyword</span><span class="p">(</span><span class="n">txt</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">58</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">TkKeyWord</span><span class="o">::</span><span class="n">Unknown</span> <span class="o">!=</span> <span class="n">reskey</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">59</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">60</span><span class="cl">            <span class="n">kind</span> <span class="o">=</span> <span class="n">TkKind</span><span class="o">::</span><span class="n">KeyWord</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">61</span><span class="cl">            <span class="n">code</span><span class="p">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">reskey</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">62</span><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">63</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">64</span><span class="cl">        <span class="n">kind</span> <span class="o">=</span> <span class="n">TkKind</span><span class="o">::</span><span class="n">Identifier</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">65</span><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">66</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">67</span><span class="cl">    <span class="c1">// 检查注解关键字
+</span></span></span><span class="line"><span class="ln">68</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">checkAnnword</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">69</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">70</span><span class="cl">        <span class="k">auto</span> <span class="n">resann</span> <span class="o">=</span> <span class="n">MapTable</span><span class="o">::</span><span class="n">findAnnword</span><span class="p">(</span><span class="n">txt</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">71</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">TkAnnotate</span><span class="o">::</span><span class="n">Unknown</span> <span class="o">!=</span> <span class="n">resann</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">72</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">73</span><span class="cl">            <span class="n">kind</span> <span class="o">=</span> <span class="n">TkKind</span><span class="o">::</span><span class="n">Annotate</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">74</span><span class="cl">            <span class="n">code</span><span class="p">.</span><span class="n">ann</span> <span class="o">=</span> <span class="n">resann</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">75</span><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">76</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">77</span><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">78</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">79</span><span class="cl">    <span class="c1">// 是否普通关键字 key
+</span></span></span><span class="line"><span class="ln">80</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">isKeyword</span><span class="p">(</span><span class="n">TkKeyWord</span> <span class="n">key</span><span class="p">)</span> <span class="k">const</span>
+</span></span><span class="line"><span class="ln">81</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">82</span><span class="cl">        <span class="k">return</span> <span class="n">TkKind</span><span class="o">::</span><span class="n">KeyWord</span> <span class="o">==</span> <span class="n">kind</span> <span class="o">&amp;&amp;</span> <span class="n">key</span> <span class="o">==</span> <span class="n">code</span><span class="p">.</span><span class="n">key</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">83</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">84</span><span class="cl">    <span class="c1">// 是否标注关键字 ann
+</span></span></span><span class="line"><span class="ln">85</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">isAnnotate</span><span class="p">(</span><span class="n">TkAnnotate</span> <span class="n">ann</span><span class="p">)</span> <span class="k">const</span>
+</span></span><span class="line"><span class="ln">86</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">87</span><span class="cl">        <span class="k">return</span> <span class="n">TkKind</span><span class="o">::</span><span class="n">Annotate</span> <span class="o">==</span> <span class="n">kind</span> <span class="o">&amp;&amp;</span> <span class="n">ann</span> <span class="o">==</span> <span class="n">code</span><span class="p">.</span><span class="n">ann</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">88</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">89</span><span class="cl">    <span class="c1">// 是否操作符 op
+</span></span></span><span class="line"><span class="ln">90</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">isOperator</span><span class="p">(</span><span class="n">TkOpEnum</span> <span class="n">op</span><span class="p">)</span> <span class="k">const</span>
+</span></span><span class="line"><span class="ln">91</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">92</span><span class="cl">        <span class="k">return</span> <span class="n">TkKind</span><span class="o">::</span><span class="n">Operator</span> <span class="o">==</span> <span class="n">kind</span> <span class="o">&amp;&amp;</span> <span class="n">op</span> <span class="o">==</span> <span class="n">code</span><span class="p">.</span><span class="n">op</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">93</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">94</span><span class="cl">    <span class="c1">// 是否分隔符 sp
+</span></span></span><span class="line"><span class="ln">95</span><span class="cl"><span class="c1"></span>    <span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">isSeparator</span><span class="p">(</span><span class="n">TkSpEnum</span> <span class="n">sp</span><span class="p">)</span> <span class="k">const</span>
+</span></span><span class="line"><span class="ln">96</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">97</span><span class="cl">        <span class="k">return</span> <span class="n">TkKind</span><span class="o">::</span><span class="n">Separator</span> <span class="o">==</span> <span class="n">kind</span> <span class="o">&amp;&amp;</span> <span class="n">sp</span> <span class="o">==</span> <span class="n">code</span><span class="p">.</span><span class="n">sp</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">98</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">99</span><span class="cl"><span class="p">};</span></span></span></code></pre></div>
   <footer class="footline">
 
   </footer>
@@ -1700,7 +1799,8 @@
   <h1 id="案列测试"> 2.1.7 案列测试</h1>
   <hr />
 
-  <h2 id="测试文本">测试文本</h2>
+  <p>此章节代码对应标记链接：https://github.com/irscript/lang-vm-rt-c/releases/tag/lexer_test</p>
+<h2 id="测试文本">测试文本</h2>
 <div class="wrap-code highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln">  1</span><span class="cl"><span class="c1">//词法分析测试
 </span></span></span><span class="line"><span class="ln">  2</span><span class="cl"><span class="c1"></span>
 </span></span><span class="line"><span class="ln">  3</span><span class="cl"><span class="cm">/*普通关键字*/</span>
@@ -1911,8 +2011,8 @@
         </div>
       </main>
     </div>
-    <script src="../../js/clipboard.min.js?1702442809" defer></script>
-    <script src="../../js/perfect-scrollbar.min.js?1702442809" defer></script>
-    <script src="../../js/theme.js?1702442809" defer></script>
+    <script src="../../js/clipboard.min.js?1702444128" defer></script>
+    <script src="../../js/perfect-scrollbar.min.js?1702444128" defer></script>
+    <script src="../../js/theme.js?1702444128" defer></script>
   </body>
 </html>

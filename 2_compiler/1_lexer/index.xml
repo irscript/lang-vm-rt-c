@@ -70,7 +70,8 @@
       <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/7_test/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/7_test/index.html</guid>
-      <description>测试文本 1//词法分析测试 2 3/*普通关键字*/ 4package 5require 6using 7void 8bool 9int8 10int16 11int32 12int64 13uint8 14uint16 15uint32 16uint64 17sint 18uint 19pointer 20flt32 21flt64 22string 23cstring 24char 25any 26null 27false 28true 29in 30break 31continue 32goto 33return 34do 35while 36for 37foreach 38if 39elsif 40else 41switch 42case 43default 44private 45protected 46public 47static 48const 49final 50enum 51union 52struct 53entrust 54class 55interface 56this 57super 58friend 59new 60sizeof 61typeof 62instanceof 63cast 64try 65catch 66finally 67throw 68await 69synched 70 71/*注解关键字*/ 72@file 73@func 74@line 75@buildin 76@async 77@volatile 78@inline 79@virtual 80@override 81@operator 82 83/*操作符*/ 84.</description>
+      <description>此章节代码对应标记链接：https://github.com/irscript/lang-vm-rt-c/releases/tag/lexer_test
+测试文本 1//词法分析测试 2 3/*普通关键字*/ 4package 5require 6using 7void 8bool 9int8 10int16 11int32 12int64 13uint8 14uint16 15uint32 16uint64 17sint 18uint 19pointer 20flt32 21flt64 22string 23cstring 24char 25any 26null 27false 28true 29in 30break 31continue 32goto 33return 34do 35while 36for 37foreach 38if 39elsif 40else 41switch 42case 43default 44private 45protected 46public 47static 48const 49final 50enum 51union 52struct 53entrust 54class 55interface 56this 57super 58friend 59new 60sizeof 61typeof 62instanceof 63cast 64try 65catch 66finally 67throw 68await 69synched 70 71/*注解关键字*/ 72@file 73@func 74@line 75@buildin 76@async 77@volatile 78@inline 79@virtual 80@override 81@operator 82 83/*操作符*/ 84.</description>
     </item>
   </channel>
 </rss>
