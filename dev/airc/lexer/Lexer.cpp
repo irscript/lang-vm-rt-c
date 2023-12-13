@@ -431,7 +431,37 @@ namespace air
                     tok.code.op = TkOpEnum::ShrA;
             }
             else
-                tok.code.op = TkOpEnum::Minus;
+            {
+                Char ch2 = stream.next();
+                stream.back(ch2);
+                if (ch2.isdigit() == true)
+                {
+                    Token tok2 = GetDigit();
+                    tok.txt += tok2.txt;
+                    tok.kind = tok2.kind;
+                    switch (tok.kind)
+                    {
+                    case TkKind::UIntLiteral:
+                        tok.kind = TkKind::SIntLiteral;
+                        tok.val.i64 = -(int64_t)tok.val.i64;
+                        break;
+                    case TkKind::Flt32Literal:
+                        tok.val.f32 = -tok.val.f32;
+                        break;
+                    case TkKind::Flt64Literal:
+                        tok.val.f64 = -tok.val.f64;
+                        break;
+                    default:
+                        assert(0);
+                        break;
+                    }
+                }
+                else
+                {
+                    tok.code.op = TkOpEnum::Minus;
+                }
+            }
+
             return tok;
         }
         break;
