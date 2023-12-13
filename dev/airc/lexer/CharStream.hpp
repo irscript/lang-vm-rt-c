@@ -100,6 +100,7 @@ namespace air
         // 打开文件
         bool open(const std::string &path)
         {
+            index = 0;
             return ReadFile(path, data);
         }
 
@@ -125,7 +126,7 @@ namespace air
             if (index < data.size())
             {
                 uint32_t pos = index;
-                uint32_t ch = data[pos];
+                uint32_t ch = (uint8_t)data[pos];
                 ++index;
                 return Char(pos, ch);
             }
@@ -135,7 +136,7 @@ namespace air
         void back(Char ch)
         {
             index = ch.pos;
-            assert(index < data.size());
+            assert(index <= data.size());
         }
         // 匹配一个字符
         bool match(char ch, int off)

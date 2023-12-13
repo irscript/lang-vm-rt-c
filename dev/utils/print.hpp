@@ -38,11 +38,11 @@ namespace air
     private:
         static std::atomic_flag flag; // 多线程共享锁
     };
-    template <const uint32_t clr, typename... Arg>
+    template < typename... Arg>
     inline void Print(const char *fmt, Arg... arg)
     {
         Printer::lock();
-        Printer::print(clr, fmt, arg...);
+        Printer::print(Printer::BrightWhite, fmt, arg...);
         Printer::unlock();
     }
     template <typename... Arg>

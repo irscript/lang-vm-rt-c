@@ -8,7 +8,7 @@ namespace air
 {
     struct Lexer
     {
-        Lexer(CharStream &ics) : pos(), stream(ics) {}
+        Lexer(CharStream &ics) : pos(0,1), stream(ics) {}
 
         // 获取词元
         Token getNext();

@@ -49,7 +49,11 @@ namespace air
         } val; // 词元常量值
         // std::string str; // 词元对应的字符串常量
 
-        Token(TkKind kind = TkKind::Unknown) : kind(kind) {}
+        Token(TkKind kind = TkKind::Unknown) : kind(kind)
+        {
+            code.key = (TkKeyWord::Unknown);
+            val.i64 = (0);
+        }
 
         void addchar(uint32_t ch)
         {
@@ -77,6 +81,7 @@ namespace air
             {
                 kind = TkKind::Annotate;
                 code.ann = resann;
+                return true;
             }
             return false;
         }

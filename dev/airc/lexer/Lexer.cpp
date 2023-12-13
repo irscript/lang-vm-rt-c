@@ -4,6 +4,7 @@ namespace air
 {
     Token Lexer::getNext()
     {
+        return GetToken();
         while (true)
         {
             auto tok = GetToken();
@@ -147,11 +148,11 @@ namespace air
     }
     Token Lexer::GetString(bool escape)
     {
-        Token tok(escape == true ? TkKind::StringLiteral : TkKind::StringLiteral);
+        Token tok(escape == true ? TkKind::StringLiteral2 : TkKind::StringLiteral);
         Char ch = stream.next();
         tok.pos.pos = ch.pos;
         tok.pos.line = pos.line;
-        if (escape == true)
+        if (escape == false)
         {
             while (true)
             {
@@ -174,6 +175,7 @@ namespace air
                 else if (ch.val == '"')
                     break;
                 tok.addchar(ch.val);
+                ch = stream.next();
             }
         }
         else
@@ -187,6 +189,7 @@ namespace air
                 else if (ch.val == '"')
                     break;
                 tok.addchar(ch.val);
+                ch = stream.next();
             }
         }
 
@@ -194,7 +197,7 @@ namespace air
     }
     Token Lexer::GetDigit()
     {
-        Token tok(TkKind::SIntLiteral);
+        Token tok(TkKind::UIntLiteral);
         Char ch = stream.next();
         tok.pos.pos = ch.pos;
         tok.pos.line = pos.line;
@@ -209,7 +212,7 @@ namespace air
             case 'X':
             case 'x':
             {
-                tok.addchar(ch.val);
+                tok.addchar(ch2.val);
                 while (true)
                 {
                     ch2 = stream.next();
@@ -218,7 +221,7 @@ namespace air
                         stream.back(ch2);
                         break;
                     }
-                    tok.addchar(ch.val);
+                    tok.addchar(ch2.val);
                 }
 
                 if (tok.txt.empty())
@@ -233,7 +236,7 @@ namespace air
             case 'B':
             case 'b':
             {
-                tok.addchar(ch.val);
+                tok.addchar(ch2.val);
                 while (true)
                 {
                     ch2 = stream.next();
@@ -242,7 +245,7 @@ namespace air
                         stream.back(ch2);
                         break;
                     }
-                    tok.addchar(ch.val);
+                    tok.addchar(ch2.val);
                 }
                 if (tok.txt.empty())
                     throw ErrorWhat::fmt("%u:%u: 不完整的 2 进制数：%s\n",
@@ -255,7 +258,7 @@ namespace air
             // 浮点数
             case '.':
             {
-                tok.addchar(ch.val);
+                tok.addchar(ch2.val);
                 return GetFltNumber(tok);
             }
             break;
@@ -269,10 +272,10 @@ namespace air
                         stream.back(ch2);
                         break;
                     }
-                    tok.addchar(ch.val);
+                    tok.addchar(ch2.val);
                     ch2 = stream.next();
                 }
-                tok.val.i64 = std::strtoull(&tok.txt[2], nullptr, 8);
+                tok.val.i64 = std::strtoull(&tok.txt[1], nullptr, 8);
                 tok.kind = TkKind::UIntLiteral;
                 return tok;
             }
@@ -317,7 +320,8 @@ namespace air
             // 32位浮点
             if (ch.val == 'F' || ch.val == 'f')
             {
-                tok.kind == TkKind::Flt32Literal;
+                tok.addchar(ch.val);
+                tok.kind = TkKind::Flt32Literal;
                 tok.val.f32 = std::strtof(tok.txt.c_str(), nullptr);
                 return tok;
             }
@@ -335,7 +339,6 @@ namespace air
         else if (ch.isdigit() == false)
             throw ErrorWhat::fmt("%u:%u: 不完整的科学计数法：%s\n",
                                  tok.pos.line, tok.pos.pos, tok.txt.c_str());
-        tok.addchar(ch.val);
         while (true)
         {
             ch = stream.next();
@@ -365,7 +368,7 @@ namespace air
         {
             if (stream.match('.', 0) == true && stream.match('.', 1) == true)
             {
-                tok.kind == TkKind::Separator;
+                tok.kind = TkKind::Separator;
                 ch = stream.next();
                 tok.addchar(ch.val);
                 ch = stream.next();
@@ -672,7 +675,7 @@ namespace air
     }
     Token Lexer::GetSeparator(Token &tok, uint32_t val)
     {
-        tok.kind == TkKind::Separator;
+        tok.kind = TkKind::Separator;
         switch (val)
         {
             // 匹配 [
@@ -755,6 +758,7 @@ namespace air
 
     Token Lexer::GetSinglineComment(Token &tok)
     {
+        tok.kind = TkKind::SingleComments;
         Char ch = stream.next();
         while (true)
         {
@@ -766,12 +770,14 @@ namespace air
                 break;
             }
             tok.addchar(ch.val);
+            ch = stream.next();
         }
         return tok;
     }
 
     Token Lexer::GetMultilineComment(Token &tok)
     {
+        tok.kind = TkKind::MultipleComments;
         Char ch = stream.next();
         while (true)
         {
