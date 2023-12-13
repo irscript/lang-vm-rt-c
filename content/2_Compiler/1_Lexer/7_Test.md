@@ -4,7 +4,7 @@ weight = 7
 autonumbering = true
 +++
 
-此章节代码对应标记链接：https://github.com/irscript/lang-vm-rt-c/releases/tag/lexer_test
+此章节代码对应标记链接：[https://github.com/irscript/lang-vm-rt-c/releases/tag/lexer_test](https://github.com/irscript/lang-vm-rt-c/releases/tag/lexer_test)
 
 ## 测试文本
 ```c++
