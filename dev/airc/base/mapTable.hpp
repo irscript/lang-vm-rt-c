@@ -1,6 +1,6 @@
 #ifndef __MAPTABLE_INC__
 #define __MAPTABLE_INC__
-#include "lexer/TkEnum.hpp"
+#include "airc/lexer/TkEnum.hpp"
 #include "utils/pch.hpp"
 namespace air
 {

@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "lexer/Lexer.hpp"
-#include "mapTable.hpp"
+#include "base/mapTable.hpp"
 #include "utils/errorWhat.hpp"
 #include "utils/print.hpp"
 using namespace std;
