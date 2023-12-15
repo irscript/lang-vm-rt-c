@@ -8,17 +8,22 @@ namespace air
     enum class SymbolKind
     {
         Unkonwn,
-        Type, // 类型
-        Func, // 函数
-        Var,  // 变量
+        Type,     // 类型
+        Function, // 函数
+        Variable, // 变量
     };
     // 符号定义
     struct ISymbol
     {
-        StringRef name;  // 符号的名称
+        StringRef &name; // 符号的短名称
+        StringRef &full; // 符号的全名称
         SymbolKind kind; // 符号类别
 
-        ISymbol(StringRef name, SymbolKind kind = SymbolKind::Unkonwn) : name(name), kind(kind) {}
+        ISymbol(StringRef &full, StringRef &name, SymbolKind kind = SymbolKind::Unkonwn) : name(name), full(full), kind(kind) {}
+
+        inline bool isType() const { return kind == SymbolKind::Type; }
+        inline bool isFunction() const { return kind == SymbolKind::Function; }
+        inline bool isVariable() const { return kind == SymbolKind::Variable; }
     };
     // 符号引用
     using SymbolRef = std::shared_ptr<ISymbol>;
@@ -29,42 +34,42 @@ namespace air
         uintptr_t size;  // 内存大小
         uintptr_t align; // 对齐大小
 
-        ISymbolType(StringRef name, uintptr_t size, uintptr_t align)
-            : ISymbol(name, SymbolKind::Type), size(size), align(align) {}
+        ISymbolType(StringRef &full, StringRef &name, uintptr_t size, uintptr_t align)
+            : ISymbol(full, name, SymbolKind::Type), size(size), align(align) {}
     };
 
     // 符号表定义
-    struct SybolTable
+    struct SymbolTable
     {
-        SybolTable(SybolTable *super = nullptr) : super(super) {}
+        SymbolTable(SymbolTable *super = nullptr) : super(super) {}
 
+        using Result = std::pair<bool, SymbolRef>; // 操作结果
         // 插入符号
-        inline bool insert(ISymbol *sym)
+        inline Result insert(const std::string *name, SymbolRef sym)
         {
-            auto res = map.insert({sym->name, SymbolRef(sym)});
-            return res.second;
+            auto res = map.insert({name, sym});
+            return Result(res.second, res.first->second);
         }
         // 查找符号
-        inline SymbolRef find(const StringRef name)
+        inline Result find(const std::string *name)
         {
             auto res = map.find(name);
-            if (res == map.end())
+            if (res == map.end() && super != nullptr)
             {
-                if (super != nullptr)
-                    return super->find(name);
-                return SymbolRef();
+                return super->find(name);
             }
-            return res->second;
+            return Result(true, res->second);
         }
 
+        // 是顶层符号表？
+        inline bool isTop() const { return super == nullptr; }
+
     private:
-        SybolTable *super;                  // 上层符号表
-        std::map<StringRef, SymbolRef> map; // 符号映射表
+        SymbolTable *super;                            // 上层符号表
+        std::map<const std::string *, SymbolRef> map; // 符号映射表
     };
 
-    // 符号名称重名规则
-    /*
-     * 在同一作用域下不得出现符号名称相同
-     */
+    // 符号名称重名规则:同一符号表内部,名称不得重复
+
 }
 #endif // __SYMTABLE_INC__

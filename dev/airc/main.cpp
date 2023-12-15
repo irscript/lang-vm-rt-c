@@ -1,9 +1,12 @@
 #include <iostream>
 
-#include "lexer/Lexer.hpp"
 #include "base/mapTable.hpp"
+#include "lexer/Lexer.hpp"
 #include "utils/errorWhat.hpp"
 #include "utils/print.hpp"
+
+#include "base/strPool.hpp"
+#include "base/symTable.hpp"
 using namespace std;
 
 int main(int argc, char **argv)
@@ -33,6 +36,8 @@ int main(int argc, char **argv)
                        tok.txt.c_str());
             if (tok.kind == air::TkKind::UIntLiteral)
                 air::Print("\t%llu\n", tok.val.i64);
+            else if (tok.kind == air::TkKind::SIntLiteral)
+                air::Print("\t%lld\n", tok.val.i64);
             else if (tok.kind == air::TkKind::Flt32Literal)
                 air::Print("\t%f\n", tok.val.f32);
             else if (tok.kind == air::TkKind::Flt64Literal)

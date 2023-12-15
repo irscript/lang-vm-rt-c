@@ -442,15 +442,21 @@ namespace air
                     switch (tok.kind)
                     {
                     case TkKind::UIntLiteral:
+                    {
                         tok.kind = TkKind::SIntLiteral;
-                        tok.val.i64 = -(int64_t)tok.val.i64;
-                        break;
+                        tok.val.i64 = -((int64_t)tok2.val.i64);
+                    }
+                    break;
                     case TkKind::Flt32Literal:
-                        tok.val.f32 = -tok.val.f32;
-                        break;
+                    {
+                        tok.val.f32 = -tok2.val.f32;
+                    }
+                    break;
                     case TkKind::Flt64Literal:
-                        tok.val.f64 = -tok.val.f64;
-                        break;
+                    {
+                        tok.val.f64 = -tok2.val.f64;
+                    }
+                    break;
                     default:
                         assert(0);
                         break;
