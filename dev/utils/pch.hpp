@@ -30,6 +30,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <any>
 // 平台相关
 #ifdef Plat_Windows
 #include <Windows.h>
