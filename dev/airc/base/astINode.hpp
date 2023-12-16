@@ -1,6 +1,6 @@
 #ifndef __ASTINODE_INC__
 #define __ASTINODE_INC__
-#include "lexer/Token.hpp"
+#include "airc/lexer/Token.hpp"
 #include "utils/pch.hpp"
 namespace air
 {
