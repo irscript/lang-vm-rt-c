@@ -1,5 +1,6 @@
 #ifndef __ASTINODE_INC__
 #define __ASTINODE_INC__
+#include "lexer/Token.hpp"
 #include "utils/pch.hpp"
 namespace air
 {
@@ -8,9 +9,11 @@ namespace air
     // 语法节点基类
     struct IAstNode
     {
-        uint32_t startpos; // 开始位置
-        uint32_t endpos;   // 结束文字
-        bool mIsErr;       // 是否是错误节点
+        TokPos startpos; // 开始位置
+        TokPos endpos;   // 结束文字
+        bool mIsErr;     // 是否是错误节点
+
+        IAstNode() : mIsErr(false) {}
         // 接收访问者访问
         virtual std::any visit(IAstVisitor &visitor, std::any opt) = 0;
     };
@@ -96,9 +99,11 @@ namespace air
         // 访问语句
         virtual std::any visit(StmBlock &stm, std::any opt) = 0;
         virtual std::any visit(StmIf &stm, std::any opt) = 0;
+        virtual std::any visit(StmElsif &stm, std::any opt) = 0;
         virtual std::any visit(StmElse &stm, std::any opt) = 0;
         virtual std::any visit(StmSwitch &stm, std::any opt) = 0;
         virtual std::any visit(StmCase &stm, std::any opt) = 0;
+        virtual std::any visit(StmDefault &stm, std::any opt) = 0;
         virtual std::any visit(StmFor &stm, std::any opt) = 0;
         virtual std::any visit(StmDoWhile &stm, std::any opt) = 0;
         virtual std::any visit(StmWhile &stm, std::any opt) = 0;
