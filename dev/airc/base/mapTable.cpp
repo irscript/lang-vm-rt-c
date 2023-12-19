@@ -33,7 +33,7 @@ namespace air
 
         mapKey.insert({"sint", TkKeyWord::SInt});
         mapKey.insert({"uint", TkKeyWord::UInt});
-        mapKey.insert({"pointer", TkKeyWord::Pointer});
+        mapKey.insert({"uintptr", TkKeyWord::Uintptr});
 
         mapKey.insert({"flt32", TkKeyWord::Flt32});
         mapKey.insert({"flt64", TkKeyWord::Flt64});

@@ -19,11 +19,10 @@ namespace air
         {
             std::stringstream ss;
 
-            ss << "[ line: ";
             ss << line;
-            ss << " ,pos ";
+            ss << ":";
             ss << pos;
-            ss << " ]";
+
             return ss.str();
         }
     };
@@ -55,7 +54,21 @@ namespace air
             val.i64 = (0);
         }
 
-        void addchar(uint32_t ch)
+        inline auto getTxt() const { return txt.c_str(); }
+
+        std::string toString() const
+        {
+            std::stringstream ss;
+
+            ss << txt;
+            ss << ":";
+            ss << pos.line;
+            ss << ":";
+            ss << pos.pos;
+            return ss.str();
+        }
+
+        inline void addchar(uint32_t ch)
         {
             txt.push_back(ch);
         }
@@ -85,6 +98,11 @@ namespace air
             }
             return false;
         }
+        // 是否标识符
+        inline bool isIdentity() const
+        {
+            return TkKind::Identifier == kind;
+        }
         // 是否普通关键字 key
         inline bool isKeyword(TkKeyWord key) const
         {
@@ -104,6 +122,12 @@ namespace air
         inline bool isSeparator(TkSpEnum sp) const
         {
             return TkKind::Separator == kind && sp == code.sp;
+        }
+
+        // 是否字符串
+        inline bool isString() const
+        {
+            return TkKind::StringLiteral == kind || TkKind::StringLiteral2 == kind;
         }
     };
 }

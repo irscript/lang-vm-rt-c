@@ -64,6 +64,9 @@
         "set": "cpp",
         "fstream": "cpp",
         "sstream": "cpp",
-        "any": "cpp"
+        "any": "cpp",
+        "codecvt": "cpp",
+        "ratio": "cpp",
+        "iomanip": "cpp"
     }
 }

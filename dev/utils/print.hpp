@@ -38,7 +38,7 @@ namespace air
     private:
         static std::atomic_flag flag; // 多线程共享锁
     };
-    template < typename... Arg>
+    template <typename... Arg>
     inline void Print(const char *fmt, Arg... arg)
     {
         Printer::lock();
@@ -50,6 +50,27 @@ namespace air
     {
         Printer::lock();
         Printer::print(Printer::LightRed, fmt, arg...);
+        Printer::unlock();
+    }
+    template <typename... Arg>
+    inline void Waring(const char *fmt, Arg... arg)
+    {
+        Printer::lock();
+        Printer::print(Printer::FaintYellow, fmt, arg...);
+        Printer::unlock();
+    }
+    template <typename... Arg>
+    inline void Info(const char *fmt, Arg... arg)
+    {
+        Printer::lock();
+        Printer::print(Printer::LightGreen, fmt, arg...);
+        Printer::unlock();
+    }
+    template <typename... Arg>
+    inline void Notify(const char *fmt, Arg... arg)
+    {
+        Printer::lock();
+        Printer::print(Printer::Green, fmt, arg...);
         Printer::unlock();
     }
 }

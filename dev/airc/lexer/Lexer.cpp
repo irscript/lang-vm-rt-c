@@ -4,7 +4,7 @@ namespace air
 {
     Token Lexer::getNext()
     {
-        return GetToken();
+        //return GetToken();
         while (true)
         {
             auto tok = GetToken();

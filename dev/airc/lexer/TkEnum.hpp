@@ -123,7 +123,7 @@ namespace air
 
         SInt,    // 根据目标架构，可变有符号
         UInt,    // 根据目标架构，可变无符号
-        Pointer, // 地址
+        Uintptr, // 地址
 
         Flt32, // 32位浮点
         Flt64, // 64位浮点
