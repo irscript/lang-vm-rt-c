@@ -31,6 +31,8 @@ namespace air
             }
             stream.back(ch);
         }
+        // 获取字符串
+        inline std::string getSub(uint32_t start, uint32_t end) { return stream.getSbu(start, end); }
 
     private:
         // 解析一个单词

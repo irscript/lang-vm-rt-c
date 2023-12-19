@@ -108,6 +108,10 @@ namespace air
         auto symref = genSymbol(sym, *decl);
         auto res = unit.symbols.insert(&decl->name.get(), symref);
         if (res.first == false)
+        {
+            std::string src = lexer.getSub(decl->startpos.pos, decl->endpos.pos);
+            Print("当前定义：\n%s\n", src.c_str());
             throw ErrorWhat::fmt("符号名称冲突！\n");
+        }
     }
 }
