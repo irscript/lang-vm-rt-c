@@ -57,14 +57,20 @@ namespace air
     };
     struct StringRef
     {
-        inline ~StringRef() { pool->unrefString(get()); }
+        inline ~StringRef()
+        {
+            if (pool)
+                pool->unrefString(get());
+        }
         // 获取名称
         const std::string &get() const { return item->get(); }
-        inline StringRef(const StringRef &rhs) : StringRef(rhs.pool, rhs.item) { item->ref(); }
+        StringRef() : StringRef(nullptr, nullptr) {}
+        inline StringRef(const StringRef &rhs) : StringRef(rhs.pool, rhs.item) { if (item)item->ref(); }
 
         inline StringRef &operator=(const StringRef &rhs)
         {
-            item->unref();
+            if (item)
+                item->unref();
             pool = rhs.pool;
             item = rhs.item;
             item->ref();

@@ -23,6 +23,10 @@ namespace air
         void getPackage();
         // 解析依赖
         void getRequire();
+        void getRequireItem();
+
+        // 开始解析声明
+        void getDecl();
     };
 }
 

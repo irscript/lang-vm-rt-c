@@ -10,7 +10,7 @@ namespace air
     // 编译的文件单元
     struct FileUnit
     {
-        FileUnit() : state(0) {}
+        FileUnit() : state(0), file(nullptr) {}
         // 文件状态
         union
         {
@@ -24,7 +24,7 @@ namespace air
         const std::string *file; // 文件路径
 
         SymbolTable symbols;           // 文件内符号表
-        std::string package;           // 包名
+        StringRef package;             // 包名
         std::list<AstDeclRef> declist; // 声明列表
     };
 }

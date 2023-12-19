@@ -8,18 +8,17 @@ namespace air
 {
     struct Lexer
     {
-        Lexer(CharStream &ics) : pos(0,1), stream(ics) {}
+        Lexer(CharStream &ics) : pos(0, 1), stream(ics) {}
 
         // 获取词元
         Token getNext();
         // 退回词元
-        void backToken(Token &tok)
+        inline void backToken(Token &tok)
         {
             stream.back(Char(tok.pos.pos, 0));
             pos = tok.pos;
         }
-
-    private:
+        inline TokPos getPos() const { return pos; }
         // 跳过空白字符
         inline void SkipWhiteSpaces()
         {
@@ -32,6 +31,8 @@ namespace air
             }
             stream.back(ch);
         }
+
+    private:
         // 解析一个单词
         Token GetToken();
 
@@ -50,7 +51,7 @@ namespace air
         // 解析操作符或者分隔符
         Token GetOperator();
         // 解析分隔符
-        Token GetSeparator(Token &tok,uint32_t val);
+        Token GetSeparator(Token &tok, uint32_t val);
         // 解析一个单行注释
         Token GetSinglineComment(Token &tok);
         // 解析多行注释

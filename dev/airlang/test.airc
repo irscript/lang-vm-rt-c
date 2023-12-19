@@ -1,2 +1,7 @@
 package airlang.test;
-
+/*
+require file="file";
+require 
+{
+    //file2="file2";
+}*/

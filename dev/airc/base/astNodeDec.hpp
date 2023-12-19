@@ -16,7 +16,10 @@ namespace air
     struct DeclFile : public IAstDecl
     {
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
-        DeclFile(StringRef &name) : IAstDecl(name), unit(nullptr) {}
+
+        DeclFile(StringRef &name,StringRef file) 
+        : IAstDecl(name), file(file),unit(nullptr) {}
+        StringRef file; // 声明名称
         FileUnit *unit; // 对应的文件单元
     };
     // 文件符号
