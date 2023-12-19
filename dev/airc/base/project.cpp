@@ -1,5 +1,6 @@
 #include "project.hpp"
 #include "airc/lexer/Lexer.hpp"
+#include "airc/parser/Parser.hpp"
 #include "utils/errorWhat.hpp"
 #include "utils/print.hpp"
 namespace air
@@ -8,10 +9,10 @@ namespace air
     {
         Token tok = lexer.getNext();
         if (false == tok.isSeparator(TkSpEnum::Colon))
-            throw ErrorWhat::fmt("缺少符号‘：’！\n%s\n", tok.toString());
+            throw ErrorWhat::fmt("缺少符号‘：’！\n%s\n", tok.toString().c_str());
         tok = lexer.getNext();
         if (false == tok.isString())
-            throw ErrorWhat::fmt("缺少构建目录！\n%s\n", tok.toString());
+            throw ErrorWhat::fmt("缺少构建目录！\n%s\n", tok.toString().c_str());
         proj.buildDir = tok.txt;
         CheckPath(proj.buildDir);
     }
@@ -19,33 +20,33 @@ namespace air
     {
         Token tok = lexer.getNext();
         if (false == tok.isSeparator(TkSpEnum::Colon))
-            throw ErrorWhat::fmt("缺少符号‘：’！\n%s\n", tok.toString());
+            throw ErrorWhat::fmt("缺少符号‘：’！\n%s\n", tok.toString().c_str());
         tok = lexer.getNext();
         if (false == tok.isString())
-            throw ErrorWhat::fmt("缺少地址空间名称！\n%s\n", tok.toString());
+            throw ErrorWhat::fmt("缺少地址空间名称！\n%s\n", tok.toString().c_str());
         proj.projBits = tok.txt;
         if (proj.projBits == "x64")
             proj.addrbits = 64;
         else if (proj.projBits == "x32")
             proj.addrbits = 32;
         else
-            throw ErrorWhat::fmt("未知地址空间名称！\n%s\n", tok.toString());
+            throw ErrorWhat::fmt("未知地址空间名称！\n%s\n", tok.toString().c_str());
     }
     inline void parseLibrary(air::Lexer &lexer, Project &proj)
     {
         Token tok = lexer.getNext();
         if (false == tok.isSeparator(TkSpEnum::Colon))
-            throw ErrorWhat::fmt("缺少符号‘：’！\n%s\n", tok.toString());
+            throw ErrorWhat::fmt("缺少符号‘：’！\n%s\n", tok.toString().c_str());
         tok = lexer.getNext();
         if (false == tok.isSeparator(TkSpEnum::OpenBracket))
-            throw ErrorWhat::fmt("缺少符号‘[’！\n%s\n", tok.toString());
+            throw ErrorWhat::fmt("缺少符号‘[’！\n%s\n", tok.toString().c_str());
         while (true)
         {
             tok = lexer.getNext();
             if (true == tok.isSeparator(TkSpEnum::CloseBracket))
                 break;
             if (false == tok.isString())
-                throw ErrorWhat::fmt("缺少库文件目录路径字符串！\n%s\n", tok.toString());
+                throw ErrorWhat::fmt("缺少库文件目录路径字符串！\n%s\n", tok.toString().c_str());
             auto res = proj.dirsmap.insert({tok.txt, {}});
             if (res.second == false)
                 Waring("路径重复：%s\n", res.first->first.c_str());
@@ -57,22 +58,22 @@ namespace air
     {
         Token tok = lexer.getNext();
         if (false == tok.isSeparator(TkSpEnum::Colon))
-            throw ErrorWhat::fmt("缺少符号‘：’！\n%s\n", tok.toString());
+            throw ErrorWhat::fmt("缺少符号‘：’！\n%s\n", tok.toString().c_str());
         tok = lexer.getNext();
         if (false == tok.isSeparator(TkSpEnum::OpenBracket))
-            throw ErrorWhat::fmt("缺少符号‘[’！\n%s\n", tok.toString());
+            throw ErrorWhat::fmt("缺少符号‘[’！\n%s\n", tok.toString().c_str());
         while (true)
         {
             tok = lexer.getNext();
             if (true == tok.isSeparator(TkSpEnum::CloseBracket))
                 break;
             if (false == tok.isString())
-                throw ErrorWhat::fmt("缺少编译文件路径字符串！\n%s\n", tok.toString());
+                throw ErrorWhat::fmt("缺少编译文件路径字符串！\n%s\n", tok.toString().c_str());
             auto res = proj.filemap.insert({tok.txt, {}});
             if (res.second == false)
                 Waring("路径重复：%s\n", res.first->first.c_str());
             else
-                res.first->second.path = &res.first->first;
+                res.first->second.unit.file = &res.first->first;
         }
     }
 
@@ -80,21 +81,21 @@ namespace air
     {
         Token tok = lexer.getNext();
         if (false == tok.isSeparator(TkSpEnum::Colon))
-            throw ErrorWhat::fmt("缺少符号‘：’！\n%s\n", tok.toString());
+            throw ErrorWhat::fmt("缺少符号‘：’！\n%s\n", tok.toString().c_str());
         tok = lexer.getNext();
         if (false == tok.isString())
-            throw ErrorWhat::fmt("缺少项目名称！\n%s\n", tok.toString());
+            throw ErrorWhat::fmt("缺少项目名称！\n%s\n", tok.toString().c_str());
         proj.projName = tok.txt;
         tok = lexer.getNext();
         if (false == tok.isSeparator(TkSpEnum::OpenBrace))
-            throw ErrorWhat::fmt("缺少符号‘{’！\n%s\n", tok.toString());
+            throw ErrorWhat::fmt("缺少符号‘{’！\n%s\n", tok.toString().c_str());
         while (true)
         {
             tok = lexer.getNext();
             if (true == tok.isSeparator(TkSpEnum::CloseBrace))
                 break;
             if (tok.isIdentity() == false)
-                throw ErrorWhat::fmt("未知语法词元：%s！\n%s\n", tok.getTxt(), tok.toString());
+                throw ErrorWhat::fmt("未知语法词元：%s！\n%s\n", tok.getTxt(), tok.toString().c_str());
             if (tok.txt == "build")
             {
                 parseBuild(lexer, proj);
@@ -121,23 +122,23 @@ namespace air
     void Project::load(const std::string &path)
     {
         std::filesystem::path fpath(path);
-        projPath = fpath.root_path().string();
+        projPath = fpath.parent_path().string();
 
         CheckPath(projPath);
+        auto res = dirsmap.insert({projPath, {}});
+        res.first->second.path = &res.first->first;
 
-        Info("%s：解析项目文件...\n", path.c_str());
-        air::CharStream stream;
+        Print("%s：解析项目文件...\n", path.c_str());
+        CharStream stream;
         if (stream.open(path) == false)
             throw ErrorWhat::fmt("%s: 文件读取失败！\n", path.c_str());
 
-        air::Lexer lexer(stream);
+        Lexer lexer(stream);
         Token tok = lexer.getNext();
         if (tok.isIdentity() == false || tok.txt != "project")
-            throw ErrorWhat::fmt("未知语法词元：%s！\n%s\n", tok.getTxt(), tok.toString());
+            throw ErrorWhat::fmt("未知语法词元：%s！\n%s\n", tok.getTxt(), tok.toString().c_str());
         // 解析项目
         parseProject(lexer, *this);
-
-        Notify("解析项目文件完成！\n");
     }
 
     /*  编译流程
@@ -157,11 +158,24 @@ namespace air
             auto build = std::filesystem::absolute(buildPath);
             // 创建目录
             std::filesystem::create_directories(build);
-            Info("build-path:%s\n", build.string().c_str());
+            Print("构建路径: %s\n", build.string().c_str());
         }
+        dirsmap.insert({projPath, {}});
         // 初始化基本类型符号
         initSymbol();
+        std::string path;
         // 单文件编译
+        for (auto item : filemap)
+        {
+            path = getFilePath(item.first);
+            CharStream stream;
+            if (stream.open(path) == false)
+                throw ErrorWhat::fmt("%s: 文件读取失败！\n", path.c_str());
+            Info("编译：%s\n", item.first.c_str());
+            Lexer lexer(stream);
+            Parser paser(strings, lexer, item.second.unit);
+        }
+        // 语义解析
     }
     std::string Project::getFilePath(const std::string &path)
     {
@@ -176,16 +190,16 @@ namespace air
         }
         // 未找到文件路径
         if (fileset.empty() == true)
-            throw ErrorWhat::fmt("%s:文件可能不存在 ！\n", path.c_str());
+            throw ErrorWhat::fmt("%s : 文件可能不存在 ！\n", path.c_str());
         // 文件路径冲突
         else if (fileset.size() != 1)
         {
             Printer::lock();
-            Printer::print(Printer::Purple, "%s:存在以下路径：\n", path.c_str());
+            Printer::print(Printer::Purple, "%s : 存在以下路径：\n", path.c_str());
             for (auto item : fileset)
                 Printer::print(Printer::Aqua, "\t%s\n", item.c_str());
             Printer::unlock();
-            throw ErrorWhat::fmt("%s:文件路径冲突 ！\n", path.c_str());
+            throw ErrorWhat::fmt("%s : 文件路径冲突 ！\n", path.c_str());
         }
         return *fileset.begin();
     }
@@ -269,7 +283,7 @@ namespace air
         // 字符串类型
         {
             auto name = strings.refString("char");
-            symbols.insert(&name.get(), makeSymbol(new BuildinTypeSymbol(name, addrbits, addrbits, false)));
+            symbols.insert(&name.get(), makeSymbol(new BuildinTypeSymbol(name, 1, 1, false)));
         }
         // 字符串类型
         {

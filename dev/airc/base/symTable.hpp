@@ -20,7 +20,12 @@ namespace air
     // 符号引用
     using SymbolRef = std::shared_ptr<ISymbol>;
     inline SymbolRef makeSymbol(ISymbol *symbol) { return SymbolRef(symbol); }
-
+    template <typename Symbol, typename... Arg>
+    inline SymbolRef genSymbol(Symbol *&instance, Arg... arg)
+    {
+        instance = new Symbol(arg...);
+        return SymbolRef(instance);
+    }
     // 符号表定义
     struct SymbolTable
     {
@@ -79,9 +84,9 @@ namespace air
         SymbolTable symbols; // 内部符号表
     };
     // 文件符号
-    struct FileSymbol : public ISymbol
+    struct IFileSymbol : public ISymbol
     {
-        FileSymbol(StringRef &name) : ISymbol(full, name, SymbolKind::File) {}
+        IFileSymbol(StringRef &name) : ISymbol(name, name, SymbolKind::File) {}
     };
     //  类型符号
     struct ISymbolType : public ISymbol
@@ -92,7 +97,7 @@ namespace air
                            bool sign, bool buildin = false)
             : ISymbol(full, name, SymbolKind::Type),
               size(size), align(align),
-              sign(sign), buildin(buildin) {}
+              sign(sign), buildin(buildin), clas(false) {}
 
         inline uintptr_t getSize() const { return size; }
         inline uintptr_t getAlign() const { return align; }
@@ -103,6 +108,7 @@ namespace air
         uintptr_t align; // 对齐大小,单位：字节
         bool sign;       // 有符号？
         bool buildin;    // 内建类型？
+        bool clas;       // 类？
     };
     // 内建类型符号
     struct BuildinTypeSymbol : public ISymbolType
@@ -123,11 +129,5 @@ namespace air
         bool buildin; // 内建函数？
     };
 
-    // 内建函数符号
-    struct BuildinFuncSymbol : public IFuncSymbol
-    {
-        BuildinFuncSymbol(StringRef &full, StringRef &name)
-            : IFuncSymbol(full, name, true) {}
-    };
 }
 #endif // __SYMTABLE_INC__

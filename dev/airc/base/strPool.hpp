@@ -62,6 +62,15 @@ namespace air
         const std::string &get() const { return item->get(); }
         inline StringRef(const StringRef &rhs) : StringRef(rhs.pool, rhs.item) { item->ref(); }
 
+        inline StringRef &operator=(const StringRef &rhs)
+        {
+            item->unref();
+            pool = rhs.pool;
+            item = rhs.item;
+            item->ref();
+            return *this;
+        }
+
     private:
         friend struct StringPool;
         inline StringRef(StringPool *pool, StringItem *str) : pool(pool), item(str) {}

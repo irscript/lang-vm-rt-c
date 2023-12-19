@@ -1,15 +1,12 @@
 project: "test"
 {
     build:"build"
-    bits:"x64"  //"x32"
+    bits:"x64"
     library:
     [
-        "库文件目录"
-        "库文件目录2"
     ]
     file:
     [
-        "编译文件名称"
-        "编译文件名称2"
+        "test.airc"
     ]
 }

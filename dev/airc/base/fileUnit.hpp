@@ -20,7 +20,12 @@ namespace air
                 uint32_t error : 1; // 错误？
             };
         };
-        SymbolTable symbols; // 文件内符号表
+
+        const std::string *file; // 文件路径
+
+        SymbolTable symbols;           // 文件内符号表
+        std::string package;           // 包名
+        std::list<AstDeclRef> declist; // 声明列表
     };
 }
 #endif // __FILEUNIT_INC__

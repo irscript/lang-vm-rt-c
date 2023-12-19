@@ -60,11 +60,11 @@ namespace air
         {
             std::stringstream ss;
 
-            ss << txt;
-            ss << ":";
             ss << pos.line;
-            ss << ":";
+            ss << " : ";
             ss << pos.pos;
+            ss << " | ";
+            ss << txt;
             return ss.str();
         }
 

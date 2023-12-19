@@ -39,20 +39,19 @@ namespace air
         // 项目文件
         struct File
         {
-            File() : path(nullptr) {}
+            File() {}
 
-            const std::string *path;  // 文件路径
             FileUnit unit;            // 文件单元
             std::set<StringRef> deps; // 依赖文件
         };
         std::map<std::string, Directory> dirsmap; // 搜索的目录
-        std::map<std::string, File> filemap;     // 编译的文件
+        std::map<std::string, File> filemap;      // 编译的文件
 
         std::string buildDir; // 构建目录
         std::string projPath; // 项目目录
         std::string projName; // 项目名称
         std::string projBits; // 项目架构
-        uint32_t addrbits;   // 目标地址大小
+        uint32_t addrbits;    // 目标地址大小
 
         StringPool strings;  // 字符串池
         SymbolTable symbols; // 全局符号表

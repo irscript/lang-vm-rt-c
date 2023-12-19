@@ -1,6 +1,7 @@
 #ifndef __ASTINODE_INC__
 #define __ASTINODE_INC__
 #include "airc/lexer/Token.hpp"
+#include "symTable.hpp"
 #include "utils/pch.hpp"
 namespace air
 {
@@ -142,6 +143,71 @@ namespace air
         virtual std::any visit(ExpArrayIndex &exp, std::any opt) = 0;
         virtual std::any visit(ExpRang &exp, std::any opt) = 0;
         virtual std::any visit(ExpBlock &exp, std::any opt) = 0;
+    };
+
+    // 智能指针
+    using AstDeclRef = std::shared_ptr<IAstDecl>;
+    using AstStmRef = std::shared_ptr<IAstStm>;
+    using AstExpRef = std::shared_ptr<IAstExp>;
+
+    template <typename Decl, typename... Arg>
+    inline AstDeclRef genDecl(Decl *&instance, Arg... arg)
+    {
+        instance = new Decl(arg...);
+        return AstDeclRef(instance);
+    }
+    template <typename Stm, typename... Arg>
+    inline AstStmRef genStm(Stm *&instance, Arg... arg)
+    {
+        instance = new Stm(arg...);
+        return AstStmRef(instance);
+    }
+    template <typename Exp, typename... Arg>
+    inline AstExpRef genExp(Exp *&instance, Arg... arg)
+    {
+        instance = new Exp(arg...);
+        return AstExpRef(instance);
+    }
+
+    // 作用域
+    enum class ScopeEnum : uint32_t
+    {
+        Unknown,
+        Public,
+        Protected,
+        Private,
+    };
+    // 声明标志
+    union AstFlag
+    {
+        AstFlag() : mFlag(0) {}
+
+        uint32_t mFlag;
+        struct
+        {
+            // 通用标记
+            ScopeEnum mScope : 2; // 3P 作用域
+            uint32_t mStatic : 1; // 静态 static 标识
+            // uint32_t mConst : 1;  // 常量标识
+
+            // 函数标记
+            uint32_t mInline : 1;   // 内联标识
+            uint32_t mVirtual : 1;  // 虚函数
+            uint32_t mPureVir : 1;  // 纯虚函数
+            uint32_t mOverride : 1; // 函数重写
+            uint32_t mFinal : 1;    // 子类不再重写虚函数函数
+            uint32_t mNoRet : 1;    // 无返回值
+        };
+    };
+
+    // 类型元描述
+    struct AstType
+    {
+        AstType() : size(0), offset(0) {}
+        std::list<StringRef> name; // 类型名称
+        SymbolRef type;            // 类型符号
+        uintptr_t size;            // 变量大小
+        uintptr_t offset;          // 变量偏移量
     };
 
 }

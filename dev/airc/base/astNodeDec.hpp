@@ -7,21 +7,46 @@ namespace air
 {
     struct IAstDecl : public IAstNode
     {
+        IAstDecl(StringRef &name) : name(name) {}
+        StringRef name; // 声明名称
     };
+
+    struct FileUnit; // 文件单元
     // 文件依赖声明
-    struct DeclFile: public IAstDecl
+    struct DeclFile : public IAstDecl
     {
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
-    };;
+        DeclFile(StringRef &name) : IAstDecl(name), unit(nullptr) {}
+        FileUnit *unit; // 对应的文件单元
+    };
+    // 文件符号
+    struct FileSymbol : public IFileSymbol
+    {
+        FileSymbol(DeclFile &decl) : IFileSymbol(decl.name), decl(decl) {}
+        DeclFile &decl; // 对应的声明
+    };
     // 变量声明
     struct DeclVar : public IAstDecl
     {
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
     };
+    // 变量符号
+    struct VarSymbol : public IVarSymbol
+    {
+        VarSymbol(DeclVar &decl) : IVarSymbol(decl.name), decl(decl) {}
+        DeclVar &decl;
+    };
     // 函数声明
     struct DeclFunc : public IAstDecl
     {
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
+    };
+    // 函数符号
+    struct FuncSymbol : public IFuncSymbol
+    {
+        FuncSymbol(DeclFunc &decl)
+            : IFuncSymbol(decl.name, decl.name), decl(decl) {}
+        DeclFunc &decl;
     };
     // 枚举声明
     struct DeclEnum : public IAstDecl
