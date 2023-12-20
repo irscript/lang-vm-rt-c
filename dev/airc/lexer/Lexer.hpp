@@ -33,6 +33,7 @@ namespace air
         }
         // 获取字符串
         inline std::string getSub(uint32_t start, uint32_t end) { return stream.getSbu(start, end); }
+        inline std::string getLineTxt(uint32_t line, uint32_t start, uint32_t end) { return stream.getLineTxt(line, start, end); }
 
     private:
         // 解析一个单词

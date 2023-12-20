@@ -73,5 +73,12 @@ namespace air
         Printer::print(Printer::Green, fmt, arg...);
         Printer::unlock();
     }
+    template <typename... Arg>
+    inline void Tips(const char *fmt, Arg... arg)
+    {
+        Printer::lock();
+        Printer::print(Printer::Purple, fmt, arg...);
+        Printer::unlock();
+    }
 }
 #endif // __PRINT_INC__

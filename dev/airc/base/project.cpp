@@ -158,7 +158,7 @@ namespace air
             auto build = std::filesystem::absolute(buildPath);
             // 创建目录
             std::filesystem::create_directories(build);
-            Print("构建路径: %s\n", build.string().c_str());
+            Print("构建路径: %s\n\n", build.string().c_str());
         }
         dirsmap.insert({projPath, {}});
         // 初始化基本类型符号
@@ -171,7 +171,10 @@ namespace air
             CharStream stream;
             if (stream.open(path) == false)
                 throw ErrorWhat::fmt("%s: 文件读取失败！\n", path.c_str());
-            Info("编译：%s\n", item.first.c_str());
+            Printer::lock();
+            Printer::print(Printer::Green, "编译：");
+            Printer::print(Printer::BrightWhite, "%s\n", item.first.c_str());
+            Printer::unlock();
             Lexer lexer(stream);
             Parser paser(strings, lexer, item.second.unit);
         }

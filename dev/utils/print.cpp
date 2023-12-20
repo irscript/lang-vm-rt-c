@@ -18,7 +18,8 @@ namespace air
         va_start(ap, fmt);
         vsnprintf(buffer, sizeof(buffer), fmt, ap);
         va_end(ap);
-        puts(buffer);
+        fputs(buffer, stdout);
+        // puts(buffer);
 
         SetConsoleTextAttribute(hCns, Printer::White);
     }

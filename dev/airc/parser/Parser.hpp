@@ -3,8 +3,8 @@
 
 #include "airc/base/fileUnit.hpp"
 #include "airc/lexer/Lexer.hpp"
-#include "utils/pch.hpp"
 #include "utils/errorWhat.hpp"
+#include "utils/pch.hpp"
 #include "utils/print.hpp"
 namespace air
 {
@@ -20,6 +20,10 @@ namespace air
         StringPool &pool; // 字符串池
         // 开始解析
         void start();
+        // 处理重复的符号
+        void repeatSymbol(ISymbol *cur, ISymbol *pre);
+        // 处理缺少词元
+        void missingToken(Token &tok, const char *fmt);
 
         // 解析包名
         void getPackage();

@@ -17,8 +17,8 @@ namespace air
     {
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
 
-        DeclFile(StringRef &name,StringRef file) 
-        : IAstDecl(name), file(file),unit(nullptr) {}
+        DeclFile(StringRef &name, StringRef file)
+            : IAstDecl(name), file(file), unit(nullptr) {}
         StringRef file; // 声明名称
         FileUnit *unit; // 对应的文件单元
     };
@@ -32,6 +32,10 @@ namespace air
     struct DeclVar : public IAstDecl
     {
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
+
+        AstFlag flag;   // 变量标志
+        AstType type;   // 变量类型
+        AstExpRef init; // 变量初始化表达式
     };
     // 变量符号
     struct VarSymbol : public IVarSymbol

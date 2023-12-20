@@ -25,7 +25,7 @@ int main(int argc, char **argv)
     }
     catch (air::ErrorWhat what)
     {
-        air::Error("%s\n", what.what.c_str());
+        air::Error("\n%s\n", what.what.c_str());
     }
 
     return 0;

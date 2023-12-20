@@ -112,13 +112,49 @@ namespace air
         }
         inline std::string &getData() { return data; }
         // 获取字符串中的一段
-        std::string getSbu(uint32_t start, uint32_t end)
+        inline std::string getSbu(uint32_t start, uint32_t end)
         {
-            assert(start < end);
+            assert(start <= end);
             return data.substr(start, end - start);
         }
+        // 获取完整行信息
+        inline std::string getLineTxt(uint32_t line, uint32_t start, uint32_t end)
+        {
+            uint32_t size = data.size();
+            /*
+            if (end > size)
+                end = size;
+            */
+            std::stringstream ss;
 
-        uint32_t getpos() const { return index; }
+            // 找到行起始位置
+            auto startpos = data.find_last_of('\n', start);
+            /*if (startpos == std::string::npos)
+                startpos = 0;*/
+            startpos += 1;
+
+            // 找到行结束位置
+            auto endpos = data.find_first_of('\n', end);
+            if (endpos == std::string::npos)
+                endpos = size;
+
+            // 开始切片
+            while (startpos < endpos)
+            {
+                auto pos = data.find_first_of('\n', startpos);
+                if (pos == std::string::npos)
+                    pos = endpos;
+                ss << line;
+                ss << " | ";
+                ss << data.substr(startpos, pos - startpos);
+                ++line;
+                startpos = pos + 1;
+            }
+
+            return ss.str();
+        }
+
+        inline uint32_t getpos() const { return index; }
 
         // 获取下一字符
         Char next()

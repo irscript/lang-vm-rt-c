@@ -77,6 +77,9 @@ namespace air
         inline SymbolTable::Result insert(const std::string *subname, SymbolRef sym) { return symbols.insert(subname, sym); }
         inline SymbolTable::Result find(const std::string *subname) const { return symbols.find(subname); }
 
+        TokPos startpos;
+        TokPos endpos;
+
     protected:
         StringRef name;      // 符号的短名称
         StringRef full;      // 符号的全名称
