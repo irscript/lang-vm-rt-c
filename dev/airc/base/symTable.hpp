@@ -119,6 +119,11 @@ namespace air
         inline BuildinTypeSymbol(StringRef &name, uintptr_t size, uintptr_t align, bool sign)
             : ISymbolType(name, name, size, align, sign, true) {}
     };
+    struct ITypeSymbol : public ISymbolType
+    {
+        inline ITypeSymbol(StringRef &name)
+            : ISymbolType(name, name, 0, 0, false, false) {}
+    };
     // 变量符号
     struct IVarSymbol : public ISymbol
     {

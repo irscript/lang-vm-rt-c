@@ -33,6 +33,19 @@ namespace air
 
         // 开始解析声明
         void getDecl();
+        // 解析作用域
+        ScopeEnum getScope();
+
+        // 解析表达式
+        inline AstExpRef getExp()
+        {
+            return getBinExp();
+        }
+        AstExpRef getBaseExp(); // 解析基础表达式
+        AstExpRef getFuncExp(); // 解析函数调用
+        AstExpRef getUnaExp();  // 解析一元表达式
+        AstExpRef getBinExp();  // 解析二元表达式
+        AstExpRef getTerExp();  // 解析三元表达式
     };
 }
 

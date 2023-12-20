@@ -4,7 +4,7 @@ namespace air
 {
     Token Lexer::getNext()
     {
-        //return GetToken();
+        // return GetToken();
         while (true)
         {
             auto tok = GetToken();
@@ -363,6 +363,13 @@ namespace air
         // 操作符
         switch (ch.val)
         {
+            // 匹配 ?
+        case '?':
+        {
+            tok.code.op = TkOpEnum::Ques;
+            return tok;
+        }
+        break;
             // 匹配 . 、 ...
         case '.':
         {

@@ -5,10 +5,12 @@ namespace air
     // 开始解析
     void Parser::start()
     {
-        // 获取包名
+        // 解析包名
         getPackage();
-        // 获取依赖
+        // 解析依赖
         getRequire();
+        // 解析声明
+        getDecl();
     }
 
     void Parser::repeatSymbol(ISymbol *cur, ISymbol *pre)

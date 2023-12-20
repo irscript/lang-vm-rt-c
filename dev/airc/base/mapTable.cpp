@@ -4,7 +4,7 @@ namespace air
 {
     std::map<std::string, TkKeyWord> MapTable::mapKey;  // 普通关键字映射表
     std::map<std::string, TkAnnotate> MapTable::mapAnn; // 注解关键字映射表
-
+    std::map<TkOpEnum, int32_t> MapTable::mapOp;        // 操作符优先级映射
     void MapTable::init()
     {
         initMapKey();
@@ -121,5 +121,62 @@ namespace air
 
     void MapTable::initMapOp()
     {
+        int32_t max = 100; // 最大优先级
+
+        mapOp.insert({TkOpEnum::Dot, max}); // .
+        --max;
+        mapOp.insert({TkOpEnum::Plus2, max});      // ++
+        mapOp.insert({TkOpEnum::Minus2, max});     // --
+        mapOp.insert({TkOpEnum::LogicalNot, max}); // !
+        mapOp.insert({TkOpEnum::BitNot, max});     // ~
+        --max;
+        mapOp.insert({TkOpEnum::Multiply, max}); // *
+        mapOp.insert({TkOpEnum::Divide, max});   // /
+        mapOp.insert({TkOpEnum::Modulus, max});  // %
+        --max;
+        mapOp.insert({TkOpEnum::Plus, max});  // +
+        mapOp.insert({TkOpEnum::Minus, max}); // -
+        --max;
+        mapOp.insert({TkOpEnum::Shl, max});  // <<
+        mapOp.insert({TkOpEnum::ShrA, max}); // ->>
+        mapOp.insert({TkOpEnum::ShrL, max}); // >>
+        mapOp.insert({TkOpEnum::ShlR, max}); // <<)
+        mapOp.insert({TkOpEnum::ShrR, max}); // >>(
+        --max;
+        mapOp.insert({TkOpEnum::LE, max}); // <=
+        mapOp.insert({TkOpEnum::LT, max}); // <
+        mapOp.insert({TkOpEnum::GE, max}); // >=
+        mapOp.insert({TkOpEnum::GT, max}); // >
+        --max;
+        mapOp.insert({TkOpEnum::EQ, max}); // ==
+        mapOp.insert({TkOpEnum::NE, max}); // !=
+        --max;
+        mapOp.insert({TkOpEnum::BitAnd, max}); // &
+        --max;
+        mapOp.insert({TkOpEnum::BitXOr, max}); // ^
+        --max;
+        mapOp.insert({TkOpEnum::BitOr, max}); // |
+        --max;
+        mapOp.insert({TkOpEnum::LogicalAnd, max}); // &&
+        --max;
+        mapOp.insert({TkOpEnum::LogicalOr, max}); // ||
+        --max;
+        mapOp.insert({TkOpEnum::Ques, max}); // ?
+        --max;
+        mapOp.insert({TkOpEnum::Assign, max});         // =
+        mapOp.insert({TkOpEnum::PlusAssign, max});     // +=
+        mapOp.insert({TkOpEnum::MinusAssign, max});    // -=
+        mapOp.insert({TkOpEnum::MultiplyAssign, max}); // *=
+        mapOp.insert({TkOpEnum::DivideAssign, max});   // /=
+        mapOp.insert({TkOpEnum::ModulusAssign, max});  // %=
+        mapOp.insert({TkOpEnum::ShlAssign, max});      // <<=
+        mapOp.insert({TkOpEnum::ShrLAssign, max});     // >>=
+        mapOp.insert({TkOpEnum::ShrAAssign, max});     // ->>=
+        mapOp.insert({TkOpEnum::ShlRAssign, max});     // <<)=
+        mapOp.insert({TkOpEnum::ShrRAssign, max});     // >>(=
+        mapOp.insert({TkOpEnum::BitAndAssign, max});   // &=
+        mapOp.insert({TkOpEnum::BitOrAssign, max});    // |=
+        mapOp.insert({TkOpEnum::BitXOrAssign, max});   // ^=
+        mapOp.insert({TkOpEnum::BitNotAssign, max});   // ~=
     }
 }

@@ -33,9 +33,13 @@ namespace air
     {
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
 
-        AstFlag flag;   // 变量标志
-        AstType type;   // 变量类型
-        AstExpRef init; // 变量初始化表达式
+        AstFlag flag;                   // 变量标志
+        AstType type;                   // 变量类型
+        std::list<AstExpRef> arrcols;   // 静态数组维度表达式
+        std::vector<uintptr_t> arrcolv; // 静态数组维度表达式计算后的值
+        AstExpRef init;                 // 变量初始化表达式
+
+        DeclVar(StringRef &name) : IAstDecl(name) {}
     };
     // 变量符号
     struct VarSymbol : public IVarSymbol
@@ -43,9 +47,17 @@ namespace air
         VarSymbol(DeclVar &decl) : IVarSymbol(decl.name), decl(decl) {}
         DeclVar &decl;
     };
+
     // 函数声明
     struct DeclFunc : public IAstDecl
     {
+        AstFlag flag;                // 函数标志
+        AstType retType;             // 函数返回类型
+        std::vector<AstDeclRef> arg; // 函数参数
+        AstStmRef body;              // 函数体
+
+        DeclFunc(StringRef &name) : IAstDecl(name) {}
+
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
     };
     // 函数符号
@@ -58,8 +70,19 @@ namespace air
     // 枚举声明
     struct DeclEnum : public IAstDecl
     {
+
+        StringRef base;                // 基础类型
+        std::vector<AstDeclRef> items; // 枚举定义列表
+
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
     };
+    struct EnumType : public ITypeSymbol
+    {
+        DeclEnum &decl;
+
+        EnumType(DeclEnum &decl) : ITypeSymbol(decl.name), decl(decl) {}
+    };
+
     // 结构体声明
     struct DeclStruct : public IAstDecl
     {
