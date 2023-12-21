@@ -34,9 +34,9 @@ namespace air
 
     // 表达式节点
     struct IAstExp;
-    struct ExpAnnFile;    //@file
-    struct ExpAnnFunc;    //@func
-    struct ExpAnnLine;    //@line
+    struct ExpAnnFile;    //@file 常量表达式
+    struct ExpAnnFunc;    //@func 常量表达式
+    struct ExpAnnLine;    //@line 常量表达式
     struct ExpBool;       // bool 常量表达式
     struct ExpNull;       // null 常量表达式
     struct ExpSInt;       // sint 常量表达式
@@ -208,30 +208,42 @@ namespace air
     // 声明标志
     union AstFlag
     {
-        AstFlag() : mFlag(0) {}
+        AstFlag() : flag(0) {}
 
-        uint32_t mFlag;
+        uint32_t flag;
         struct
         {
             // 通用标记
-            ScopeEnum mScope : 2; // 3P 作用域
-            uint32_t mStatic : 1; // 静态 static 标识
+            ScopeEnum scope : 2;  // 3P 作用域
+            uint32_t staticv : 1; // 静态 static 标识
             // uint32_t mConst : 1;  // 常量标识
 
             // 函数标记
-            uint32_t mInline : 1;   // 内联标识
-            uint32_t mVirtual : 1;  // 虚函数
-            uint32_t mPureVir : 1;  // 纯虚函数
-            uint32_t mOverride : 1; // 函数重写
-            uint32_t mFinal : 1;    // 子类不再重写虚函数函数
-            uint32_t mNoRet : 1;    // 无返回值
+            uint32_t inlinev : 1;   // 内联标识
+            uint32_t virtualv : 1;  // 虚函数
+            uint32_t pureVir : 1;   // 纯虚函数
+            uint32_t overridev : 1; // 函数重写
+            uint32_t finalv : 1;    // 子类不再重写虚函数函数
+            uint32_t noRet : 1;     // 无返回值
         };
     };
 
     // 类型元描述
     struct AstType
     {
-        AstType() : size(0), offset(0) {}
+        AstType() : size(0), offset(0), flag(0) {}
+        union
+        {
+            uint32_t flag; // 类型信息标注
+            struct
+            {
+                uint32_t constv : 1; // 具有 const 修饰 ？
+                uint32_t array : 1;  // 数组 ？
+                uint32_t block : 1;  // 块数组 ？
+                uint32_t cols : 8;   // 数组维度值
+            };
+        };
+
         std::list<StringRef> name; // 类型名称
         SymbolRef type;            // 类型符号
         uintptr_t size;            // 变量大小

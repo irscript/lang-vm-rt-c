@@ -115,6 +115,12 @@ namespace air
         {
             return TkKind::KeyWord == kind && key == code.key;
         }
+        inline bool isTypeKeyword() const
+        {
+            return TkKind::KeyWord == kind &&
+                   TkKeyWord::Void <= code.key &&
+                   code.key <= TkKeyWord::Any;
+        }
         // 是否标注关键字 ann
         inline bool isAnnotate() const
         {

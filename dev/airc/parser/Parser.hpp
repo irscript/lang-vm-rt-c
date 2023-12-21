@@ -54,6 +54,8 @@ namespace air
         AstExpRef getExpTer(AstExpRef &cond);  // 解析三元表达式          // 解析三元表达式
 
         //----------------------------解析声明-------------------------
+        AstDeclRef getDeclVar(ScopeEnum scope, TokPos &startpos, AstType &type, StringRef &name, bool array);
+        AstDeclRef getDeclFunc(ScopeEnum scope, TokPos &startpos, AstType &type, StringRef &name);
         AstDeclRef getDeclEnum(ScopeEnum scope, TokPos &startpos);
         AstDeclRef getDeclStruct(ScopeEnum scope, TokPos &startpos);
         AstDeclRef getDeclUnion(ScopeEnum scope, TokPos &startpos);
