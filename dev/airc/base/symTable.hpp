@@ -8,10 +8,15 @@ namespace air
     enum class SymbolKind
     {
         Unkonwn,
-        File,     // 文件
-        Type,     // 类型
-        Variable, // 变量
-        Function, // 函数
+        File,      // 文件
+        Type,      // 基本类型
+        Struct,    // 结构类型
+        Union,     // 联合类型
+        Entrust,   // 委托类型
+        Interface, // 接口类型
+        Class,     // 类类型
+        Variable,  // 变量
+        Function,  // 函数
 
     };
     // 符号定义
@@ -95,10 +100,10 @@ namespace air
     struct ISymbolType : public ISymbol
     {
 
-        inline ISymbolType(StringRef &full, StringRef &name,
+        inline ISymbolType(SymbolKind kind, StringRef &full, StringRef &name,
                            uintptr_t size, uintptr_t align,
                            bool sign, bool buildin = false)
-            : ISymbol(full, name, SymbolKind::Type),
+            : ISymbol(full, name, kind),
               size(size), align(align),
               sign(sign), buildin(buildin), clas(false) {}
 
@@ -117,13 +122,9 @@ namespace air
     struct BuildinTypeSymbol : public ISymbolType
     {
         inline BuildinTypeSymbol(StringRef &name, uintptr_t size, uintptr_t align, bool sign)
-            : ISymbolType(name, name, size, align, sign, true) {}
+            : ISymbolType(SymbolKind::Type, name, name, size, align, sign, true) {}
     };
-    struct ITypeSymbol : public ISymbolType
-    {
-        inline ITypeSymbol(StringRef &name)
-            : ISymbolType(name, name, 0, 0, false, false) {}
-    };
+
     // 变量符号
     struct IVarSymbol : public ISymbol
     {

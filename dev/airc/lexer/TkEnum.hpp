@@ -166,9 +166,8 @@ namespace air
         Private,   // 私有的
         Protected, // 受保护的
         Public,    // 公开的
-        Static,    // 静态的
-        Const,     // 常量（不可修改）的
-        Final,     // 只读的
+
+        Const,  // 常量（不可修改）的
 
         // 扩展类型
         Enum,
@@ -211,6 +210,9 @@ namespace air
         Buildin,  // @buildin 内建函数
         Async,    // @async 异步调用函数
         Volatile, // @volatile 易变的变量
+
+        Static, // @static  静态的
+        Final,  // @final 不可修改的
 
         Inline,   // @inline
         Virtual,  // @virtual

@@ -10,7 +10,31 @@ namespace air
         // 解析依赖
         getRequire();
         // 解析声明
-        getDecl();
+        Token tok;
+        std::vector<AstAnnRef> anns;
+        while (true)
+        {
+
+            tok = lexer.getNext();
+            // 流结束
+            if (tok.kind == TkKind::EOS)
+                break;
+            // 多余的分号
+            if (tok.isSeparator(TkSpEnum::SemiColon) == true)
+                continue;
+            // 注解
+            while (tok.isAnnotate() == true)
+            {
+                anns.push_back(getAnn(tok));
+                tok = lexer.getNext();
+            }
+            lexer.backToken(tok);
+            // 获取声明
+            auto decl = getDecl();
+            decl->ann = anns; // 记录标注
+            unit.declist.push_back(decl);
+            anns.clear();
+        }
     }
 
     void Parser::repeatSymbol(ISymbol *cur, ISymbol *pre)
@@ -31,7 +55,7 @@ namespace air
         Printer::unlock();
         throw ErrorWhat::fmt("符号名称( %s )冲突！\n", pre->getName().get().c_str());
     }
-    void Parser::missingToken(Token &tok, const char *msg)
+    void Parser::syntaxError(Token &tok, const char *msg)
     {
         std::string src = lexer.getLineTxt(tok.pos.line,
                                            tok.pos.pos,
@@ -48,14 +72,14 @@ namespace air
     {
         auto tok = lexer.getNext();
         if (tok.isKeyword(TkKeyWord::Package) == false)
-            missingToken(tok, "缺少包声明！");
+            syntaxError(tok, "缺少包声明！");
 
         std::string szPkg;
         while (true)
         {
             tok = lexer.getNext();
             if (tok.isIdentity() == false)
-                missingToken(tok, "缺少包名！");
+                syntaxError(tok, "缺少包名！");
 
             szPkg += tok.txt;
             tok = lexer.getNext();
@@ -66,7 +90,7 @@ namespace air
             }
             if (tok.isSeparator(TkSpEnum::SemiColon) == true)
                 break;
-            missingToken(tok, "缺少符号“ ; ”！");
+            syntaxError(tok, "缺少符号“ ; ”！");
         }
         unit.package = pool.refString(szPkg);
     }
@@ -112,20 +136,20 @@ namespace air
 
         auto tok = lexer.getNext();
         if (tok.isIdentity() == false)
-            missingToken(tok, "缺少依赖名！");
+            syntaxError(tok, "缺少依赖名！");
         szName = tok.txt;
 
         tok = lexer.getNext();
         if (tok.isOperator(TkOpEnum::Assign) == false)
-            missingToken(tok, "缺少符号“ = ”！");
+            syntaxError(tok, "缺少符号“ = ”！");
 
         tok = lexer.getNext();
         if (tok.isString() == false)
-            missingToken(tok, "缺少文件路径！");
+            syntaxError(tok, "缺少文件路径！");
         szFile = tok.txt;
         tok = lexer.getNext();
         if (tok.isSeparator(TkSpEnum::SemiColon) == false)
-            missingToken(tok, "缺少符号“ ; ”！");
+            syntaxError(tok, "缺少符号“ ; ”！");
 
         // 生成声明
         DeclFile *decl = nullptr;

@@ -5,6 +5,41 @@
 #include "utils/pch.hpp"
 namespace air
 {
+    // 语句类别
+    enum class StmKind : uint32_t
+    {
+        Unknown, // 未知语句
+        Block,   // 块语句
+
+        If,    // if语句
+        Else,  // else语句
+        Elsif, // elsif语句
+
+        Switch,  // switch语句
+        Case,    // case语句
+        Default, // default语句
+
+        For,     // for语句
+        Foreach, // foreach语句
+        While,   // while语句
+        DoWhile, // do{}while语句
+
+        Try,     // try语句
+        Trow,    // trow语句
+        Catch,   // catch语句
+        Finally, // finally语句
+
+        Label,    // 标签语句
+        Goto,     // goto语句
+        Break,    // break语句
+        Continue, // continue语句
+        Return,   // return语句
+
+        Exp, // 表达式语句
+        Var, // 变量声明语句
+
+    };
+
     struct IAstStm : public IAstNode
     {
     };

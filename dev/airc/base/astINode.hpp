@@ -18,8 +18,25 @@ namespace air
         // 接收访问者访问
         virtual std::any visit(IAstVisitor &visitor, std::any opt) = 0;
     };
+
+    // 标注节点
+    struct IAstAnn;
+
+    struct AnnBuildin;  //@buildin
+    struct AnnAsync;    //@async
+    struct AnnVolatile; //@volatile
+    struct AnnInline;   //@inline
+    struct AnnVirtual;  //@virtual
+    struct AnnOverride; //@override
+    struct AnnOperator; //@operator
+
+    // struct Ann;         //@
+
     // 表达式节点
     struct IAstExp;
+    struct ExpAnnFile;    //@file
+    struct ExpAnnFunc;    //@func
+    struct ExpAnnLine;    //@line
     struct ExpBool;       // bool 常量表达式
     struct ExpNull;       // null 常量表达式
     struct ExpSInt;       // sint 常量表达式
@@ -32,6 +49,7 @@ namespace air
     struct ExpSuper;      // super 表达式
     struct ExpID;         // 标识符 表达式
     struct ExpFuncCall;   // 函数调用 表达式
+    struct ExpArrayIndex; // 数组索引 表达式
     struct ExpMemberCall; // 成员调用 表达式
     struct ExpUnary;      // 一元 表达式
     struct ExpBinary;     // 二元 表达式
@@ -39,9 +57,9 @@ namespace air
     struct ExpParen;      // 括号 表达式
     struct ExpNew;        // new 表达式
     struct ExpCast;       // cast 表达式
-    struct ExpArrayIndex; // 数组索引 表达式
-    struct ExpRang;       // 范围 表达式
-    struct ExpBlock;      // 块 表达式
+
+    struct ExpRang;  // 范围 表达式
+    struct ExpBlock; // 块 表达式
 
     // 声明节点
     struct IAstDecl;
@@ -121,6 +139,9 @@ namespace air
         virtual std::any visit(StmExp &stm, std::any opt) = 0;
 
         // 访问表达式
+        virtual std::any visit(ExpAnnFile &exp, std::any opt) = 0;
+        virtual std::any visit(ExpAnnFunc &exp, std::any opt) = 0;
+        virtual std::any visit(ExpAnnLine &exp, std::any opt) = 0;
         virtual std::any visit(ExpBool &exp, std::any opt) = 0;
         virtual std::any visit(ExpNull &exp, std::any opt) = 0;
         virtual std::any visit(ExpSInt &exp, std::any opt) = 0;
@@ -146,10 +167,17 @@ namespace air
     };
 
     // 智能指针
+    using AstAnnRef = std::shared_ptr<IAstAnn>;
     using AstDeclRef = std::shared_ptr<IAstDecl>;
     using AstStmRef = std::shared_ptr<IAstStm>;
     using AstExpRef = std::shared_ptr<IAstExp>;
 
+    template <typename Ann, typename... Arg>
+    inline AstAnnRef genAnn(Ann *&instance, Arg... arg)
+    {
+        instance = new Ann(arg...);
+        return AstAnnRef(instance);
+    }
     template <typename Decl, typename... Arg>
     inline AstDeclRef genDecl(Decl *&instance, Arg... arg)
     {

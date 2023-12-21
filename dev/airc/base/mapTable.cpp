@@ -72,10 +72,7 @@ namespace air
         mapKey.insert({"private", TkKeyWord::Private});
         mapKey.insert({"protected", TkKeyWord::Protected});
         mapKey.insert({"public", TkKeyWord::Public});
-
-        mapKey.insert({"static", TkKeyWord::Static});
         mapKey.insert({"const", TkKeyWord::Const});
-        mapKey.insert({"final", TkKeyWord::Final});
 
         mapKey.insert({"enum", TkKeyWord::Enum});
         mapKey.insert({"union", TkKeyWord::Union});
@@ -113,6 +110,9 @@ namespace air
         mapAnn.insert({"@async", TkAnnotate::Async});
         mapAnn.insert({"@volatile", TkAnnotate::Volatile});
 
+        mapAnn.insert({"@static", TkAnnotate::Static});
+        mapAnn.insert({"@final", TkAnnotate::Final});
+
         mapAnn.insert({"@inline", TkAnnotate::Inline});
         mapAnn.insert({"@virtual", TkAnnotate::Virtual});
         mapAnn.insert({"@override", TkAnnotate::Override});
@@ -121,14 +121,15 @@ namespace air
 
     void MapTable::initMapOp()
     {
-        int32_t max = 100; // 最大优先级
-
+        int32_t max = 1000; // 最大优先级
+        /*
         mapOp.insert({TkOpEnum::Dot, max}); // .
         --max;
         mapOp.insert({TkOpEnum::Plus2, max});      // ++
         mapOp.insert({TkOpEnum::Minus2, max});     // --
         mapOp.insert({TkOpEnum::LogicalNot, max}); // !
         mapOp.insert({TkOpEnum::BitNot, max});     // ~
+        */
         --max;
         mapOp.insert({TkOpEnum::Multiply, max}); // *
         mapOp.insert({TkOpEnum::Divide, max});   // /
@@ -160,8 +161,8 @@ namespace air
         mapOp.insert({TkOpEnum::LogicalAnd, max}); // &&
         --max;
         mapOp.insert({TkOpEnum::LogicalOr, max}); // ||
-        --max;
-        mapOp.insert({TkOpEnum::Ques, max}); // ?
+        /*--max;
+        mapOp.insert({TkOpEnum::Ques, max}); // ?*/
         --max;
         mapOp.insert({TkOpEnum::Assign, max});         // =
         mapOp.insert({TkOpEnum::PlusAssign, max});     // +=

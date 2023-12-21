@@ -5,10 +5,32 @@
 #include "utils/pch.hpp"
 namespace air
 {
+    // 声明类别
+    enum class DeclKind : uint32_t
+    {
+        Unknown,   // 未知声明
+        File,      // 文件声明
+        Var,       // 变量声明
+        Func,      // 函数声明
+        Enum,      // 枚举声明
+        Struct,    // 结构体声明
+        Union,     // 联合体声明
+        Class,     // 类声明
+        Interface, // 接口声明
+        Entrust,   // 函数指针声明
+
+    };
+
     struct IAstDecl : public IAstNode
     {
-        IAstDecl(StringRef &name) : name(name) {}
-        StringRef name; // 声明名称
+        IAstDecl(StringRef &name, DeclKind kind) : name(name), kind(kind) {}
+
+        inline DeclKind getKind() const { return kind; }
+
+        StringRef name;             // 声明名称
+        std::vector<AstAnnRef> ann; // 注解列表
+    private:
+        DeclKind kind;
     };
 
     struct FileUnit; // 文件单元
@@ -18,7 +40,7 @@ namespace air
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
 
         DeclFile(StringRef &name, StringRef file)
-            : IAstDecl(name), file(file), unit(nullptr) {}
+            : IAstDecl(name, DeclKind::File), file(file), unit(nullptr) {}
         StringRef file; // 声明名称
         FileUnit *unit; // 对应的文件单元
     };
@@ -39,7 +61,7 @@ namespace air
         std::vector<uintptr_t> arrcolv; // 静态数组维度表达式计算后的值
         AstExpRef init;                 // 变量初始化表达式
 
-        DeclVar(StringRef &name) : IAstDecl(name) {}
+        DeclVar(StringRef &name) : IAstDecl(name, DeclKind::Var) {}
     };
     // 变量符号
     struct VarSymbol : public IVarSymbol
@@ -56,7 +78,7 @@ namespace air
         std::vector<AstDeclRef> arg; // 函数参数
         AstStmRef body;              // 函数体
 
-        DeclFunc(StringRef &name) : IAstDecl(name) {}
+        DeclFunc(StringRef &name) : IAstDecl(name, DeclKind::Func) {}
 
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
     };
@@ -76,11 +98,11 @@ namespace air
 
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
     };
-    struct EnumType : public ITypeSymbol
+    struct EnumType : public ISymbolType
     {
         DeclEnum &decl;
 
-        EnumType(DeclEnum &decl) : ITypeSymbol(decl.name), decl(decl) {}
+        // EnumType(DeclEnum &decl) : ITypeSymbol(decl.name), decl(decl) {}
     };
 
     // 结构体声明

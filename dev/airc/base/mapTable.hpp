@@ -30,7 +30,7 @@ namespace air
         {
             auto find = mapOp.find(op);
             if (find == mapOp.end())
-                return INT32_MAX;
+                return -1;
             return find->second;
         }
 

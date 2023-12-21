@@ -73,6 +73,9 @@ namespace air
             txt.push_back(ch);
         }
 
+        // 获取二元操作符优先级
+        inline int32_t getBinopPriority() const { return MapTable::findOpPriority(code.op); }
+
         // 检查普通关键字
         inline bool checkKeyword()
         {
@@ -104,26 +107,41 @@ namespace air
             return TkKind::Identifier == kind;
         }
         // 是否普通关键字 key
+        inline bool isKeyword() const
+        {
+            return TkKind::KeyWord == kind;
+        }
         inline bool isKeyword(TkKeyWord key) const
         {
             return TkKind::KeyWord == kind && key == code.key;
         }
         // 是否标注关键字 ann
+        inline bool isAnnotate() const
+        {
+            return TkKind::Annotate == kind;
+        }
         inline bool isAnnotate(TkAnnotate ann) const
         {
             return TkKind::Annotate == kind && ann == code.ann;
         }
         // 是否操作符 op
+        inline bool isOperator() const
+        {
+            return TkKind::Operator == kind;
+        }
         inline bool isOperator(TkOpEnum op) const
         {
             return TkKind::Operator == kind && op == code.op;
         }
         // 是否分隔符 sp
+        inline bool isSeparator() const
+        {
+            return TkKind::Separator == kind;
+        }
         inline bool isSeparator(TkSpEnum sp) const
         {
             return TkKind::Separator == kind && sp == code.sp;
         }
-
         // 是否字符串
         inline bool isString() const
         {
