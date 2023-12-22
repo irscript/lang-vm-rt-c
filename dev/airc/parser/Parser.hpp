@@ -44,14 +44,21 @@ namespace air
         // ---------------------------解析表达式------------------------
         inline AstExpRef getExp()
         {
+            auto tok = lexer.getNext();
+            // 块表达式
+            if (tok.isSeparator(TkSpEnum::OpenBrace) == true)
+                return getExpBlock(tok.pos);
+            lexer.backToken(tok);
             return getExpBin(0);
         }
-        AstExpRef getExpBase();                // 解析基础表达式
-        void getExpArray(ExpArrayIndex &exp);  // 数组
-        void getExpFunc(ExpFuncCall &exp);     // 函数调用
-        AstExpRef getExpUna();                 // 解析一元表达式
-        AstExpRef getExpBin(int32_t priority); // 解析二元表达式
-        AstExpRef getExpTer(AstExpRef &cond);  // 解析三元表达式
+        AstExpRef getExpBlock(TokPos &startpos); // 解析块表达式
+        AstExpRef getExpRang();                  // 解析范围表达式
+        AstExpRef getExpBase();                  // 解析基础表达式
+        void getExpArray(ExpArrayIndex &exp);    // 数组
+        void getExpFunc(ExpFuncCall &exp);       // 函数调用
+        AstExpRef getExpUna();                   // 解析一元表达式
+        AstExpRef getExpBin(int32_t priority);   // 解析二元表达式
+        AstExpRef getExpTer(AstExpRef &cond);    // 解析三元表达式
 
         //----------------------------解析声明-------------------------
         AstDeclRef getDeclVar(ScopeEnum scope, TokPos &startpos, AstType &type, StringRef &name, bool array); // 解析 变量 声明

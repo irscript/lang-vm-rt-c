@@ -40,6 +40,7 @@ namespace air
         Paren, // 括号表达式
 
         Rang,  // 范围表达式
+        In,    // 范围表达式
         Block, // 块表达式
 
         Lambda, // 匿名表达式
@@ -214,6 +215,44 @@ namespace air
             : IAstExp(ExpKind::Paren), exp(exp) {}
         AstExpRef exp;
     };
+    // 范围 表达式
+    struct ExpRange : public IAstExp
+    {
+        virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
+
+        ExpRange(AstExpRef left, AstExpRef right,
+                 bool loc, bool roc)
+            : IAstExp(ExpKind::Rang),
+              left(left), right(right),
+              loc(loc), roc(roc) {}
+
+        AstExpRef left;
+        AstExpRef right;
+        bool loc; // 左开？左闭？
+        bool roc; // 右开？右闭？
+    };
+    // in/in! 表达式
+    struct ExpInRange : public IAstExp
+    {
+        virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
+
+        ExpInRange(bool neg, AstExpRef var, AstExpRef range)
+            : IAstExp(ExpKind::In), neg(neg),
+              var(var), range(range) {}
+
+        bool neg; // 不在范围内
+        AstExpRef var;
+        AstExpRef range;
+    };
+    // 块 表达式
+    struct ExpBlock : public IAstExp
+    {
+        ExpBlock() : IAstExp(ExpKind::Block) {}
+        virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
+        std::vector<AstExpRef> ids;
+        std::vector<AstExpRef> val;
+    };
+
     // new 表达式
     struct ExpNew : public IAstExp
     {
@@ -226,28 +265,7 @@ namespace air
         ExpCast() : IAstExp(ExpKind::Cast) {}
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
     };
-    // 范围 表达式
-    struct ExpRang : public IAstExp
-    {
-        virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
 
-        ExpRang(AstExpRef left, AstExpRef right,
-                bool loc, bool roc, bool neg)
-            : IAstExp(ExpKind::Rang), left(left), right(right),
-              loc(loc), roc(roc), neg(neg) {}
-
-        AstExpRef left;
-        AstExpRef right;
-        bool loc; // 左开？左闭？
-        bool roc; // 右开？右闭？
-        bool neg; // 不在范围内
-    };
-    // 块 表达式
-    struct ExpBlock : public IAstExp
-    {
-        ExpBlock() : IAstExp(ExpKind::Block) {}
-        virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
-    };
 }
 
 #endif // __ASTNODEEXP_INC__

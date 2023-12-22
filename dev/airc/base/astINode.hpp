@@ -55,11 +55,13 @@ namespace air
     struct ExpBinary;     // 二元 表达式
     struct ExpTernary;    // 三元 表达式
     struct ExpParen;      // 括号 表达式
-    struct ExpNew;        // new 表达式
-    struct ExpCast;       // cast 表达式
 
-    struct ExpRang;  // 范围 表达式
-    struct ExpBlock; // 块 表达式
+    struct ExpRange;   // 范围 表达式
+    struct ExpInRange; // in/in! 表达式
+    struct ExpBlock;   // 块 表达式
+
+    struct ExpNew;  // new 表达式
+    struct ExpCast; // cast 表达式
 
     // 声明节点
     struct IAstDecl;
@@ -162,7 +164,8 @@ namespace air
         virtual std::any visit(ExpNew &exp, std::any opt) = 0;
         virtual std::any visit(ExpCast &exp, std::any opt) = 0;
         virtual std::any visit(ExpArrayIndex &exp, std::any opt) = 0;
-        virtual std::any visit(ExpRang &exp, std::any opt) = 0;
+        virtual std::any visit(ExpRange &exp, std::any opt) = 0;
+        virtual std::any visit(ExpInRange &exp, std::any opt) = 0;
         virtual std::any visit(ExpBlock &exp, std::any opt) = 0;
     };
 

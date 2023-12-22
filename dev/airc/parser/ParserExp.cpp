@@ -2,6 +2,120 @@
 #include "utils/errorWhat.hpp"
 namespace air
 {
+    // 解析块表达式
+    // 语法：{exp,exp}
+    // 语法2：{exp:exp,exp:exp}
+    AstExpRef Parser::getExpBlock(TokPos &startpos)
+    {
+        ExpBlock *blk = nullptr;
+        auto result = genExp(blk);
+        bool haveId = false; // 存在ID
+
+        auto tok = lexer.getNext();
+        // 结束 }
+        if (tok.isSeparator(TkSpEnum::CloseBrace) == false)
+        {
+            lexer.backToken(tok);
+            auto exp = getExp();
+
+            tok = lexer.getNext();
+            // exp:exp
+            if (tok.isSeparator(TkSpEnum::CBSemiColon) == true)
+            {
+                tok.pos.pos++;
+                lexer.backToken(tok);
+            }
+            else if (tok.isSeparator(TkSpEnum::Colon) == true)
+            {
+                blk->ids.push_back(exp);
+                blk->val.push_back(getExp());
+
+                while (true)
+                {
+                    tok = lexer.getNext();
+                    if (tok.isSeparator(TkSpEnum::CBSemiColon) == true)
+                    {
+                        tok.pos.pos++;
+                        lexer.backToken(tok);
+                        break;
+                    }
+                    if (tok.isSeparator(TkSpEnum::CloseBrace) == true)
+                        break;
+                    if (tok.isSeparator(TkSpEnum::Comma) == false)
+                        syntaxError(tok, "缺少符号“ } ”！");
+
+                    // exp:exp
+                    blk->ids.push_back(getExp());
+
+                    tok = lexer.getNext();
+                    if (tok.isSeparator(TkSpEnum::Colon) == false)
+                        syntaxError(tok, "缺少符号“ : ”！");
+
+                    blk->val.push_back(getExp());
+                }
+            }
+            else // exp,exp
+            {
+                lexer.backToken(tok);
+                blk->val.push_back(exp);
+                while (true)
+                {
+                    tok = lexer.getNext();
+                    if (tok.isSeparator(TkSpEnum::CBSemiColon) == true)
+                    {
+                        tok.pos.pos++;
+                        lexer.backToken(tok);
+                        break;
+                    }
+                    if (tok.isSeparator(TkSpEnum::CloseBrace) == true)
+                        break;
+                    if (tok.isSeparator(TkSpEnum::Comma) == false)
+                        syntaxError(tok, "缺少符号“ } ”！");
+                    blk->val.push_back(getExp());
+                }
+            }
+        }
+
+        blk->startpos = startpos;
+        blk->endpos = lexer.getPos();
+        return result;
+    }
+    // 解析范围表达式
+    AstExpRef Parser::getExpRang()
+    {
+        bool lf = false, rf = false;
+        // 开始符
+        auto tok = lexer.getNext();
+        if (tok.isSeparator(TkSpEnum::OpenBracket) == true)
+            lf = true;
+        else if (tok.isSeparator(TkSpEnum::OpenBracket) == true)
+            lf = false;
+        else
+            syntaxError(tok, "缺少符号“ [ ”或“ ( ”！");
+        auto startpos = tok.pos;
+        // 左范围
+        AstExpRef lexp = getExpBin(0);
+
+        tok = lexer.getNext();
+        if (tok.isSeparator(TkSpEnum::Comma) == false)
+            syntaxError(tok, "缺少符号“ , ”！");
+        // 右范围
+        AstExpRef rexp = getExpBin(0);
+        // 结束符
+        tok = lexer.getNext();
+        if (tok.isSeparator(TkSpEnum::CloseBracket) == true)
+            rf = true;
+        else if (tok.isSeparator(TkSpEnum::CloseBracket) == true)
+            rf = false;
+        else
+            syntaxError(tok, "缺少符号“ ] ”或“ ) ”！");
+
+        ExpRange *exp = nullptr;
+        auto result = genExp(exp, lexp, rexp, lf, rf);
+        exp->startpos = startpos;
+        exp->endpos = tok.pos;
+        return result;
+    }
     // 解析基础表达式
     AstExpRef Parser::getExpBase()
     {

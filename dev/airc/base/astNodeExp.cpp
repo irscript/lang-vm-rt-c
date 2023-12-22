@@ -26,6 +26,7 @@ namespace air
     std::any ExpNew::visit(IAstVisitor &visitor, std::any opt) { return visitor.visit(*this, opt); }
     std::any ExpCast::visit(IAstVisitor &visitor, std::any opt) { return visitor.visit(*this, opt); }
     std::any ExpArrayIndex::visit(IAstVisitor &visitor, std::any opt) { return visitor.visit(*this, opt); }
-    std::any ExpRang::visit(IAstVisitor &visitor, std::any opt) { return visitor.visit(*this, opt); }
+    std::any ExpRange::visit(IAstVisitor &visitor, std::any opt) { return visitor.visit(*this, opt); }
+    std::any ExpInRange::visit(IAstVisitor &visitor, std::any opt) { return visitor.visit(*this, opt); }
     std::any ExpBlock::visit(IAstVisitor &visitor, std::any opt) { return visitor.visit(*this, opt); }
 }
