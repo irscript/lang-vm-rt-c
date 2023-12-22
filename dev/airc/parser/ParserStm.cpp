@@ -6,6 +6,34 @@ namespace air
     {
         return {};
     }
+    AstStmRef Parser::getStmVar(TokPos &startpos)
+    {
+        return {};
+    }
+    AstStmRef Parser::getStmExp(TokPos &startpos)
+    {
+        return {};
+    }
+    AstStmRef Parser::getStmLable(TokPos &startpos)
+    {
+        return {};
+    }
+    AstStmRef Parser::getStmGoto(TokPos &startpos)
+    {
+        return {};
+    }
+    AstStmRef Parser::getStmBreak(TokPos &startpos)
+    {
+        return {};
+    }
+    AstStmRef Parser::getStmContinue(TokPos &startpos)
+    {
+        return {};
+    }
+    AstStmRef Parser::getStmReturn(TokPos &startpos)
+    {
+        return {};
+    }
 
     AstStmRef Parser::getStmIf(TokPos &startpos)
     {
@@ -63,32 +91,4 @@ namespace air
         return {};
     }
 
-    AstStmRef Parser::getStmLable(TokPos &startpos)
-    {
-        return {};
-    }
-    AstStmRef Parser::getStmGoto(TokPos &startpos)
-    {
-        return {};
-    }
-    AstStmRef Parser::getStmBreak(TokPos &startpos)
-    {
-        return {};
-    }
-    AstStmRef Parser::getStmContinue(TokPos &startpos)
-    {
-        return {};
-    }
-    AstStmRef Parser::getStmReturn(TokPos &startpos)
-    {
-        return {};
-    }
-    AstStmRef Parser::getStmVar(TokPos &startpos)
-    {
-        return {};
-    }
-    AstStmRef Parser::getStmExp(TokPos &startpos)
-    {
-        return {};
-    }
 }

@@ -51,45 +51,47 @@ namespace air
         void getExpFunc(ExpFuncCall &exp);     // 函数调用
         AstExpRef getExpUna();                 // 解析一元表达式
         AstExpRef getExpBin(int32_t priority); // 解析二元表达式
-        AstExpRef getExpTer(AstExpRef &cond);  // 解析三元表达式          // 解析三元表达式
+        AstExpRef getExpTer(AstExpRef &cond);  // 解析三元表达式
 
         //----------------------------解析声明-------------------------
-        AstDeclRef getDeclVar(ScopeEnum scope, TokPos &startpos, AstType &type, StringRef &name, bool array);
-        AstDeclRef getDeclFunc(ScopeEnum scope, TokPos &startpos, AstType &type, StringRef &name);
-        AstDeclRef getDeclEnum(ScopeEnum scope, TokPos &startpos);
-        AstDeclRef getDeclStruct(ScopeEnum scope, TokPos &startpos);
-        AstDeclRef getDeclUnion(ScopeEnum scope, TokPos &startpos);
-        AstDeclRef getDeclEntrust(ScopeEnum scope, TokPos &startpos);
-        AstDeclRef getDeclInterface(ScopeEnum scope, TokPos &startpos);
-        AstDeclRef getDeclClass(ScopeEnum scope, TokPos &startpos);
+        AstDeclRef getDeclVar(ScopeEnum scope, TokPos &startpos, AstType &type, StringRef &name, bool array); // 解析 变量 声明
+        AstDeclRef getDeclFunc(ScopeEnum scope, TokPos &startpos, AstType &type, StringRef &name);            // 解析 函数 声明
+        void getDeclFunParam(DeclFunc &func);                                                                 // 解析 函数参数 声明
+        AstDeclRef getDeclEnum(ScopeEnum scope, TokPos &startpos);                                            // 解析 枚举 声明
+        AstDeclRef getDeclStruct(ScopeEnum scope, TokPos &startpos);                                          // 解析 结构体 声明
+        AstDeclRef getDeclUnion(ScopeEnum scope, TokPos &startpos);                                           // 解析 联合体 声明
+        AstDeclRef getDeclEntrust(ScopeEnum scope, TokPos &startpos);                                         // 解析 委托 声明
+        AstDeclRef getDeclInterface(ScopeEnum scope, TokPos &startpos);                                       // 解析 接口 声明
+        AstDeclRef getDeclClass(ScopeEnum scope, TokPos &startpos);                                           // 解析 类 声明
 
         //----------------------------解析语句-----------------------------
-        AstStmRef getStmBlock();
+        AstStmRef getStmBlock(); // 解析 块 语句
 
-        AstStmRef getStmIf(TokPos &startpos);
-        AstStmRef getStmElsif(TokPos &startpos);
-        AstStmRef getStmElse(TokPos &startpos);
+        AstStmRef getStmVar(TokPos &startpos);   // 解析 变量声明 语句
+        AstStmRef getStmExp(TokPos &startpos);   // 解析 表达式 语句
+        AstStmRef getStmLable(TokPos &startpos); // 解析 标签声明 语句
 
-        AstStmRef getStmSwitch(TokPos &startpos);
-        AstStmRef getStmCase(TokPos &startpos);
-        AstStmRef getStmDefault(TokPos &startpos);
+        AstStmRef getStmGoto(TokPos &startpos);     // 解析 goto lable; 语句
+        AstStmRef getStmBreak(TokPos &startpos);    // 解析 break; 语句
+        AstStmRef getStmContinue(TokPos &startpos); // 解析 continue; 语句
+        AstStmRef getStmReturn(TokPos &startpos);   // 解析 return exp;语句
 
-        AstStmRef getStmFor(TokPos &startpos);
-        AstStmRef getStmDoWhile(TokPos &startpos);
-        AstStmRef getStmWhile(TokPos &startpos);
+        AstStmRef getStmIf(TokPos &startpos);    // 解析 if 语句
+        AstStmRef getStmElsif(TokPos &startpos); // 解析 elsif 语句
+        AstStmRef getStmElse(TokPos &startpos);  // 解析 else 语句
 
-        AstStmRef getStmTry(TokPos &startpos);
-        AstStmRef getStmCatch(TokPos &startpos);
-        AstStmRef getStmFinally(TokPos &startpos);
-        AstStmRef getStmThrow(TokPos &startpos);
+        AstStmRef getStmSwitch(TokPos &startpos);  // 解析 switch 语句
+        AstStmRef getStmCase(TokPos &startpos);    // 解析 case 语句
+        AstStmRef getStmDefault(TokPos &startpos); // 解析 default 语句
 
-        AstStmRef getStmLable(TokPos &startpos);
-        AstStmRef getStmGoto(TokPos &startpos);
-        AstStmRef getStmBreak(TokPos &startpos);
-        AstStmRef getStmContinue(TokPos &startpos);
-        AstStmRef getStmReturn(TokPos &startpos);
-        AstStmRef getStmVar(TokPos &startpos);
-        AstStmRef getStmExp(TokPos &startpos);
+        AstStmRef getStmFor(TokPos &startpos);     // 解析 for 语句
+        AstStmRef getStmDoWhile(TokPos &startpos); // 解析 do{}while() 语句
+        AstStmRef getStmWhile(TokPos &startpos);   // 解析 while 语句
+
+        AstStmRef getStmTry(TokPos &startpos);     // 解析 try 语句
+        AstStmRef getStmCatch(TokPos &startpos);   // 解析 catch 语句
+        AstStmRef getStmFinally(TokPos &startpos); // 解析 finally 语句
+        AstStmRef getStmThrow(TokPos &startpos);   // 解析 throw 语句
     };
 }
 

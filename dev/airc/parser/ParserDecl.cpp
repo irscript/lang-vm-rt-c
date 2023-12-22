@@ -21,7 +21,7 @@ namespace air
         lexer.backToken(tok);
         return ScopeEnum::Public;
     }
-    // 语法: [const] type ( '[,,]' | '[][]...' ) ( '&' | ('*')* )
+    // 语法: [const] type ( '[,,]' | '[][]...' |  ('*')* )
     void Parser::getType(AstType &type)
     {
         auto tok = lexer.getNext();
@@ -34,6 +34,7 @@ namespace air
         if (tok.isTypeKeyword() == true)
         {
             type.name.push_back(pool.refString(tok.txt));
+            tok = lexer.getNext();
         }
         // 可能是 id.id
         else if (tok.isIdentity() == true)
@@ -43,16 +44,81 @@ namespace air
                 type.name.push_back(pool.refString(tok.txt));
                 tok = lexer.getNext();
                 if (tok.isOperator(TkOpEnum::Dot) == false)
-                {
-                    lexer.backToken(tok);
                     break;
-                }
                 tok = lexer.getNext();
                 if (tok.isIdentity() == false)
                     syntaxError(tok, "缺少成员名称！");
             }
         }
         // 查看数组定义
+        if (tok.isSeparator(TkSpEnum::OpenBracket) == true)
+        {
+            tok = lexer.getNext();
+            // 块数组
+            if (tok.isSeparator(TkSpEnum::Comma) == true)
+            {
+                uint32_t col = 2;
+                while (true)
+                {
+                    tok = lexer.getNext();
+                    if (tok.isSeparator(TkSpEnum::Comma) == true)
+                    {
+                        ++col;
+                        continue;
+                    }
+                    if (tok.isSeparator(TkSpEnum::CloseBracket) == true)
+                        break;
+                    syntaxError(tok, "缺少符号“ ] ”！");
+                }
+                type.array = 1;
+                type.block = 1;
+                type.cols = col;
+
+                tok = lexer.getNext(); // 为解析指针预读
+            }
+            // 动态数组
+            else if (tok.isSeparator(TkSpEnum::CloseBracket) == true)
+            {
+                uint32_t col = 1;
+                while (true)
+                {
+                    tok = lexer.getNext();
+                    if (tok.isSeparator(TkSpEnum::OpenBracket) == true)
+                    {
+                        ++col;
+                        tok = lexer.getNext();
+                    }
+                    else
+                    {
+                        // lexer.backToken(tok);//为解析指针预读
+                        break;
+                    }
+                    if (tok.isSeparator(TkSpEnum::CloseBracket) == true)
+                        continue;
+                    syntaxError(tok, "缺少符号“ ] ”！");
+                }
+                type.array = 1;
+                type.block = col == 1;
+                type.cols = col;
+            }
+            else
+                syntaxError(tok, "缺少符号“ ] ”！");
+        }
+        // 查看是否是指针
+        if (tok.isOperator(TkOpEnum::Multiply) == true)
+        {
+            type.pointer = 1;
+            uint32_t ptrs = 1;
+            while (true)
+            {
+                tok = lexer.getNext();
+                if (tok.isOperator(TkOpEnum::Multiply) == false)
+                    break;
+                ++ptrs;
+            }
+            type.ptrs = ptrs;
+        }
+        lexer.backToken(tok);
     }
 
     AstDeclRef Parser::getDecl()
@@ -96,6 +162,7 @@ namespace air
         // 静态数组?
         if (tok.isSeparator(TkSpEnum::OpenBracket) == true)
             return getDeclVar(scope, startpos, type, name, true);
+        lexer.backToken(tok);
         return getDeclVar(scope, startpos, type, name, false);
     }
     AstDeclRef Parser::getDeclVar(ScopeEnum scope, TokPos &startpos, AstType &type, StringRef &name, bool array)
@@ -140,9 +207,8 @@ namespace air
         func->startpos = startpos;
         func->retType = type;
         func->flag.scope = scope;
-
         // 解析参数列表
-
+        getDeclFunParam(*func);
         // 解析函数体
         auto tok = lexer.getNext();
         if (tok.isSeparator(TkSpEnum::OpenBrace) == true)
@@ -154,6 +220,52 @@ namespace air
 
         func->endpos = lexer.getPos();
         return decl;
+    }
+    // 语法：'(' (type id ann, )* ')'
+    void Parser::getDeclFunParam(DeclFunc &func)
+    {
+        Token tok;
+        while (true)
+        {
+            tok = lexer.getNext();
+            // ) 结束
+            if (tok.isSeparator(TkSpEnum::CloseParen) == true)
+                return;
+            lexer.backToken(tok);
+            auto startpos = lexer.getPos();
+            // 解析类型
+            AstType type;
+            getType(type);
+            // 解析名称
+            tok = lexer.getNext();
+            if (tok.isIdentity() == false)
+                syntaxError(tok, "缺少参数名称！");
+            StringRef name = pool.refString(tok.txt);
+            DeclVar *var = nullptr;
+            auto arg = genDecl(var, name);
+            var->startpos = startpos;
+            var->type = type;
+            var->flag.arg = 1;
+
+            tok = lexer.getNext();
+
+            // 存在注解
+            while (tok.isAnnotate() == true)
+            {
+                var->anns.push_back(getAnn(tok));
+                tok = lexer.getNext();
+            }
+            // 记录结束位置
+            var->endpos = lexer.getPos();
+            func.args.push_back(arg);
+            // 逗号 ，
+            if (tok.isSeparator(TkSpEnum::Comma) == true)
+                continue;
+            // ) 结束
+            if (tok.isSeparator(TkSpEnum::CloseParen) == true)
+                return;
+            syntaxError(tok, "缺少符号“ ) ”！");
+        }
     }
 
     AstDeclRef Parser::getDeclEnum(ScopeEnum scope, TokPos &startpos)

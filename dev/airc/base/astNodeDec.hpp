@@ -28,7 +28,7 @@ namespace air
         inline DeclKind getKind() const { return kind; }
 
         StringRef name;             // 声明名称
-        std::vector<AstAnnRef> ann; // 注解列表
+        std::vector<AstAnnRef> anns; // 注解列表
     private:
         DeclKind kind;
     };
@@ -75,7 +75,7 @@ namespace air
     {
         AstFlag flag;                // 函数标志
         AstType retType;             // 函数返回类型
-        std::vector<AstDeclRef> arg; // 函数参数
+        std::vector<AstDeclRef> args; // 函数参数
         AstStmRef body;              // 函数体
 
         DeclFunc(StringRef &name) : IAstDecl(name, DeclKind::Func) {}

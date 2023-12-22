@@ -31,7 +31,7 @@ namespace air
             lexer.backToken(tok);
             // 获取声明
             auto decl = getDecl();
-            decl->ann = anns; // 记录标注
+            decl->anns = anns; // 记录标注
             unit.declist.push_back(decl);
             anns.clear();
         }
@@ -157,14 +157,15 @@ namespace air
         unit.declist.push_back(node);
         decl->startpos = startpos;
         decl->endpos = tok.pos; // lexer.getPos();
-        FileSymbol *sym;
-        // 插入符号
-        auto symref = genSymbol(sym, *decl);
-        sym->startpos = decl->startpos;
-        sym->endpos = decl->endpos;
-        auto res = unit.symbols.insert(&decl->name.get(), symref);
-        // 符号重复
-        if (res.first == false)
-            repeatSymbol(sym, res.second.get());
+
+        /* FileSymbol *sym;
+         // 插入符号
+         auto symref = genSymbol(sym, *decl);
+         sym->startpos = decl->startpos;
+         sym->endpos = decl->endpos;
+         auto res = unit.symbols.insert(&decl->name.get(), symref);
+         // 符号重复
+         if (res.first == false)
+             repeatSymbol(sym, res.second.get());*/
     }
 }

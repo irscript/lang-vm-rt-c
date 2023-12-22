@@ -61,7 +61,7 @@ namespace air
         Token GetMultilineComment(Token &tok);
 
     private:
-        TokPos pos;         // 最后一个token的位置
+        TokPos pos;         // 当前解析位置
         CharStream &stream; // 输入流
     };
 }

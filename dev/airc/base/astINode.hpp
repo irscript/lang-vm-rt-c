@@ -218,6 +218,9 @@ namespace air
             uint32_t staticv : 1; // 静态 static 标识
             // uint32_t mConst : 1;  // 常量标识
 
+            // 变量标记
+            uint32_t arg : 1; // 参数变量
+
             // 函数标记
             uint32_t inlinev : 1;   // 内联标识
             uint32_t virtualv : 1;  // 虚函数
@@ -238,9 +241,13 @@ namespace air
             struct
             {
                 uint32_t constv : 1; // 具有 const 修饰 ？
-                uint32_t array : 1;  // 数组 ？
-                uint32_t block : 1;  // 块数组 ？
-                uint32_t cols : 8;   // 数组维度值
+
+                uint32_t array : 1; // 数组 ？
+                uint32_t block : 1; // 块数组 ？
+                uint32_t cols : 4;  // 数组维度值
+
+                uint32_t pointer : 1; // 指针？
+                uint32_t ptrs : 4;    // 指针维度值
             };
         };
 
