@@ -27,7 +27,7 @@ namespace air
 
         inline DeclKind getKind() const { return kind; }
 
-        StringRef name;             // 声明名称
+        StringRef name;              // 声明名称
         std::vector<AstAnnRef> anns; // 注解列表
     private:
         DeclKind kind;
@@ -62,6 +62,8 @@ namespace air
         AstExpRef init;                 // 变量初始化表达式
 
         DeclVar(StringRef &name) : IAstDecl(name, DeclKind::Var) {}
+
+        AstDeclRef nextvar; // 同行逗号定义的变量
     };
     // 变量符号
     struct VarSymbol : public IVarSymbol
@@ -73,10 +75,10 @@ namespace air
     // 函数声明
     struct DeclFunc : public IAstDecl
     {
-        AstFlag flag;                // 函数标志
-        AstType retType;             // 函数返回类型
+        AstFlag flag;                 // 函数标志
+        AstType retType;              // 函数返回类型
         std::vector<AstDeclRef> args; // 函数参数
-        AstStmRef body;              // 函数体
+        AstStmRef body;               // 函数体
 
         DeclFunc(StringRef &name) : IAstDecl(name, DeclKind::Func) {}
 

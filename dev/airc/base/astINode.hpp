@@ -76,6 +76,15 @@ namespace air
     struct IAstStm;
     struct StmBlock; // 块语句
 
+    struct StmVar; // 变量定义语句
+    struct StmExp; // 表达式语句
+
+    struct StmLabel;    // 标签语句
+    struct StmGoto;     // goto 语句
+    struct StmBreak;    // break 语句
+    struct StmContinue; // continue 语句
+    struct StmReturn;   // return 语句
+
     struct StmIf;    // if 语句
     struct StmElsif; // elsif 语句
     struct StmElse;  // else 语句
@@ -84,23 +93,14 @@ namespace air
     struct StmCase;    // case 语句
     struct StmDefault; // default 语句
 
-    struct StmFor;     // 语句
-    struct StmDoWhile; // 语句
-    struct StmWhile;   // 语句
+    struct StmFor;     // for 语句
+    struct StmDoWhile; // do{}while() 语句
+    struct StmWhile;   // while 语句
 
-    struct StmTry;     // 语句
-    struct StmCatch;   // 语句
-    struct StmFinally; // 语句
-    struct StmThrow;   // 语句
-
-    struct StmLable;    // 语句
-    struct StmGoto;     // 语句
-    struct StmBreak;    // 语句
-    struct StmContinue; // 语句
-    struct StmReturn;   // 语句
-
-    struct StmVar; // 语句
-    struct StmExp; // 语句
+    struct StmTry;     // try 语句
+    struct StmCatch;   // catch 语句
+    struct StmFinally; // finally 语句
+    struct StmThrow;   // throw 语句
 
     // 访问者接口
     struct IAstVisitor
@@ -130,7 +130,7 @@ namespace air
         virtual std::any visit(StmCatch &stm, std::any opt) = 0;
         virtual std::any visit(StmFinally &stm, std::any opt) = 0;
         virtual std::any visit(StmThrow &stm, std::any opt) = 0;
-        virtual std::any visit(StmLable &stm, std::any opt) = 0;
+        virtual std::any visit(StmLabel &stm, std::any opt) = 0;
         virtual std::any visit(StmGoto &stm, std::any opt) = 0;
         virtual std::any visit(StmBreak &stm, std::any opt) = 0;
         virtual std::any visit(StmContinue &stm, std::any opt) = 0;

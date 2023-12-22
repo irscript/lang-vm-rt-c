@@ -16,7 +16,7 @@ namespace air
     std::any StmCatch::visit(IAstVisitor &visitor, std::any opt) { return visitor.visit(*this, opt); }
     std::any StmFinally::visit(IAstVisitor &visitor, std::any opt) { return visitor.visit(*this, opt); }
     std::any StmThrow::visit(IAstVisitor &visitor, std::any opt) { return visitor.visit(*this, opt); }
-    std::any StmLable::visit(IAstVisitor &visitor, std::any opt) { return visitor.visit(*this, opt); }
+    std::any StmLabel::visit(IAstVisitor &visitor, std::any opt) { return visitor.visit(*this, opt); }
     std::any StmGoto::visit(IAstVisitor &visitor, std::any opt) { return visitor.visit(*this, opt); }
     std::any StmBreak::visit(IAstVisitor &visitor, std::any opt) { return visitor.visit(*this, opt); }
     std::any StmContinue::visit(IAstVisitor &visitor, std::any opt) { return visitor.visit(*this, opt); }

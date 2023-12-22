@@ -4,7 +4,31 @@ namespace air
 {
     AstStmRef Parser::getStmBlock()
     {
-        return {};
+        StmBlock *blk = nullptr;
+        auto result = genStm(blk);
+        Token tok;
+        while (true)
+        {
+            tok = lexer.getNext();
+            // } 结束
+            if (tok.isSeparator(TkSpEnum::CloseBrace) == true)
+                break;
+            // 无意义的分号
+            if (tok.isSeparator(TkSpEnum::SemiColon) == true)
+                continue;
+            // 关键字
+            if (tok.isKeyword() == true)
+            {
+                switch (tok.code.key)
+                {
+                case TkKeyWord::If:
+                    getStmIf(tok.pos);
+                    break;
+                }
+            }
+            // 变量定义
+        }
+        return result;
     }
     AstStmRef Parser::getStmVar(TokPos &startpos)
     {

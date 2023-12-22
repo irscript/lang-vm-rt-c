@@ -1,6 +1,6 @@
 package airlang.test;
 
-public sint a;
+public sint a,b;
 
 @buildin
 public const sint[,,] arrblk(const uint cols);
@@ -13,3 +13,5 @@ public const sint[][] arrjag(const uint cols);
 
 @buildin
 public const sint[][]* arrjagptr(const uint cols);
+
+protected uint a[8];

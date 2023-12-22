@@ -197,6 +197,28 @@ namespace air
         else
             lexer.backToken(tok);
         var->endpos = lexer.getPos();
+        // 查看是否同行定义变量
+        tok = lexer.getNext();
+        if (tok.isSeparator(TkSpEnum::Comma) == true)
+        {
+            // 解析名称
+            tok = lexer.getNext();
+            if (tok.isIdentity() == false)
+                syntaxError(tok, "缺少名称！");
+            StringRef name = pool.refString(tok.txt);
+            auto startpos = tok.pos;
+
+            tok = lexer.getNext();
+            bool array = false;
+            // 静态数组?
+            if (tok.isSeparator(TkSpEnum::OpenBracket) == true)
+                array = true;
+            else
+                lexer.backToken(tok);
+            var->nextvar = getDeclVar(scope, startpos, type, name, array);
+        }
+        if (tok.isSeparator(TkSpEnum::SemiColon) == false)
+            syntaxError(tok, "缺少符号“ ; ”！");
         return decl;
     }
 
