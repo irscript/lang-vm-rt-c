@@ -24,3 +24,5 @@ protected uint a[8]={
     6:16,
     7:17
 };
+
+uint exp = 10 + 12 * 15;

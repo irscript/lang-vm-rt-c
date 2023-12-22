@@ -449,6 +449,22 @@ namespace air
                 break;
             }
         }
+        // 范围表达式
+        if (tok2.isKeyword(TkKeyWord::In) == true)
+        {
+            auto tok = lexer.getNext();
+            bool neg = false;
+            if (tok.isOperator(TkOpEnum::LogicalNot) == false)
+                lexer.backToken(tok);
+            else
+                neg = true;
+            auto range = getExpRang();
+            ExpInRange *inexp = nullptr;
+            auto result = genExp(inexp, neg, exp, range);
+            inexp->startpos = exp->startpos;
+            inexp->endpos = lexer.getPos();
+            return result;
+        }
         // 就是基本表达式
         lexer.backToken(tok2);
         return exp;
