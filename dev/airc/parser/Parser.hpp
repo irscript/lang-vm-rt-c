@@ -72,33 +72,31 @@ namespace air
         AstDeclRef getDeclClass(ScopeEnum scope, TokPos &startpos);                                           // 解析 类 声明
 
         //----------------------------解析语句-----------------------------
-        AstStmRef getStmBlock(); // 解析 块 语句
+        AstStmRef getStmBlock(AstStmRef blk); // 解析 块 语句
 
-        AstStmRef getStmVar(TokPos &startpos);   // 解析 变量声明 语句
-        AstStmRef getStmExp(TokPos &startpos);   // 解析 表达式 语句
-        AstStmRef getStmLable(TokPos &startpos); // 解析 标签声明 语句
+        AstStmRef getStmVar(const std::vector<AstAnnRef> &anns); // 解析 变量声明 语句
 
-        AstStmRef getStmGoto(TokPos &startpos);     // 解析 goto lable; 语句
-        AstStmRef getStmBreak(TokPos &startpos);    // 解析 break; 语句
-        AstStmRef getStmContinue(TokPos &startpos); // 解析 continue; 语句
-        AstStmRef getStmReturn(TokPos &startpos);   // 解析 return exp;语句
+        AstStmRef getStmGoto(TokPos &startpos, const std::vector<AstAnnRef> &anns);     // 解析 goto lable; 语句
+        AstStmRef getStmBreak(TokPos &startpos, const std::vector<AstAnnRef> &anns);    // 解析 break; 语句
+        AstStmRef getStmContinue(TokPos &startpos, const std::vector<AstAnnRef> &anns); // 解析 continue; 语句
+        AstStmRef getStmReturn(TokPos &startpos, const std::vector<AstAnnRef> &anns);   // 解析 return exp;语句
 
-        AstStmRef getStmIf(TokPos &startpos);    // 解析 if 语句
-        AstStmRef getStmElsif(TokPos &startpos); // 解析 elsif 语句
-        AstStmRef getStmElse(TokPos &startpos);  // 解析 else 语句
+        AstStmRef getStmIf(TokPos &startpos, const std::vector<AstAnnRef> &anns);    // 解析 if 语句
+        AstStmRef getStmElsif(TokPos &startpos, const std::vector<AstAnnRef> &anns); // 解析 elsif 语句
+        AstStmRef getStmElse(TokPos &startpos, const std::vector<AstAnnRef> &anns);  // 解析 else 语句
 
-        AstStmRef getStmSwitch(TokPos &startpos);  // 解析 switch 语句
-        AstStmRef getStmCase(TokPos &startpos);    // 解析 case 语句
-        AstStmRef getStmDefault(TokPos &startpos); // 解析 default 语句
+        AstStmRef getStmSwitch(TokPos &startpos, const std::vector<AstAnnRef> &anns);  // 解析 switch 语句
+        AstStmRef getStmCase(TokPos &startpos, const std::vector<AstAnnRef> &anns);    // 解析 case 语句
+        AstStmRef getStmDefault(TokPos &startpos, const std::vector<AstAnnRef> &anns); // 解析 default 语句
 
-        AstStmRef getStmFor(TokPos &startpos);     // 解析 for 语句
-        AstStmRef getStmDoWhile(TokPos &startpos); // 解析 do{}while() 语句
-        AstStmRef getStmWhile(TokPos &startpos);   // 解析 while 语句
+        AstStmRef getStmFor(TokPos &startpos, const std::vector<AstAnnRef> &anns);     // 解析 for 语句
+        AstStmRef getStmDoWhile(TokPos &startpos, const std::vector<AstAnnRef> &anns); // 解析 do{}while() 语句
+        AstStmRef getStmWhile(TokPos &startpos, const std::vector<AstAnnRef> &anns);   // 解析 while 语句
 
-        AstStmRef getStmTry(TokPos &startpos);     // 解析 try 语句
-        AstStmRef getStmCatch(TokPos &startpos);   // 解析 catch 语句
-        AstStmRef getStmFinally(TokPos &startpos); // 解析 finally 语句
-        AstStmRef getStmThrow(TokPos &startpos);   // 解析 throw 语句
+        AstStmRef getStmTry(TokPos &startpos, const std::vector<AstAnnRef> &anns);     // 解析 try 语句
+        AstStmRef getStmCatch(TokPos &startpos, const std::vector<AstAnnRef> &anns);   // 解析 catch 语句
+        AstStmRef getStmFinally(TokPos &startpos, const std::vector<AstAnnRef> &anns); // 解析 finally 语句
+        AstStmRef getStmThrow(TokPos &startpos, const std::vector<AstAnnRef> &anns);   // 解析 throw 语句
     };
 }
 

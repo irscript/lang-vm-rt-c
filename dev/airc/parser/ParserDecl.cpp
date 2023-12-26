@@ -216,6 +216,7 @@ namespace air
             else
                 lexer.backToken(tok);
             var->nextvar = getDeclVar(scope, startpos, type, name, array);
+            return decl;
         }
         if (tok.isSeparator(TkSpEnum::SemiColon) == false)
             syntaxError(tok, "缺少符号“ ; ”！");
@@ -235,7 +236,7 @@ namespace air
         auto tok = lexer.getNext();
         if (tok.isSeparator(TkSpEnum::OpenBrace) == true)
         {
-            func->body = getStmBlock();
+            func->body = getStmBlock({});
         }
         else if (tok.isSeparator(TkSpEnum::SemiColon) == false)
             syntaxError(tok, "缺少符号“ ; ”");

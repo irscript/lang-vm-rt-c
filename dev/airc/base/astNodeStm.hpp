@@ -49,7 +49,7 @@ namespace air
 
         IAstStm(StmKind kind) : kind(kind) {}
         inline StmKind getKind() const { return kind; }
-
+        std::vector<AstAnnRef> anns; // 注解列表
     private:
         StmKind kind;
     };
@@ -99,7 +99,7 @@ namespace air
     {
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
         StmVar() : IAstStm(StmKind::Var) {}
-        std::shared_ptr<DeclVar> def; // 定义
+        AstDeclRef vardef;
     };
     // exp 语句
     struct StmExp : public IAstStm
@@ -107,7 +107,7 @@ namespace air
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
         StmExp() : IAstStm(StmKind::Exp) {}
 
-        AstExpRef exp;
+        std::vector<AstExpRef> exp;
     };
     // 标签 语句
 
@@ -143,6 +143,7 @@ namespace air
     {
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
         StmReturn() : IAstStm(StmKind::Return) {}
+        AstExpRef exp; // 返回表达式
     };
     // if 语句
     struct StmIf : public StmBlock
@@ -175,6 +176,9 @@ namespace air
         StmSwitch() : StmBlock(BlockKind::Switch) {}
 
         AstExpRef cond; // 条件表达式
+
+        std::vector<AstStmRef> cases; // case 语句列表
+        AstStmRef defaults;           // default 语句
     };
     // case 语句
     struct StmCase : public StmBlock
@@ -221,12 +225,17 @@ namespace air
     {
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
         StmTry() : StmBlock(BlockKind::Try) {}
+
+        std::vector<AstStmRef> catchs; // catch 语句列表
+        AstStmRef finallys;            // finally 语句
     };
     // catch 语句
     struct StmCatch : public StmBlock
     {
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
         StmCatch() : StmBlock(BlockKind::Catch) {}
+        AstType type;
+        StringRef name;
     };
     // finally 语句
     struct StmFinally : public StmBlock
@@ -239,6 +248,7 @@ namespace air
     {
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
         StmThrow() : IAstStm(StmKind::Throw) {}
+        AstExpRef exp;
     };
 
     // 语句

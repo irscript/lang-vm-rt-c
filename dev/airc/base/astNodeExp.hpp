@@ -36,7 +36,7 @@ namespace air
         This,  // this 表达式
         Super, // super 表达式
 
-        Dot,   // 成员访问表达式
+        MemberCall,   // 成员访问表达式
         Paren, // 括号表达式
 
         Rang,  // 范围表达式
@@ -172,7 +172,7 @@ namespace air
     struct ExpMemberCall : public IAstExp
     {
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
-        ExpMemberCall() : IAstExp(ExpKind::Dot) {}
+        ExpMemberCall() : IAstExp(ExpKind::MemberCall) {}
         std::list<AstExpRef> items;
     };
     // 一元 表达式
