@@ -30,6 +30,6 @@ uint exp = 10 + 12 * 15;
 
 public sint main(const string[] args){
     int32 a = 0, b = 3;
-
+    a = a + b * a;
     return a + b;
 }
