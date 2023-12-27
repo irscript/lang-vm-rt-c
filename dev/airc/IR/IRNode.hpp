@@ -85,15 +85,15 @@ namespace air
         AstType mType;       // 类型
         StringRef mName;     // 名称
     };
-
+    using IRSymbolRef = std::shared_ptr<IRSymbol>;
     enum class IRValueKind
     {
         Unknown,
         Bool,
         Int32,
         Uint32,
-        Int32,
-        Uint32,
+        Int64,
+        Uint64,
         Flt32,
         Flt64,
         Char,
@@ -115,9 +115,10 @@ namespace air
     {
         IRBlock(IRNodeKind kind) : IIRNode(kind) {}
 
-         inline void addNode(IRNodeRef node){nodes.push_back(node);}
+        inline void addNode(IRNodeRef node) { nodes.push_back(node); }
 
-        std::vector<IRNodeRef> nodes; // 块的内部节点
+        std::list<IRNodeRef> nodes;            // 块的内部节点
+        std::map<std::string, IRNodeRef> maps; // 名称到节点的映射
 
         virtual void visit(IIRVisit &vist) override;
     };

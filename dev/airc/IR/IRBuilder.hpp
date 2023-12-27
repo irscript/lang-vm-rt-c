@@ -9,7 +9,14 @@ namespace air
     struct IRBuilder
     {
         // 构建基本块
-        inline IRBlock *IRBlock(IRNodeKind kind) { return new IRBlock(kind); }
+        inline IRBlock *Block(IRNodeKind kind) { return new IRBlock(kind); }
+        // 构建值
+        inline IRValueRef Value();
+
+        // 构建一元表达式
+        inline IRSymbolRef Unary(IRNodeKind op, IRValueRef val);
+        // 构建二元表达式
+        inline IRSymbolRef Binary(IRNodeKind op, IRValueRef val, IRValueRef val2);
     };
 }
 

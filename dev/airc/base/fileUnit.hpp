@@ -5,6 +5,7 @@
 #include "strPool.hpp"
 #include "symTable.hpp"
 #include "utils/pch.hpp"
+#include "airc/lexer/Lexer.hpp"
 namespace air
 {
     // 编译的文件单元

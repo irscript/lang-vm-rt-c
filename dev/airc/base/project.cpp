@@ -1,4 +1,5 @@
 #include "project.hpp"
+#include "airc/Parser/Analysis.hpp"
 #include "airc/lexer/Lexer.hpp"
 #include "airc/parser/Parser.hpp"
 #include "utils/errorWhat.hpp"
@@ -176,7 +177,10 @@ namespace air
             Printer::print(Printer::BrightWhite, "%s\n", item.first.c_str());
             Printer::unlock();
             Lexer lexer(stream);
+            // 语法解析
             Parser paser(strings, lexer, item.second.unit);
+            // 引用消解
+            CitationResolution(*this, strings, lexer, item.second.unit, symbols);
         }
         // 语义解析
     }
@@ -297,5 +301,8 @@ namespace air
             auto name = strings.refString("string");
             symbols.insert(&name.get(), makeSymbol(new BuildinTypeSymbol(name, addrbits, addrbits, false)));
         }
+        varSerial = 0;                  // 变量编号
+        funcSerial = 0;                 // 函数编号
+        typeSerial = symbols.getSize(); // 类型编号
     }
 }

@@ -68,8 +68,11 @@ namespace air
     // 变量符号
     struct VarSymbol : public IVarSymbol
     {
-        VarSymbol(DeclVar &decl) : IVarSymbol(decl.name), decl(decl) {}
+        VarSymbol(DeclVar &decl, uint32_t serial)
+            : IVarSymbol(decl.name),
+              decl(decl), serial(serial) {}
         DeclVar &decl;
+        uint32_t serial;
     };
 
     // 函数声明
@@ -87,9 +90,11 @@ namespace air
     // 函数符号
     struct FuncSymbol : public IFuncSymbol
     {
-        FuncSymbol(DeclFunc &decl)
-            : IFuncSymbol(decl.name, decl.name), decl(decl) {}
+        FuncSymbol(DeclFunc &decl, uint32_t serial)
+            : IFuncSymbol(decl.name, decl.name),
+              decl(decl), serial(serial) {}
         DeclFunc &decl;
+        uint32_t serial;
     };
     // 枚举声明
     struct DeclEnum : public IAstDecl

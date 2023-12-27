@@ -59,6 +59,9 @@ namespace air
         // 设置生成符号表
         inline void setSuper(SymbolTable *sup) { super = super; }
 
+        // 获取符号表大小
+        inline auto getSize() const { return map.size(); }
+
     private:
         SymbolTable *super;                           // 上层符号表
         std::map<const std::string *, SymbolRef> map; // 符号映射表
@@ -77,6 +80,8 @@ namespace air
         inline const StringRef &getName() const { return name; }
         inline const StringRef &getFull() const { return full; }
         inline SymbolKind getKind() const { return kind; }
+
+        inline void setFull(StringRef &fullname) { full = fullname; }
 
         inline SymbolTable &getSymbols() { return symbols; }
         inline SymbolTable::Result insert(const std::string *subname, SymbolRef sym) { return symbols.insert(subname, sym); }

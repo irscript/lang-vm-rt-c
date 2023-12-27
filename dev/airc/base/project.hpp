@@ -65,6 +65,16 @@ namespace air
 
         // 添加基本类型符号
         void initSymbol();
+
+        // 分配编号
+        uint32_t getVarSerial() { return varSerial++; }
+        uint32_t getFuncSerial() { return funcSerial++; }
+        uint32_t getTypeSerial() { return typeSerial++; }
+
+    private:
+        uint32_t funcSerial; // 函数编号
+        uint32_t typeSerial; // 类型编号
+        uint32_t varSerial;  // 变量编号
     };
 
     // 项目集中心
