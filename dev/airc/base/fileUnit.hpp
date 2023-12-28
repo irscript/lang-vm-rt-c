@@ -1,11 +1,11 @@
 #ifndef __FILEUNIT_INC__
 #define __FILEUNIT_INC__
 
+#include "airc/lexer/Lexer.hpp"
 #include "astNode.hpp"
 #include "strPool.hpp"
 #include "symTable.hpp"
 #include "utils/pch.hpp"
-#include "airc/lexer/Lexer.hpp"
 namespace air
 {
     // 编译的文件单元
@@ -18,12 +18,13 @@ namespace air
             uint32_t state;
             struct
             {
-                uint32_t error : 1; // 错误？
+                uint32_t compile : 1; // 编译解析过的？
+                uint32_t error : 1;   // 错误？
             };
         };
 
-        const std::string *file; // 文件路径
-
+        const std::string *file;       // 文件路径
+        CharStream stream;             // 文件流
         SymbolTable symbols;           // 文件内符号表
         StringRef package;             // 包名
         std::list<AstDeclRef> declist; // 声明列表

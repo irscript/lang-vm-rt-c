@@ -82,7 +82,7 @@ namespace air
         AstType retType;              // 函数返回类型
         std::vector<AstDeclRef> args; // 函数参数
         AstStmRef body;               // 函数体
-
+        SymbolTable argsyms;          // 参数符号表
         DeclFunc(StringRef &name) : IAstDecl(name, DeclKind::Func) {}
 
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;

@@ -1,5 +1,5 @@
-#ifndef __ANALYSIS_INC__
-#define __ANALYSIS_INC__
+#ifndef __SYMBOLIZATION_INC__
+#define __SYMBOLIZATION_INC__
 
 #include "airc/base/astNode.hpp"
 #include "airc/base/fileUnit.hpp"
@@ -9,15 +9,13 @@
 namespace air
 {
     // 引用消解、符号表生成、类型计算
-    struct CitationResolution : public IAstVisitor
+    struct Symbolization : public IAstVisitor
     {
-        inline CitationResolution(Project& project,StringPool &pool, Lexer &lexer, FileUnit &unit, SymbolTable &gsymbol)
-            :project(project), pool(pool), lexer(lexer), unit(unit), gsymbol(gsymbol) { start(); }
-        Lexer &lexer;         // 词法分析器
-        FileUnit &unit;       // 文件单元
-        StringPool &pool;     // 字符串池
-        SymbolTable &gsymbol; // 全局符号表
-        Project& project;
+        inline Symbolization(Project &project, Project::File &unit)
+            : project(project), funit(unit) { start(); }
+
+        Project::File &funit; // 文件单元
+        Project &project;
         // 开始分析
         void start();
 
@@ -29,6 +27,8 @@ namespace air
 
         // 处理重复的符号
         void repeatSymbol(ISymbol *cur, ISymbol *pre);
+        // 语义错误
+        void semanticError(TokPos &start, TokPos &end, const char *msg);
 
         // 访问声明
         virtual std::any visit(DeclFile &dec, std::any opt) override;
@@ -93,4 +93,4 @@ namespace air
 
 }
 
-#endif // __ANALYSIS_INC__
+#endif // __SYMBOLIZATION_INC__

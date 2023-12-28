@@ -60,6 +60,8 @@ namespace air
         void load(const std::string &path);
         // 开始编译项目
         void compiling();
+        void compiling(const std::string &file, File &funit); // 编译文件
+        void compilingDeps(const std::string &file);          // 编译依赖文件
         // 获取文件唯一路径
         std::string getFilePath(const std::string &path);
 

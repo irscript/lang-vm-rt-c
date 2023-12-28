@@ -57,7 +57,7 @@ namespace air
         // 是顶层符号表？
         inline bool isTop() const { return super == nullptr; }
         // 设置生成符号表
-        inline void setSuper(SymbolTable *sup) { super = super; }
+        inline void setSuper(SymbolTable &sup) { super = &sup; }
 
         // 获取符号表大小
         inline auto getSize() const { return map.size(); }

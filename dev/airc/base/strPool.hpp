@@ -65,7 +65,11 @@ namespace air
         // 获取名称
         const std::string &get() const { return item->get(); }
         StringRef() : StringRef(nullptr, nullptr) {}
-        inline StringRef(const StringRef &rhs) : StringRef(rhs.pool, rhs.item) { if (item)item->ref(); }
+        inline StringRef(const StringRef &rhs) : StringRef(rhs.pool, rhs.item)
+        {
+            if (item)
+                item->ref();
+        }
 
         inline StringRef &operator=(const StringRef &rhs)
         {
@@ -76,6 +80,9 @@ namespace air
             item->ref();
             return *this;
         }
+
+        inline bool operator==(const StringRef &rhs) const { return rhs.pool == pool && rhs.item == item; }
+        inline bool operator<(const StringRef &rhs) const { return item->get() < rhs.item->get(); }
 
     private:
         friend struct StringPool;

@@ -1,5 +1,5 @@
 #include "project.hpp"
-#include "airc/Parser/Analysis.hpp"
+#include "airc/Parser/Symbolization.hpp"
 #include "airc/lexer/Lexer.hpp"
 #include "airc/parser/Parser.hpp"
 #include "utils/errorWhat.hpp"
@@ -168,21 +168,44 @@ namespace air
         // 单文件编译
         for (auto item : filemap)
         {
-            path = getFilePath(item.first);
-            CharStream stream;
-            if (stream.open(path) == false)
-                throw ErrorWhat::fmt("%s: 文件读取失败！\n", path.c_str());
-            Printer::lock();
-            Printer::print(Printer::Green, "编译：");
-            Printer::print(Printer::BrightWhite, "%s\n", item.first.c_str());
-            Printer::unlock();
-            Lexer lexer(stream);
-            // 语法解析
-            Parser paser(strings, lexer, item.second.unit);
-            // 引用消解
-            CitationResolution(*this, strings, lexer, item.second.unit, symbols);
+            compiling(item.first, item.second);
         }
         // 语义解析
+    }
+    void Project::compiling(const std::string &fpath, File &funit)
+    {
+        std::string path = getFilePath(fpath);
+        CharStream &stream = funit.unit.stream;
+        if (stream.open(path) == false)
+            throw ErrorWhat::fmt("%s: 文件读取失败！\n", path.c_str());
+        Printer::lock();
+        Printer::print(Printer::Green, "编译：");
+        Printer::print(Printer::BrightWhite, "%s\n", fpath.c_str());
+        Printer::unlock();
+        Lexer lexer(stream);
+        // 语法解析
+        Parser paser(strings, lexer, funit.unit, funit.deps);
+        // 编译依赖项
+        for (auto item : funit.deps)
+            compilingDeps(item.get());
+        // 符号表生成
+        Symbolization(*this, funit);
+        // 引用消解
+    }
+    void Project::compilingDeps(const std::string &file)
+    {
+        auto res = filemap.find(file);
+        if (res != filemap.end())
+        {
+            if (res->second.unit.compile == 0)
+                compiling(file, res->second);
+        }
+        else
+        {
+            auto res = filemap.insert({file, {}});
+            assert(res.second == true);
+            compiling(file, res.first->second);
+        }
     }
     std::string Project::getFilePath(const std::string &path)
     {

@@ -11,13 +11,18 @@ namespace air
     // 语法解析器
     struct Parser
     {
-        inline Parser(StringPool &pool, Lexer &lexer, FileUnit &unit)
-            : pool(pool), lexer(lexer), unit(unit) { start(); }
+        inline Parser(StringPool &pool, Lexer &lexer, FileUnit &unit, std::set<StringRef> &deps)
+            : pool(pool), lexer(lexer), unit(unit), deps(deps)
+        {
+            start();
+            unit.compile = 1;
+        }
 
     protected:
         Lexer &lexer;     // 词法分析器
         FileUnit &unit;   // 文件单元
         StringPool &pool; // 字符串池
+        std::set<StringRef> &deps;
         // 开始解析
         void start();
         // 处理重复的符号

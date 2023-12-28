@@ -153,7 +153,9 @@ namespace air
 
         // 生成声明
         DeclFile *decl = nullptr;
-        auto node = genDecl(decl, pool.refString(szName), pool.refString(szFile));
+        auto fileRef = pool.refString(szFile);
+        deps.insert(fileRef);
+        auto node = genDecl(decl, pool.refString(szName), fileRef);
         unit.declist.push_back(node);
         decl->startpos = startpos;
         decl->endpos = tok.pos; // lexer.getPos();
