@@ -1,4 +1,5 @@
 +++
+archetype = "chapter"
 title = "反汇编器"
 weight = 3
 +++

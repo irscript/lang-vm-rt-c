@@ -1,6 +1,7 @@
 +++
+archetype = "chapter"
 title = "编译器"
-weight = 3
+weight = 2
 +++
 ## 目录
 <hr>

@@ -16,10 +16,15 @@ title = "airlang Programming Language"
 
 [markup]
     [markup.highlight]
+        codeFences = true
+        guessSyntax = true
+        hl_Lines = ""
+        lineNoStart = 1
+        lineNos = true
         lineNumbersInTable = false
-        guessSyntax = false
         noClasses = false
-        # style = "tango"
+        style = "native"
+        tabWidth = 4
     [markup.goldmark.renderer]
         unsafe = true
 
