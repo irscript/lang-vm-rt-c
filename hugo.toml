@@ -1,4 +1,4 @@
-baseURL = "https://lang-vm-rt-c.irscript.github.io/"
+baseURL = "https://irscript.github.io/lang-vm-rt-c/"
 canonifyURLs = true 
 relativeURLs = true 
 uglyURLs = false  
@@ -36,7 +36,7 @@ title = "airlang Programming Language"
         [[languages.zh-cn.menu.shortcuts]]
             name = "<i class='fab fa-fw fa-github'></i> GitHub 仓库"
             identifier = "ds"
-            url = "https://github.com/irscript/irscript.github.io"
+            url = "https://github.com/irscript/"
             weight = 10
 
         [[languages.zh-cn.menu.shortcuts]]
