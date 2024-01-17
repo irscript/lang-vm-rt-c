@@ -1,69 +1,69 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/1_lang/1_meta/1_bnf/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/1_lang/1_meta/1_bnf/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/1_lang/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/1_lang/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/1_lang/2_langdef/1_keyword/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/1_lang/2_langdef/1_keyword/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/1_lang/1_meta/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/1_lang/1_meta/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/1_char/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/1_char/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/1_lang/2_langdef/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/1_lang/2_langdef/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/2_compiler/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/2_compiler/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/1_lang/1_meta/2_ebnf/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/1_lang/1_meta/2_ebnf/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/2_stream/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/2_stream/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/3_lexer/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/3_lexer/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/3_disassembler/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/3_disassembler/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/1_lang/1_meta/3_abnf/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/1_lang/1_meta/3_abnf/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/4_token/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/4_token/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/4_bytecode/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/4_bytecode/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/5_maptable/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/5_maptable/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/5_vmrt/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/5_vmrt/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/6_scan/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/6_scan/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/7_test/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/7_test/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/categories/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/categories/index.html</loc>
   </url>
   <url>
-    <loc>https://lang-vm-rt-c.irscript.github.io/tags/index.html</loc>
+    <loc>https://irscript.github.io/lang-vm-rt-c/tags/index.html</loc>
   </url>
 </urlset>

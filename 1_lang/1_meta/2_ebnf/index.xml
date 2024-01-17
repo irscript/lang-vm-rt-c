@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>扩展巴科斯范式：EBNF on air 编程语言</title>
-    <link>https://lang-vm-rt-c.irscript.github.io/1_lang/1_meta/2_ebnf/index.html</link>
+    <link>https://irscript.github.io/lang-vm-rt-c/1_lang/1_meta/2_ebnf/index.html</link>
     <description>Recent content in 扩展巴科斯范式：EBNF on air 编程语言</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language><atom:link href="https://lang-vm-rt-c.irscript.github.io/1_lang/1_meta/2_ebnf/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language><atom:link href="https://irscript.github.io/lang-vm-rt-c/1_lang/1_meta/2_ebnf/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

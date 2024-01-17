@@ -2,15 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>词法分析 on air 编程语言</title>
-    <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/index.html</link>
+    <link>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/index.html</link>
     <description>Recent content in 词法分析 on air 编程语言</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language><atom:link href="https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language><atom:link href="https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>字符抽象</title>
-      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/1_char/index.html</link>
+      <link>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/1_char/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/1_char/index.html</guid>
+      <guid>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/1_char/index.html</guid>
       <description>字符抽象是编译器在处理源代码时的一种重要机制。在编程中，我们使用的字符实际上可以被看作是特定的整数值（通常是ASCII值或者Unicode值）。编译器在读取源代码时，会将这些字符转换成对应的整数值，并进行相应的操作。
 例如，在C语言中，我们可以使用字符字面量来表示单个字符，如&amp;rsquo;a&amp;rsquo;或&#39;5&amp;rsquo;。编译器会将这些字符字面量解析为它们对应的整数值，并在需要的时候将其转换回字符形式。
 此外，编译器还会对字符串进行特殊的处理。在C语言中，字符串实际上是字符数组，每个元素都包含了字符的整数值。当编译器遇到一个字符串字面量，如&amp;quot;Hello, world!&amp;quot;，它会创建一个包含所有字符的数组，并在末尾添加一个空字符（其整数值通常为0），以表示字符串的结束。
@@ -20,9 +20,9 @@
     </item>
     <item>
       <title>字符流抽象</title>
-      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/2_stream/index.html</link>
+      <link>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/2_stream/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/2_stream/index.html</guid>
+      <guid>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/2_stream/index.html</guid>
       <description>字符流抽象是指在编程和软件开发中，将底层的字节流或字符编码处理细节隐藏起来，提供一个更高级别的接口来操作文本数据。这样做的目的是简化程序设计，提高代码可读性，并使开发者可以专注于应用程序的逻辑和语义，而不是底层的实现细节。
 在编译器中，词法分析阶段通常会对输入的源代码进行字符流抽象。这一阶段会将原始的字符序列转换为一系列有意义的单元，如标识符、关键字、数字、运算符等，这些单元被称为词法单元（或称为标记、符号）。每个词法单元都有对应的类型和值，这使得后续的语法分析和语义分析阶段能够更容易地理解和处理源代码。
 此外，字符流抽象也经常出现在IO库的设计中，例如Java中的Reader和Writer类，或者C++中的iostream库。这些库提供了一个统一的方式来读取和写入字符流，无论底层的字符编码如何变化。使用这些库的开发者通常不需要关心字符编码的具体细节，从而可以更加高效地编写跨平台和兼容多种字符集的代码。
@@ -32,9 +32,9 @@
     </item>
     <item>
       <title>词法分析器</title>
-      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/3_lexer/index.html</link>
+      <link>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/3_lexer/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/3_lexer/index.html</guid>
+      <guid>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/3_lexer/index.html</guid>
       <description>词法分析器（也称为扫描器、分词器或词法分析程序）是编译器或解释器的一部分，负责将输入的源代码字符串分解成一系列有意义的最小单元，这些单元被称为标记（Token）。每个标记代表了语言的一个原子单元，如关键字、标识符、常量、运算符和标点符号等。
 在编译过程中，词法分析器通常是第一个执行的阶段。它从源代码的开头开始，按顺序读取字符，并根据语言的语法规则生成标记流。这些规则通常由正则表达式或者有限状态自动机来定义，它们描述了如何识别特定类型的标记。
 词法分析器的主要任务包括：
@@ -46,30 +46,30 @@
     </item>
     <item>
       <title>词元(Token)定义</title>
-      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/4_token/index.html</link>
+      <link>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/4_token/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/4_token/index.html</guid>
+      <guid>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/4_token/index.html</guid>
       <description>词元类别 1// 词元类别 2enum class TkKind : uint16_t 3{ 4 Unknown, // 未知 5 SingleComments, // 单行注释 6 MultipleComments, // 多行注释 7 Annotate, // 注解 8 KeyWord, // 关键字 9 Identifier, // 标志符 10 StringLiteral, // 存在转义的字符串常量 11 StringLiteral2, // 不转义的字符串常量 12 CharLiteral, // 字符常量 13 SIntLiteral, // 有符号整形字符串常量 14 UIntLiteral, // 无符号整形字符串常量 15 Flt32Literal, // 浮点字符串常量 16 Flt64Literal, // 浮点字符串常量 17 Separator, // 分隔符 18 Operator, // 操作符 19 EOS, // 字符流结束 20};分隔符 1// 分隔符 2enum class TkSpEnum : uint16_t 3{ 4 Unknown, // 未知 5 OpenBracket, // [ 左方括号 6 CloseBracket, // ] 右方括号 7 OpenParen, // ( 左括号 8 CloseParen, // ) 右括号 9 OpenBrace, // { 左花括号 10 CloseBrace, // } 右花括号 11 CBSemiColon, // }; 右花括号和分号 12 Colon, // : 冒号 13 SemiColon, // ; 分号 14 Comma, // , 逗号 15 Ellipsis, // .</description>
     </item>
     <item>
       <title>关键字映射表</title>
-      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/5_maptable/index.html</link>
+      <link>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/5_maptable/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/5_maptable/index.html</guid>
+      <guid>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/5_maptable/index.html</guid>
       <description>类定义 1struct MapTable 2{ 3 // 初始化信息 4 static void init(); 5 // 查找关键字 6 static TkKeyWord findKeyword(const std::string &amp;amp;szTok) 7 { 8 auto find = mapKey.find(szTok); 9 if (find == mapKey.end()) 10 return TkKeyWord::Unknown; 11 return find-&amp;gt;second; 12 } 13 // 查找标注关键字 14 static TkAnnotate findAnnword(const std::string &amp;amp;szTok) 15 { 16 auto find = mapAnn.find(szTok); 17 if (find == mapAnn.end()) 18 return TkAnnotate::Unknown; 19 return find-&amp;gt;second; 20 } 21 // 查找操作符优先级 22 static int32_t findOpPriority(TkOpEnum op) 23 { 24 auto find = mapOp.</description>
     </item>
     <item>
       <title>词法分析实现</title>
-      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/6_scan/index.html</link>
+      <link>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/6_scan/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/6_scan/index.html</guid>
+      <guid>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/6_scan/index.html</guid>
       <description>类定义 1struct Lexer 2{ 3 Lexer(CharStream &amp;amp;ics) : pos(0,1), stream(ics) {} 4 5 // 获取词元 6 Token getNext(); 7 // 退回词元 8 void backToken(Token &amp;amp;tok) 9 { 10 stream.back(Char(tok.pos.pos, 0)); 11 pos = tok.pos; 12 } 13 14private: 15 // 跳过空白字符 16 inline void SkipWhiteSpaces() 17 { 18 Char ch = stream.next(); 19 while (ch.isWhiteSpace()) 20 { 21 if (ch.val == &amp;#39;\n&amp;#39;) 22 pos.line++; 23 ch = stream.next(); 24 } 25 stream.</description>
     </item>
     <item>
       <title>案列测试</title>
-      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/7_test/index.html</link>
+      <link>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/7_test/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/7_test/index.html</guid>
+      <guid>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/7_test/index.html</guid>
       <description>此章节代码对应标记链接：https://github.com/irscript/lang-vm-rt-c/releases/tag/lexer_test
 测试文本 1//词法分析测试 2 3/*普通关键字*/ 4package 5require 6using 7void 8bool 9int8 10int16 11int32 12int64 13uint8 14uint16 15uint32 16uint64 17sint 18uint 19pointer 20flt32 21flt64 22string 23cstring 24char 25any 26null 27false 28true 29in 30break 31continue 32goto 33return 34do 35while 36for 37foreach 38if 39elsif 40else 41switch 42case 43default 44private 45protected 46public 47static 48const 49final 50enum 51union 52struct 53entrust 54class 55interface 56this 57super 58friend 59new 60sizeof 61typeof 62instanceof 63cast 64try 65catch 66finally 67throw 68await 69synched 70 71/*注解关键字*/ 72@file 73@func 74@line 75@buildin 76@async 77@volatile 78@inline 79@virtual 80@override 81@operator 82 83/*操作符*/ 84.</description>
     </item>

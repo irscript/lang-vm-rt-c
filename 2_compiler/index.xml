@@ -2,15 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>编译器 on air 编程语言</title>
-    <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/index.html</link>
+    <link>https://irscript.github.io/lang-vm-rt-c/2_compiler/index.html</link>
     <description>Recent content in 编译器 on air 编程语言</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language><atom:link href="https://lang-vm-rt-c.irscript.github.io/2_compiler/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language><atom:link href="https://irscript.github.io/lang-vm-rt-c/2_compiler/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>词法分析</title>
-      <link>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/index.html</link>
+      <link>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://lang-vm-rt-c.irscript.github.io/2_compiler/1_lexer/index.html</guid>
+      <guid>https://irscript.github.io/lang-vm-rt-c/2_compiler/1_lexer/index.html</guid>
       <description>引言 词法分析，也称为扫描或词法分析器，是编译过程中的第一步。它负责将源代码（即程序员编写的程序）分解成一系列有意义的符号，这些符号被称为标记（tokens），可以叫做词元。 每个标记代表源代码中的一部分，如关键字、标识符、常量、运算符和分隔符。 在词法分析过程中，输入的源代码被逐字符地读取，并根据预定的规则（通常称为词法规则或正则表达式）进行匹配。当找到一个匹配时，就生成一个相应的标记，并将其发送到下一个编译阶段（通常是语法分析）。这个过程会一直持续到整个源代码文件都被处理完为止。
 词法分析的主要目的是识别出源代码中的词汇结构，为后续的编译步骤提供基础。通过这种方式，编译器可以理解程序的基本元素，从而能够正确地解析和执行代码。
 目录 字符抽象 字符流抽象 词法分析器 词元(Token)定义 关键字映射表 词法分析实现 案列测试 </description>
