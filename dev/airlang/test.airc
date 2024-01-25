@@ -1,6 +1,6 @@
 package airlang.test;
 
-require "test.airc";
+//require "test.airc";
 
 uint exp = (10 + 5) * 10;
 

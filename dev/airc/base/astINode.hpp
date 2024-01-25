@@ -108,6 +108,8 @@ namespace air
     struct IAstVisitor
     {
         inline virtual ~IAstVisitor() {}
+
+        virtual std::any start(struct FileUnit&unit)=0;
         // 访问声明
         virtual std::any visit(DeclFile &dec, std::any opt) { return {}; }
         virtual std::any visit(DeclVar &dec, std::any opt) { return {}; }
@@ -174,6 +176,7 @@ namespace air
     using AstDeclRef = std::shared_ptr<IAstDecl>;
     using AstStmRef = std::shared_ptr<IAstStm>;
     using AstExpRef = std::shared_ptr<IAstExp>;
+    using AstVisRef = std::shared_ptr<IAstVisitor>;
 
     template <typename Ann, typename... Arg>
     inline AstAnnRef genAnn(Ann *&instance, Arg... arg)

@@ -1,5 +1,5 @@
 #include "project.hpp"
-#include "airc/Parser/Symbolization.hpp"
+#include "airc/Analysis/AnalysisHub.h"
 #include "airc/lexer/Lexer.hpp"
 #include "airc/parser/Parser.hpp"
 #include "utils/errorWhat.hpp"
@@ -189,9 +189,8 @@ namespace air
         // 编译依赖项
         for (auto item : funit.depset)
             compilingDeps(item.get());
-        // 符号表生成
-        Symbolization(*this, funit);
-        // 引用消解
+        //语义分析
+        AnalysisHub pass(*this);
     }
     void Project::compilingDeps(const std::string &file)
     {
