@@ -5,6 +5,7 @@ namespace air
     // 开始解析
     void Parser::start()
     {
+        unit.parsed=1;
         // 解析包名
         getPackage();
         // 解析依赖
@@ -95,8 +96,8 @@ namespace air
         unit.package = pool.refString(szPkg);
     }
     // 解析依赖
-    // 语法1 require id="file.ext";
-    // 语法2 require{ id="file.ext"; }
+    // 语法1 require "file.ext";
+    // 语法2 require{ "file.ext"; }
     void Parser::getRequire()
     {
         while (true)
@@ -125,7 +126,7 @@ namespace air
             continue;
         }
     }
-    // 语法 id="string";
+    // 语法 "string";
     void Parser::getRequireItem()
     {
         // 跳过空白字符
@@ -135,15 +136,7 @@ namespace air
         std::string szFile, szName;
 
         auto tok = lexer.getNext();
-        if (tok.isIdentity() == false)
-            syntaxError(tok, "缺少依赖名！");
-        szName = tok.txt;
-
-        tok = lexer.getNext();
-        if (tok.isOperator(TkOpEnum::Assign) == false)
-            syntaxError(tok, "缺少符号“ = ”！");
-
-        tok = lexer.getNext();
+        
         if (tok.isString() == false)
             syntaxError(tok, "缺少文件路径！");
         szFile = tok.txt;
@@ -155,11 +148,12 @@ namespace air
         DeclFile *decl = nullptr;
         auto fileRef = pool.refString(szFile);
         deps.insert(fileRef);
-        auto node = genDecl(decl, pool.refString(szName), fileRef);
+        auto node = genDecl(decl, fileRef);
         unit.declist.push_back(node);
         decl->startpos = startpos;
         decl->endpos = tok.pos; // lexer.getPos();
 
+        unit.depset.insert(fileRef);
         /* FileSymbol *sym;
          // 插入符号
          auto symref = genSymbol(sym, *decl);

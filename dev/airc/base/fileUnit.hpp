@@ -18,15 +18,16 @@ namespace air
             uint32_t state;
             struct
             {
-                uint32_t compile : 1; // 编译解析过的？
+                uint32_t parsed : 1; // 语法解析过的？
                 uint32_t error : 1;   // 错误？
             };
         };
-
+        
         const std::string *file;       // 文件路径
         CharStream stream;             // 文件流
         SymbolTable symbols;           // 文件内符号表
         StringRef package;             // 包名
+        std::set<StringRef> depset;   //依赖的文件
         std::list<AstDeclRef> declist; // 声明列表
     };
 }

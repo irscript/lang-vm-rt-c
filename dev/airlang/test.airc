@@ -1,6 +1,8 @@
 package airlang.test;
 
-uint exp = 10 + 12 * 15;
+require "test.airc";
+
+uint exp = (10 + 5) * 10;
 
 
 public sint main(const string[] args){

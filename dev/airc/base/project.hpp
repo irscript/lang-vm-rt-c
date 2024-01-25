@@ -37,15 +37,9 @@ namespace air
         };
 
         // 项目文件
-        struct File
-        {
-            File() {}
 
-            FileUnit unit;            // 文件单元
-            std::set<StringRef> deps; // 依赖文件
-        };
         std::map<std::string, Directory> dirsmap; // 搜索的目录
-        std::map<std::string, File> filemap;      // 编译的文件
+        std::map<std::string, FileUnit> filemap;      // 编译的文件
 
         std::string buildDir; // 构建目录
         std::string projPath; // 项目目录
@@ -60,7 +54,7 @@ namespace air
         void load(const std::string &path);
         // 开始编译项目
         void compiling();
-        void compiling(const std::string &file, File &funit); // 编译文件
+        void compiling(const std::string &file, FileUnit &funit); // 编译文件
         void compilingDeps(const std::string &file);          // 编译依赖文件
         // 获取文件唯一路径
         std::string getFilePath(const std::string &path);

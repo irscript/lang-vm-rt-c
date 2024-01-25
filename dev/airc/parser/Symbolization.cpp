@@ -33,34 +33,34 @@ namespace air
 
     void Symbolization::start()
     {
-        SymTabInfo symbols(funit.unit.symbols, true, SymTabInfo::Symbolization);
+        SymTabInfo symbols(funit.symbols, true, SymTabInfo::Symbolization);
         // 符号生成
-        for (auto item : funit.unit.declist)
+        for (auto item : funit.declist)
         {
             item->visit(*this, symbols);
         }
         // 引用消解
         symbols.stage = SymTabInfo::Resolution;
-        for (auto item : funit.unit.declist)
+        for (auto item : funit.declist)
         {
             item->visit(*this, symbols);
         }
         // 类型计算
         symbols.stage = SymTabInfo::TypeCalculate;
-        for (auto item : funit.unit.declist)
+        for (auto item : funit.declist)
         {
             item->visit(*this, symbols);
         }
         // 变量计算
         symbols.stage = SymTabInfo::VariableCal;
-        for (auto item : funit.unit.declist)
+        for (auto item : funit.declist)
         {
             item->visit(*this, symbols);
         }
     }
     void Symbolization::repeatSymbol(ISymbol *cur, ISymbol *pre)
     {
-        std::string src = funit.unit.stream.getLineTxt(cur->startpos.line,
+        std::string src = funit.stream.getLineTxt(cur->startpos.line,
                                                        cur->startpos.pos,
                                                        cur->endpos.pos);
         Printer::lock();
@@ -72,11 +72,11 @@ namespace air
 
     void Symbolization::semanticError(TokPos &start, TokPos &end, const char *msg)
     {
-        std::string src = funit.unit.stream.getLineTxt(start.line,
+        std::string src = funit.stream.getLineTxt(start.line,
                                                        start.pos,
                                                        end.pos);
         Printer::lock();
-        Printer::print(Printer::BrightWhite, "\n%s：\n", funit.unit.file->c_str());
+        Printer::print(Printer::BrightWhite, "\n%s：\n", funit.file->c_str());
         Printer::print(Printer::Yellow, "\n当前定义：\n");
         Printer::print(Printer::Aqua, "%s\n", src.c_str());
 
@@ -106,7 +106,7 @@ namespace air
     // 生成全名
     void Symbolization::genFullName(SymbolRef sym)
     {
-        std::string full = sym->getName().get() == "main" ? sym->getName().get() : funit.unit.package.get() + "." + sym->getName().get();
+        std::string full = sym->getName().get() == "main" ? sym->getName().get() : funit.package.get() + "." + sym->getName().get();
         auto fullname = project.strings.refString(full);
         sym->setFull(fullname);
         auto result = project.symbols.insert(&fullname.get(), sym);
@@ -127,7 +127,7 @@ namespace air
             auto symref = genSymbol(sym, dec);
             sym->startpos = dec.startpos;
             sym->endpos = dec.endpos;
-            auto res = funit.unit.symbols.insert(&dec.name.get(), symref);
+            auto res = funit.symbols.insert(&dec.name.get(), symref);
             // 符号重复
             if (res.first == false)
                 repeatSymbol(sym, res.second.get());
@@ -745,6 +745,11 @@ namespace air
         switch (symtab.stage)
         {
         case SymTabInfo::TypeCalculate:
+        {
+            return exp.exp->visit(*this, opt);
+        }
+        break;
+        case SymTabInfo::ExpCalculate:
         {
             return exp.exp->visit(*this, opt);
         }

@@ -74,7 +74,7 @@ namespace air
             if (res.second == false)
                 Waring("路径重复：%s\n", res.first->first.c_str());
             else
-                res.first->second.unit.file = &res.first->first;
+                res.first->second.file = &res.first->first;
         }
     }
 
@@ -172,10 +172,10 @@ namespace air
         }
         // 语义解析
     }
-    void Project::compiling(const std::string &fpath, File &funit)
+    void Project::compiling(const std::string &fpath, FileUnit &funit)
     {
         std::string path = getFilePath(fpath);
-        CharStream &stream = funit.unit.stream;
+        CharStream &stream = funit.stream;
         if (stream.open(path) == false)
             throw ErrorWhat::fmt("%s: 文件读取失败！\n", path.c_str());
         Printer::lock();
@@ -184,9 +184,10 @@ namespace air
         Printer::unlock();
         Lexer lexer(stream);
         // 语法解析
-        Parser paser(strings, lexer, funit.unit, funit.deps);
+        Parser paser(strings, lexer, funit, funit.depset);
+        
         // 编译依赖项
-        for (auto item : funit.deps)
+        for (auto item : funit.depset)
             compilingDeps(item.get());
         // 符号表生成
         Symbolization(*this, funit);
@@ -197,7 +198,7 @@ namespace air
         auto res = filemap.find(file);
         if (res != filemap.end())
         {
-            if (res->second.unit.compile == 0)
+            if (res->second.parsed == 0)
                 compiling(file, res->second);
         }
         else

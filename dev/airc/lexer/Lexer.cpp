@@ -150,7 +150,7 @@ namespace air
     {
         Token tok(escape == true ? TkKind::StringLiteral2 : TkKind::StringLiteral);
         Char ch = stream.next();
-        tok.pos.pos = ch.pos;
+        tok.pos.pos = ch.pos - (escape == true ? 2 : 1);
         tok.pos.line = pos.line;
         if (escape == false)
         {

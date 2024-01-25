@@ -11,10 +11,10 @@ namespace air
     // 引用消解、符号表生成、类型计算
     struct Symbolization : public IAstVisitor
     {
-        inline Symbolization(Project &project, Project::File &unit)
+        inline Symbolization(Project &project, FileUnit &unit)
             : project(project), funit(unit) { start(); }
 
-        Project::File &funit; // 文件单元
+        FileUnit &funit; // 文件单元
         Project &project;
         // 开始分析
         void start();

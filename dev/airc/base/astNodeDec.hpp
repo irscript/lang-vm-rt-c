@@ -39,10 +39,9 @@ namespace air
     {
         virtual std::any visit(IAstVisitor &visitor, std::any opt) override;
 
-        DeclFile(StringRef &name, StringRef file)
-            : IAstDecl(name, DeclKind::File), file(file), unit(nullptr) {}
-        StringRef file; // 声明名称
-        FileUnit *unit; // 对应的文件单元
+        DeclFile(StringRef &name)
+            : IAstDecl(name, DeclKind::File) {}
+        inline auto getFile()const{return name;}
     };
     // 文件符号
     struct FileSymbol : public IFileSymbol

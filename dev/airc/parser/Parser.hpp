@@ -15,7 +15,6 @@ namespace air
             : pool(pool), lexer(lexer), unit(unit), deps(deps)
         {
             start();
-            unit.compile = 1;
         }
 
     protected:
