@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.121.2">
+    <meta name="generator" content="Hugo 0.123.0">
     <meta name="generator" content="Relearn 5.20.0">
     <meta name="description" content="站在巨人的肩膀上">
     <meta name="author" content="月明之都">
@@ -11,19 +11,19 @@
     <link href="https://irscript.github.io/lang-vm-rt-c/2_compiler/index.html" rel="canonical" type="text/html" title="编译器 :: air 编程语言">
     <link href="../2_compiler/index.xml" rel="alternate" type="application/rss+xml" title="编译器 :: air 编程语言"><link rel="icon" href="../images/favicon.png" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="../css/fontawesome-all.min.css?1705487429" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/fontawesome-all.min.css?1705487429" rel="stylesheet"></noscript>
-    <link href="../css/nucleus.css?1705487429" rel="stylesheet">
-    <link href="../css/auto-complete.css?1705487429" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/auto-complete.css?1705487429" rel="stylesheet"></noscript>
-    <link href="../css/perfect-scrollbar.min.css?1705487429" rel="stylesheet">
-    <link href="../css/fonts.css?1705487429" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/fonts.css?1705487429" rel="stylesheet"></noscript>
-    <link href="../css/theme.css?1705487429" rel="stylesheet">
-    <link href="../css/theme-auto.css?1705487429" rel="stylesheet" id="variant-style">
-    <link href="../css/variant.css?1705487429" rel="stylesheet">
-    <link href="../css/print.css?1705487429" rel="stylesheet" media="print">
-    <link href="../css/format-print.css?1705487429" rel="stylesheet">
-    <link href="../css/ie.css?1705487429" rel="stylesheet">
-    <script src="../js/url.js?1705487429"></script>
-    <script src="../js/variant.js?1705487429"></script>
+    <link href="../css/fontawesome-all.min.css?1708414578" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/fontawesome-all.min.css?1708414578" rel="stylesheet"></noscript>
+    <link href="../css/nucleus.css?1708414578" rel="stylesheet">
+    <link href="../css/auto-complete.css?1708414578" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/auto-complete.css?1708414578" rel="stylesheet"></noscript>
+    <link href="../css/perfect-scrollbar.min.css?1708414578" rel="stylesheet">
+    <link href="../css/fonts.css?1708414578" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="../css/fonts.css?1708414578" rel="stylesheet"></noscript>
+    <link href="../css/theme.css?1708414578" rel="stylesheet">
+    <link href="../css/theme-auto.css?1708414578" rel="stylesheet" id="variant-style">
+    <link href="../css/variant.css?1708414578" rel="stylesheet">
+    <link href="../css/print.css?1708414578" rel="stylesheet" media="print">
+    <link href="../css/format-print.css?1708414578" rel="stylesheet">
+    <link href="../css/ie.css?1708414578" rel="stylesheet">
+    <script src="../js/url.js?1708414578"></script>
+    <script src="../js/variant.js?1708414578"></script>
     <script>
       // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
       // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
@@ -148,8 +148,8 @@
 编译原理是将文本字符流，通过一系列的分析、转换，最后生成确定的指令文件的数据分析转换技术。
 <p>编译器是利用编译原理，将一种程序（源程序）翻译成另一种程序（目标程序）的计算机程序。业界也将编译器分为三个部分：前端、中端、后端。</p>
 <p>编译器所做的工作流程如下图所示。</p>
-<p><a href="#image-b8b0fffe17c69dc02e04ddbd9f7fcb05" class="lightbox-link"><img src="../2_compiler/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86.svg" alt="编译总流程" class="figure-image bg-white border lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="image-b8b0fffe17c69dc02e04ddbd9f7fcb05"><img src="../2_compiler/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86.svg" alt="编译总流程" class="lightbox-image" loading="lazy"></a></p>
+<p><a href="#image-a9a92e6cefb56e6523edace29279ca9d" class="lightbox-link"><img src="../lang-vm-rt-c/2_compiler/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86.svg" alt="编译总流程" class="figure-image bg-white border lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="image-a9a92e6cefb56e6523edace29279ca9d"><img src="../lang-vm-rt-c/2_compiler/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86.svg" alt="编译总流程" class="lightbox-image" loading="lazy"></a></p>
 
             <footer class="footline">
 
@@ -2039,8 +2039,8 @@
         </div>
       </main>
     </div>
-    <script src="../js/clipboard.min.js?1705487429" defer></script>
-    <script src="../js/perfect-scrollbar.min.js?1705487429" defer></script>
-    <script src="../js/theme.js?1705487429" defer></script>
+    <script src="../js/clipboard.min.js?1708414578" defer></script>
+    <script src="../js/perfect-scrollbar.min.js?1708414578" defer></script>
+    <script src="../js/theme.js?1708414578" defer></script>
   </body>
 </html>
